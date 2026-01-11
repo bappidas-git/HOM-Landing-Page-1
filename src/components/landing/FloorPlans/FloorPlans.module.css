@@ -1,0 +1,433 @@
+/* Floor Plans Section Styles */
+
+/* Quick Stats */
+.quickStats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.05) 0%, rgba(201, 162, 39, 0.05) 100%);
+  border-radius: 16px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.statIcon {
+  font-size: 32px !important;
+  color: #8B9A46;
+  margin-bottom: 8px;
+}
+
+.statItem h6 {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.statItem span {
+  color: #666666;
+}
+
+/* Filter Section */
+.filterSection {
+  margin-bottom: 40px;
+}
+
+.tabs {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.tab {
+  min-height: 48px;
+  text-transform: none;
+  font-weight: 500;
+  color: #666666;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 180px;
+}
+
+.tabContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countChip {
+  background: rgba(139, 154, 70, 0.15);
+  color: #6b7a36;
+  font-size: 0.7rem;
+  height: 20px;
+}
+
+/* Floor Plans Grid */
+.floorPlansGrid {
+  margin-bottom: 32px;
+}
+
+/* Floor Plan Card */
+.cardWrapper {
+  height: 100%;
+}
+
+.floorPlanCard {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.floorPlanCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Popular Badge */
+.popularBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  background: linear-gradient(135deg, #c9a227 0%, #b87333 100%);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Image Container */
+.imageContainer {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.floorPlanImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.floorPlanCard:hover .floorPlanImage {
+  transform: scale(1.05);
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 46, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imageContainer:hover .imageOverlay {
+  opacity: 1;
+}
+
+.imageOverlay span {
+  font-size: 40px !important;
+}
+
+/* Card Content */
+.cardContent {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.typeBadge {
+  align-self: flex-start;
+  margin-bottom: 12px;
+}
+
+.planTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.towerInfo {
+  color: #666666;
+  margin-bottom: 16px;
+}
+
+/* Area Grid */
+.areaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.areaItem {
+  text-align: center;
+}
+
+.areaLabel {
+  display: block;
+  color: #666666;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.areaValue {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+/* Configuration Grid */
+.configGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.configItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666666;
+}
+
+.configItem span {
+  font-size: 20px !important;
+  color: #8B9A46;
+}
+
+/* Key Features */
+.keyFeatures {
+  margin-bottom: 16px;
+}
+
+.featuresLabel {
+  color: #1a1a2e;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.featuresList {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.featuresList li {
+  color: #666666;
+  margin-bottom: 4px;
+}
+
+.featuresList li span {
+  font-size: 0.8rem;
+}
+
+/* Highlights Chips */
+.highlightsChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.highlightChip {
+  font-size: 0.7rem;
+  height: 24px;
+  border-color: #8B9A46;
+  color: #6b7a36;
+}
+
+/* Price Section */
+.priceSection {
+  text-align: center;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.priceLabel {
+  display: block;
+  color: #666666;
+  margin-bottom: 4px;
+}
+
+.priceValue {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+/* Card Actions */
+.cardActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.downloadBtn,
+.quoteBtn {
+  text-transform: none;
+  font-weight: 500;
+}
+
+/* Dialog */
+.dialogContent {
+  position: relative;
+  padding: 0 !important;
+  background: #1a1a2e;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: #ffffff;
+}
+
+.dialogImage {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.dialogInfo {
+  padding: 16px 24px;
+  background: #ffffff;
+  text-align: center;
+}
+
+/* Disclaimer */
+.disclaimer {
+  display: block;
+  text-align: center;
+  color: #999999;
+  font-style: italic;
+  margin-top: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .quickStats {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .statItem h6 {
+    font-size: 1rem;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    flex: none;
+    min-width: auto;
+    padding: 8px 16px;
+  }
+
+  .imageContainer {
+    height: 180px;
+  }
+
+  .cardContent {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 599px) {
+  .quickStats {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .statIcon {
+    font-size: 28px !important;
+  }
+
+  .statItem h6 {
+    font-size: 0.9rem;
+  }
+
+  .tabContent {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tab {
+    font-size: 0.8rem;
+  }
+
+  .imageContainer {
+    height: 160px;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .planTitle {
+    font-size: 1.1rem;
+  }
+
+  .areaGrid {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .areaValue {
+    font-size: 0.9rem;
+  }
+
+  .configGrid {
+    gap: 8px;
+  }
+
+  .configItem {
+    font-size: 0.8rem;
+  }
+
+  .priceValue {
+    font-size: 1.5rem;
+  }
+
+  .cardActions {
+    gap: 8px;
+  }
+}

@@ -1,0 +1,269 @@
+/* Amenities Section Styles */
+
+/* Featured Section */
+.featuredSection {
+  margin-bottom: 48px;
+}
+
+.featuredCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.featuredCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.featuredIconWrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.featuredIcon {
+  font-size: 32px !important;
+  color: #ffffff;
+}
+
+.featuredName {
+  font-weight: 600;
+  color: #1a1a2e;
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+/* Filter Controls */
+.filterControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.tabs {
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.tab {
+  min-height: 48px;
+  text-transform: none;
+  font-weight: 500;
+  color: #666666;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  background: rgba(139, 154, 70, 0.08);
+}
+
+.tab.Mui-selected {
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+}
+
+.searchField {
+  width: 100%;
+  max-width: 400px;
+}
+
+.searchField input {
+  background: #ffffff;
+}
+
+/* Amenities Grid */
+.amenitiesGrid {
+  margin-bottom: 24px;
+}
+
+.amenityCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 12px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative;
+  cursor: default;
+}
+
+.amenityCard:hover {
+  border-color: #8B9A46;
+  box-shadow: 0 4px 20px rgba(139, 154, 70, 0.15);
+  transform: translateY(-3px);
+}
+
+.amenityCard.featured {
+  border-color: #c9a227;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.05) 0%, rgba(139, 154, 70, 0.05) 100%);
+}
+
+.amenityIcon {
+  font-size: 28px !important;
+  color: #8B9A46;
+  margin-bottom: 8px;
+}
+
+.amenityCard:hover .amenityIcon {
+  color: #6b7a36;
+}
+
+.amenityName {
+  color: #1a1a2e;
+  font-weight: 500;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #c9a227;
+}
+
+.featuredBadge span {
+  font-size: 16px !important;
+}
+
+/* Show More */
+.showMoreWrapper {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.showMoreButton {
+  padding: 10px 24px;
+}
+
+/* Results Count */
+.resultsCount {
+  text-align: center;
+  color: #666666;
+  margin-top: 16px;
+}
+
+/* CTA */
+.ctaWrapper {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.ctaButton {
+  padding: 14px 40px;
+  font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .featuredCard {
+    padding: 20px 12px;
+  }
+
+  .featuredIconWrapper {
+    width: 56px;
+    height: 56px;
+  }
+
+  .featuredIcon {
+    font-size: 28px !important;
+  }
+
+  .filterControls {
+    gap: 16px;
+  }
+
+  .tabs {
+    order: 1;
+  }
+
+  .searchField {
+    order: 0;
+    max-width: 100%;
+  }
+
+  .amenityCard {
+    padding: 16px 10px;
+  }
+
+  .amenityIcon {
+    font-size: 24px !important;
+  }
+
+  .amenityName {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 599px) {
+  .featuredSection {
+    margin-bottom: 32px;
+  }
+
+  .featuredCard {
+    padding: 16px 10px;
+  }
+
+  .featuredIconWrapper {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+  }
+
+  .featuredIcon {
+    font-size: 24px !important;
+  }
+
+  .featuredName {
+    font-size: 0.75rem;
+  }
+
+  .tab {
+    min-height: 40px;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .amenityCard {
+    padding: 14px 8px;
+  }
+
+  .amenityIcon {
+    font-size: 22px !important;
+    margin-bottom: 6px;
+  }
+
+  .amenityName {
+    font-size: 0.7rem;
+  }
+
+  .ctaWrapper {
+    margin-top: 32px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}
