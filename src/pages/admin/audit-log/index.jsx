@@ -483,7 +483,7 @@ const AdminAuditLogPage = () => {
       PIXEL: '#ff9800',
       SCHEMA: '#00bcd4',
       KEYWORD: '#4caf50',
-      SETTINGS: '#8B9A46',
+      SETTINGS: '#667eea',
       AUTH: '#1a1a2e',
     };
     return colors[module] || '#9e9e9e';
@@ -603,8 +603,8 @@ const AdminAuditLogPage = () => {
                   startIcon={<DownloadIcon />}
                   onClick={handleExport}
                   sx={{
-                    backgroundColor: '#8B9A46',
-                    '&:hover': { backgroundColor: '#6b7a36' },
+                    backgroundColor: '#667eea',
+                    '&:hover': { backgroundColor: '#764ba2' },
                   }}
                 >
                   Export CSV
@@ -620,7 +620,7 @@ const AdminAuditLogPage = () => {
                   left: 0,
                   right: 0,
                   '& .MuiLinearProgress-bar': {
-                    backgroundColor: '#8B9A46',
+                    backgroundColor: '#667eea',
                   },
                 }}
               />
@@ -643,7 +643,7 @@ const AdminAuditLogPage = () => {
                 title="Today's Activity"
                 value={stats.today}
                 icon={CalendarMonthIcon}
-                color="#8B9A46"
+                color="#667eea"
                 trend="Today"
                 loading={loading}
               />
@@ -698,8 +698,8 @@ const AdminAuditLogPage = () => {
                   startIcon={<FilterListIcon />}
                   onClick={() => setShowFilters(!showFilters)}
                   sx={showFilters ? {
-                    backgroundColor: '#8B9A46',
-                    '&:hover': { backgroundColor: '#6b7a36' }
+                    backgroundColor: '#667eea',
+                    '&:hover': { backgroundColor: '#764ba2' }
                   } : {}}
                 >
                   Filters
@@ -984,7 +984,7 @@ const AdminAuditLogPage = () => {
                                         width: 28,
                                         height: 28,
                                         fontSize: '0.75rem',
-                                        backgroundColor: '#8B9A46',
+                                        backgroundColor: '#667eea',
                                       }}
                                     >
                                       {log.user.charAt(0)}
@@ -1030,7 +1030,7 @@ const AdminAuditLogPage = () => {
                                       sx={{
                                         fontFamily: 'monospace',
                                         cursor: 'pointer',
-                                        '&:hover': { color: '#8B9A46' },
+                                        '&:hover': { color: '#667eea' },
                                       }}
                                       onClick={() => handleCopy(log.ipAddress)}
                                     >
@@ -1054,7 +1054,7 @@ const AdminAuditLogPage = () => {
                                   <TableCell colSpan={8} sx={{ py: 0, backgroundColor: 'rgba(139, 154, 70, 0.03)' }}>
                                     <Collapse in={expandedRows[log.id]} timeout="auto" unmountOnExit>
                                       <Box sx={{ py: 2, px: 4 }}>
-                                        <Typography variant="subtitle2" gutterBottom sx={{ color: '#8B9A46' }}>
+                                        <Typography variant="subtitle2" gutterBottom sx={{ color: '#667eea' }}>
                                           Metadata
                                         </Typography>
                                         <Grid container spacing={2}>
@@ -1167,7 +1167,7 @@ const AdminAuditLogPage = () => {
         >
           <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <HistoryIcon sx={{ color: '#8B9A46' }} />
+              <HistoryIcon sx={{ color: '#667eea' }} />
               <Typography variant="h6">Audit Log Details</Typography>
             </Box>
             <IconButton onClick={() => setDetailsDialog(false)}>
@@ -1234,7 +1234,7 @@ const AdminAuditLogPage = () => {
                 {selectedLog.metadata && (
                   <Grid item xs={12}>
                     <Divider sx={{ my: 1 }} />
-                    <Typography variant="subtitle2" gutterBottom sx={{ color: '#8B9A46' }}>
+                    <Typography variant="subtitle2" gutterBottom sx={{ color: '#667eea' }}>
                       Metadata
                     </Typography>
                     <Paper variant="outlined" sx={{ p: 2, backgroundColor: 'rgba(139, 154, 70, 0.03)', borderRadius: 2 }}>

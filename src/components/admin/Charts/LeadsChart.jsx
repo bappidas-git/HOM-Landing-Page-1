@@ -97,25 +97,25 @@ const LeadsChart = ({
         {
           label: 'Leads',
           data: values,
-          borderColor: '#8B9A46',
+          borderColor: '#667eea',
           backgroundColor: chartType === 'area'
             ? (context) => {
                 const ctx = context.chart.ctx;
                 const gradient = ctx.createLinearGradient(0, 0, 0, height);
-                gradient.addColorStop(0, alpha('#8B9A46', 0.4));
-                gradient.addColorStop(1, alpha('#8B9A46', 0.02));
+                gradient.addColorStop(0, alpha('#667eea', 0.4));
+                gradient.addColorStop(1, alpha('#667eea', 0.02));
                 return gradient;
               }
-            : alpha('#8B9A46', 0.8),
+            : alpha('#667eea', 0.8),
           borderWidth: 3,
           fill: chartType === 'area',
           tension: 0.4,
           pointRadius: 6,
           pointBackgroundColor: '#fff',
-          pointBorderColor: '#8B9A46',
+          pointBorderColor: '#667eea',
           pointBorderWidth: 3,
           pointHoverRadius: 8,
-          pointHoverBackgroundColor: '#8B9A46',
+          pointHoverBackgroundColor: '#667eea',
           pointHoverBorderColor: '#fff',
           pointHoverBorderWidth: 3,
         },
@@ -139,7 +139,7 @@ const LeadsChart = ({
         backgroundColor: '#1a1a2e',
         titleColor: '#fff',
         bodyColor: '#fff',
-        borderColor: alpha('#8B9A46', 0.5),
+        borderColor: alpha('#667eea', 0.5),
         borderWidth: 1,
         padding: 12,
         cornerRadius: 8,
@@ -254,10 +254,10 @@ const LeadsChart = ({
                     px: 1.5,
                     py: 0.5,
                     '&.Mui-selected': {
-                      backgroundColor: alpha('#8B9A46', 0.15),
-                      color: '#8B9A46',
+                      backgroundColor: alpha('#667eea', 0.15),
+                      color: '#667eea',
                       '&:hover': {
-                        backgroundColor: alpha('#8B9A46', 0.25),
+                        backgroundColor: alpha('#667eea', 0.25),
                       },
                     },
                   },

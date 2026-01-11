@@ -92,7 +92,7 @@ const schemaTypes = [
     key: 'realEstate',
     label: 'Real Estate Agent',
     icon: HomeIcon,
-    color: '#8B9A46',
+    color: '#667eea',
     description: 'Real estate business listing',
     required: true,
   },
@@ -534,7 +534,7 @@ const SchemaEditorDialog = ({ open, onClose, schemaType, schema, onSave }) => {
           variant="contained"
           onClick={handleSave}
           disabled={!isValid}
-          sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+          sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
         >
           Save Changes
         </Button>
@@ -764,7 +764,7 @@ const AdminSchemaPage = () => {
               startIcon={saving ? <CircularProgress size={16} color="inherit" /> : <SaveIcon />}
               onClick={handleSaveAll}
               disabled={saving}
-              sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+              sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
             >
               {saving ? 'Saving...' : 'Save All'}
             </Button>
@@ -812,7 +812,7 @@ const AdminSchemaPage = () => {
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <CodeIcon sx={{ color: '#8B9A46' }} />
+              <CodeIcon sx={{ color: '#667eea' }} />
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
                 Combined Schema Output
               </Typography>

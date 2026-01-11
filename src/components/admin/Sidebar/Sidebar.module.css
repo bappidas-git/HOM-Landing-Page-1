@@ -1,5 +1,6 @@
 /**
  * Sidebar Component Styles
+ * Modern Purple-Blue Theme inspired by reference design
  */
 
 .sidebarContainer {
@@ -25,32 +26,33 @@
 
 .logoText {
   font-weight: 700;
-  color: #1a1a2e;
+  color: #1a202c;
   font-size: 1.25rem;
   line-height: 1.2;
 }
 
 .logoTextCollapsed {
   font-weight: 700;
-  color: #1a1a2e;
+  color: #1a202c;
   font-size: 1.25rem;
   text-align: center;
   width: 100%;
 }
 
 .logoSubtext {
-  color: #666666;
+  color: #4a5568;
   font-size: 0.75rem;
   margin-top: 2px;
 }
 
 .collapseButton {
-  background-color: #f5f5f5;
+  background-color: rgba(102, 126, 234, 0.08);
   border-radius: 8px;
+  color: #667eea;
 }
 
 .collapseButton:hover {
-  background-color: #e0e0e0;
+  background-color: rgba(102, 126, 234, 0.15);
 }
 
 /* Divider */
@@ -70,39 +72,52 @@
 }
 
 .navButton {
-  border-radius: 8px;
+  border-radius: 12px;
   min-height: 48px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .navButton:hover {
-  background-color: rgba(139, 154, 70, 0.08);
+  background-color: rgba(102, 126, 234, 0.08);
 }
 
 .navButtonActive {
-  background-color: rgba(139, 154, 70, 0.12);
-  color: #8B9A46;
+  background-color: rgba(102, 126, 234, 0.12);
+  color: #667eea;
+}
+
+.navButtonActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 0 4px 4px 0;
 }
 
 .navButtonActive:hover {
-  background-color: rgba(139, 154, 70, 0.18);
+  background-color: rgba(102, 126, 234, 0.18);
 }
 
 .navIcon {
-  color: #666666;
-  transition: color 0.2s ease;
+  color: #4a5568;
+  transition: color 0.3s ease;
 }
 
 .navButtonActive .navIcon {
-  color: #8B9A46;
+  color: #667eea;
 }
 
 .navText {
-  color: #333333;
+  color: #1a202c;
 }
 
 .navButtonActive .navText {
-  color: #8B9A46;
+  color: #667eea;
 }
 
 /* Bottom Section */
@@ -112,25 +127,27 @@
 }
 
 .logoutButton {
-  color: #d32f2f;
+  color: #f44336;
 }
 
 .logoutButton .navIcon {
-  color: #d32f2f;
+  color: #f44336;
 }
 
 .logoutButton:hover {
-  background-color: rgba(211, 47, 47, 0.08);
+  background-color: rgba(244, 67, 54, 0.08);
 }
 
 /* Mobile Drawer */
 .mobileDrawer :global(.MuiDrawer-paper) {
   border-radius: 0;
+  background-color: #ffffff;
 }
 
 /* Desktop Drawer */
 .desktopDrawer :global(.MuiDrawer-paper) {
   border-radius: 0;
+  background-color: #ffffff;
 }
 
 /* Scrollbar styling */
@@ -143,10 +160,10 @@
 }
 
 .navList::-webkit-scrollbar-thumb {
-  background-color: #d0d0d0;
+  background-color: rgba(102, 126, 234, 0.3);
   border-radius: 2px;
 }
 
 .navList::-webkit-scrollbar-thumb:hover {
-  background-color: #b0b0b0;
+  background-color: rgba(102, 126, 234, 0.5);
 }

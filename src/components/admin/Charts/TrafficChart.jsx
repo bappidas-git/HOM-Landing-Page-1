@@ -88,12 +88,12 @@ const TrafficChart = ({
       datasets.push({
         label: 'Leads',
         data: leadsData.map((item) => item.count || 0),
-        borderColor: '#8B9A46',
+        borderColor: '#667eea',
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, height);
-          gradient.addColorStop(0, alpha('#8B9A46', 0.3));
-          gradient.addColorStop(1, alpha('#8B9A46', 0.02));
+          gradient.addColorStop(0, alpha('#667eea', 0.3));
+          gradient.addColorStop(1, alpha('#667eea', 0.02));
           return gradient;
         },
         fill: true,
@@ -101,7 +101,7 @@ const TrafficChart = ({
         tension: 0.4,
         pointRadius: 5,
         pointBackgroundColor: '#fff',
-        pointBorderColor: '#8B9A46',
+        pointBorderColor: '#667eea',
         pointBorderWidth: 3,
         pointHoverRadius: 7,
       });
@@ -260,7 +260,7 @@ const TrafficChart = ({
           }}
         >
           {[
-            { label: 'Total Leads', value: stats.totalLeads, color: '#8B9A46' },
+            { label: 'Total Leads', value: stats.totalLeads, color: '#667eea' },
             { label: 'Avg/Day', value: stats.avgLeads, color: '#1a1a2e' },
             { label: 'Conversions', value: stats.totalConversions, color: '#4caf50' },
             { label: 'Conv. Rate', value: stats.conversionRate + '%', color: '#2196f3' },

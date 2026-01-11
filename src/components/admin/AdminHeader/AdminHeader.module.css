@@ -1,9 +1,11 @@
 /**
  * Admin Header Component Styles
+ * Modern Purple-Blue Theme
  */
 
 .appBar {
   z-index: 1201;
+  backdrop-filter: blur(20px);
 }
 
 .toolbar {
@@ -23,6 +25,11 @@
 
 .menuButton {
   margin-right: 8px;
+  color: #4a5568;
+}
+
+.menuButton:hover {
+  background-color: rgba(102, 126, 234, 0.08);
 }
 
 .titleSection {
@@ -33,7 +40,7 @@
 
 .pageTitle {
   font-weight: 600;
-  color: #1a1a2e;
+  color: #1a202c;
   font-size: 1.125rem;
   line-height: 1.3;
 }
@@ -50,11 +57,13 @@
 }
 
 .actionButton {
-  color: #666666;
+  color: #4a5568;
+  transition: all 0.3s ease;
 }
 
 .actionButton:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
 }
 
 /* User Section */
@@ -67,20 +76,21 @@
   align-items: center;
   gap: 12px;
   padding: 4px 8px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .userButton:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(102, 126, 234, 0.08);
 }
 
 .avatar {
   width: 36px;
   height: 36px;
-  background-color: #8B9A46;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-size: 0.875rem;
   font-weight: 600;
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
 }
 
 .userInfo {
@@ -92,12 +102,12 @@
 
 .userName {
   font-weight: 600;
-  color: #1a1a2e;
+  color: #1a202c;
   line-height: 1.2;
 }
 
 .userRole {
-  color: #666666;
+  color: #4a5568;
   text-transform: capitalize;
 }
 
@@ -105,8 +115,8 @@
 .userMenu {
   min-width: 240px;
   margin-top: 8px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 .userMenuHeader {
@@ -119,30 +129,39 @@
 .menuAvatar {
   width: 48px;
   height: 48px;
-  background-color: #8B9A46;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-size: 1rem;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .logoutMenuItem {
-  color: #d32f2f;
+  color: #f44336;
 }
 
 /* Notification Menu */
 .notificationMenu {
-  min-width: 320px;
+  min-width: 360px;
   max-width: 400px;
   margin-top: 8px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 .notificationHeader {
   padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .viewAllLink {
   justify-content: center;
+  color: #667eea;
+}
+
+.viewAllLink:hover {
+  background-color: rgba(102, 126, 234, 0.08);
 }
 
 /* Responsive */

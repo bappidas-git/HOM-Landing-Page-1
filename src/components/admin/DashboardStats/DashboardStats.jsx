@@ -320,7 +320,7 @@ export const CompactStatsRow = ({ stats = {}, loading = false }) => {
     { key: 'totalLeads', label: 'Total', color: '#1a1a2e', icon: PeopleIcon },
     { key: 'newLeads', label: 'New', color: '#2196f3', icon: PersonAddIcon },
     { key: 'convertedLeads', label: 'Converted', color: '#4caf50', icon: CheckCircleIcon },
-    { key: 'conversionRate', label: 'Rate', color: '#8B9A46', icon: TrendingUpIcon, suffix: '%' },
+    { key: 'conversionRate', label: 'Rate', color: '#667eea', icon: TrendingUpIcon, suffix: '%' },
   ];
 
   return (
@@ -381,7 +381,7 @@ export const LargeStatsCard = ({
   value,
   subtitle,
   icon: IconComponent,
-  color = '#8B9A46',
+  color = '#667eea',
   trend,
   loading = false,
   action,

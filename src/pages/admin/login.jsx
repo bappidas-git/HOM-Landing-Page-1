@@ -187,7 +187,7 @@ const AdminLoginPage = () => {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#f5f5f7',
-          backgroundImage: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+          backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           padding: 2,
         }}
       >
@@ -359,9 +359,9 @@ const AdminLoginPage = () => {
                       fontWeight: 600,
                       textTransform: 'none',
                       borderRadius: 2,
-                      backgroundColor: '#8B9A46',
+                      backgroundColor: '#667eea',
                       '&:hover': {
-                        backgroundColor: '#6b7a36',
+                        backgroundColor: '#764ba2',
                       },
                     }}
                   >
@@ -400,7 +400,7 @@ const AdminLoginPage = () => {
                     color: '#666666',
                     fontSize: '0.875rem',
                     '&:hover': {
-                      color: '#8B9A46',
+                      color: '#667eea',
                     },
                   }}
                 >
