@@ -1,0 +1,183 @@
+/* Header Component Styles */
+
+.appBar {
+  transition: all 0.3s ease;
+  z-index: 1100;
+}
+
+.transparent {
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.scrolled {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+  padding: 0 16px;
+}
+
+/* Logo Section */
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoMain {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.logoSub {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3em;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.projectName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.projectTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #8B9A46;
+  line-height: 1;
+}
+
+.projectPhase {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.6rem;
+  color: #c9a227;
+  letter-spacing: 0.2em;
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navItemWrapper {
+  position: relative;
+  padding: 8px 0;
+}
+
+.navItem {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.navItem:hover {
+  color: #ffffff;
+}
+
+.navItem.active {
+  color: #8B9A46;
+}
+
+.navIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  border-radius: 2px;
+}
+
+/* CTA Section */
+.ctaSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.phoneWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phoneIcon {
+  color: #8B9A46;
+  font-size: 1.1rem;
+}
+
+.phoneNumber {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.phoneNumber:hover {
+  color: #8B9A46;
+}
+
+.ctaButton {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+/* Responsive - Hide on smaller screens (handled by component logic) */
+@media (max-width: 1199px) {
+  .navigation {
+    gap: 4px;
+  }
+
+  .navItem {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .phoneWrapper {
+    display: none;
+  }
+}

@@ -1,0 +1,212 @@
+/* MobileDrawer Component Styles */
+
+.drawer :global(.MuiDrawer-paper) {
+  border-radius: 24px 24px 0 0;
+  max-height: 90vh;
+}
+
+.drawerPaper {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 24px 24px 0 0;
+  max-height: 90vh;
+}
+
+.container {
+  padding: 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0));
+  overflow-y: auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.logoWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoMain {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.logoSub {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #8B9A46;
+  letter-spacing: 0.05em;
+}
+
+.closeButton {
+  color: #1a1a2e;
+  background: rgba(26, 26, 46, 0.05);
+}
+
+.closeButton:hover {
+  background: rgba(26, 26, 46, 0.1);
+}
+
+/* Divider */
+.divider {
+  margin: 16px 0;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 45vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.navItem:hover {
+  background: rgba(139, 154, 70, 0.08);
+}
+
+.navItem.active {
+  background: rgba(139, 154, 70, 0.12);
+}
+
+.navIcon {
+  font-size: 1.4rem;
+  color: #666666;
+  transition: color 0.3s ease;
+}
+
+.navItem.active .navIcon {
+  color: #8B9A46;
+}
+
+.navLabel {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a2e;
+  flex-grow: 1;
+}
+
+.navItem.active .navLabel {
+  color: #8B9A46;
+  font-weight: 600;
+}
+
+.activeIndicator {
+  position: absolute;
+  right: 16px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8B9A46;
+}
+
+/* Quick Contact */
+.quickContact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.callButton {
+  border-radius: 12px;
+  padding: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.whatsappButton {
+  border-radius: 12px;
+  padding: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: none;
+  border-color: #25D366;
+  color: #25D366;
+}
+
+.whatsappButton:hover {
+  border-color: #25D366;
+  background: rgba(37, 211, 102, 0.08);
+}
+
+/* Social Section */
+.socialSection {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.socialButton {
+  color: #666666;
+  background: rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.socialButton:hover {
+  color: #8B9A46;
+  background: rgba(139, 154, 70, 0.1);
+}
+
+/* RERA Section */
+.reraSection {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.reraText {
+  color: #999999;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+/* Scrollbar */
+.navigation::-webkit-scrollbar {
+  width: 4px;
+}
+
+.navigation::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.navigation::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.navigation::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,173 @@
+/* LeadForm Component Styles */
+
+.form {
+  width: 100%;
+  max-width: 480px;
+}
+
+.compact {
+  max-width: 100%;
+}
+
+/* Header */
+.header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0;
+}
+
+/* Dark variant */
+.dark .title {
+  color: #ffffff;
+}
+
+.dark .subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Alert */
+.alert {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+/* Fields */
+.field {
+  margin-bottom: 16px;
+}
+
+.input {
+  border-radius: 8px;
+}
+
+/* Toggle switches */
+.toggle {
+  margin: 8px 0 16px;
+  width: 100%;
+}
+
+.toggle .MuiFormControlLabel-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #1a1a2e;
+}
+
+.dark .toggle .MuiFormControlLabel-label {
+  color: #ffffff;
+}
+
+/* Checkbox */
+.checkbox {
+  margin: 0 0 16px;
+}
+
+.checkbox .MuiFormControlLabel-label {
+  font-size: 0.85rem;
+  color: #666666;
+}
+
+/* Radio group */
+.radioGroup {
+  margin-bottom: 16px;
+}
+
+.radioGroup .MuiFormLabel-root {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #1a1a2e;
+}
+
+.dark .radioGroup .MuiFormLabel-root {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Conditional fields container */
+.conditionalFields {
+  padding: 16px;
+  background: rgba(139, 154, 70, 0.05);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.dark .conditionalFields {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Submit button */
+.submitButton {
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: none;
+  margin-top: 8px;
+}
+
+/* Privacy note */
+.privacyNote {
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #999999;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.privacyNote a {
+  color: #8B9A46;
+  text-decoration: none;
+}
+
+.privacyNote a:hover {
+  text-decoration: underline;
+}
+
+.dark .privacyNote {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 599px) {
+  .form {
+    max-width: 100%;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .submitButton {
+    padding: 12px 20px;
+  }
+
+  .conditionalFields {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,88 @@
+/* FloatingCTA Component Styles */
+
+.container {
+  position: fixed;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1090;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* Main FAB */
+.mainFab {
+  box-shadow: 0 4px 20px rgba(139, 154, 70, 0.5);
+  transition: all 0.3s ease;
+}
+
+.mainFab:hover {
+  box-shadow: 0 6px 25px rgba(139, 154, 70, 0.6);
+}
+
+/* WhatsApp FAB */
+.whatsappFab {
+  background-color: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
+.whatsappFab:hover {
+  background-color: #20BD5A;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* Call FAB */
+.callFab {
+  background-color: #2196f3;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+}
+
+.callFab:hover {
+  background-color: #1976d2;
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+}
+
+/* Pulse Effect */
+.pulse {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #8B9A46;
+  z-index: -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 599px) {
+  .container {
+    right: 16px;
+  }
+
+  .mainFab,
+  .pulse {
+    width: 48px;
+    height: 48px;
+  }
+
+  .whatsappFab,
+  .callFab {
+    width: 44px;
+    height: 44px;
+  }
+
+  .actionButtons {
+    gap: 10px;
+  }
+}

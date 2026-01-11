@@ -1,0 +1,121 @@
+/* Loading Component Styles */
+
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.message {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.fullScreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.linearContainer {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.skeletonItem {
+  border-radius: 8px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(26, 26, 46, 0.8);
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.overlayMessage {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.pageLoader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+  z-index: 9999;
+}
+
+.pageLoaderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.logoContainer {
+  text-align: center;
+}
+
+.logoText {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.tagline {
+  color: #8B9A46;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  margin-top: 8px;
+  display: block;
+}
+
+.pageSpinner {
+  margin-top: 8px;
+}
+
+.pageMessage {
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 8px;
+}
+
+.defaultContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}

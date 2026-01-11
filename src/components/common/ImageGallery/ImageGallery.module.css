@@ -1,0 +1,268 @@
+/* ImageGallery Component Styles */
+
+.gallery {
+  width: 100%;
+  outline: none;
+}
+
+/* Filter Container */
+.filterContainer {
+  margin-bottom: 24px;
+}
+
+.tabs {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.tab {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  text-transform: capitalize;
+  min-width: 80px;
+  border-radius: 8px;
+  margin: 0 2px;
+}
+
+.tab.Mui-selected {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Image List */
+.imageList {
+  margin: 0;
+  overflow: visible;
+}
+
+.imageItem {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 75%; /* 4:3 aspect ratio */
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.imageItem:hover .image {
+  transform: scale(1.1);
+}
+
+/* Image Overlay */
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(26, 26, 46, 0.8) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imageItem:hover .imageOverlay {
+  opacity: 1;
+}
+
+.zoomIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.imageTitle {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 500;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Lightbox */
+.lightbox {
+  z-index: 1500;
+}
+
+.lightboxPaper {
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lightboxClose:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation Buttons */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  width: 48px;
+  height: 48px;
+}
+
+.navButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.prevButton {
+  left: 16px;
+}
+
+.nextButton {
+  right: 16px;
+}
+
+/* Lightbox Content */
+.lightboxContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.lightboxContent.zoomed {
+  cursor: zoom-out;
+}
+
+.lightboxContent.zoomed .lightboxImageWrapper {
+  transform: scale(1.5);
+}
+
+.lightboxImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  transition: transform 0.3s ease;
+}
+
+.lightboxImage {
+  object-fit: contain;
+}
+
+/* Lightbox Footer */
+.lightboxFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.lightboxInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lightboxTitle {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.lightboxCounter {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.lightboxActions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.actionButton:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .lightboxContent {
+    padding: 40px 16px;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .prevButton {
+    left: 8px;
+  }
+
+  .nextButton {
+    right: 8px;
+  }
+}
+
+@media (max-width: 599px) {
+  .filterContainer {
+    margin-bottom: 16px;
+  }
+
+  .imageWrapper {
+    padding-bottom: 100%; /* 1:1 aspect ratio on mobile */
+    border-radius: 8px;
+  }
+
+  .imageItem {
+    border-radius: 8px;
+  }
+
+  .lightboxContent {
+    padding: 60px 8px;
+  }
+
+  .lightboxFooter {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .lightboxInfo {
+    align-items: center;
+  }
+}
