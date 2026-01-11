@@ -1,0 +1,61 @@
+# ===========================================
+# Robots.txt for Nambiar District 25
+# ===========================================
+
+# Allow all crawlers
+User-agent: *
+
+# Allow indexing of main pages
+Allow: /
+Allow: /thank-you
+
+# Disallow admin and API routes
+Disallow: /admin/
+Disallow: /api/
+
+# Disallow query parameters for duplicate content prevention
+Disallow: /*?*utm_source=
+Disallow: /*?*utm_medium=
+Disallow: /*?*utm_campaign=
+Disallow: /*?*utm_term=
+Disallow: /*?*utm_content=
+
+# Crawl delay (optional, for server load management)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://nambiardistrict25.com/sitemap.xml
+
+# ===========================================
+# Google Bot Specific
+# ===========================================
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ===========================================
+# Bing Bot Specific
+# ===========================================
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# ===========================================
+# Facebook Crawler (for Open Graph)
+# ===========================================
+User-agent: facebookexternalhit
+Allow: /
+
+# ===========================================
+# Twitter Crawler (for Twitter Cards)
+# ===========================================
+User-agent: Twitterbot
+Allow: /
+
+# ===========================================
+# LinkedIn Crawler
+# ===========================================
+User-agent: LinkedInBot
+Allow: /
