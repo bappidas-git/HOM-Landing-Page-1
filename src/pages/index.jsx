@@ -91,7 +91,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{siteConfig.siteName} | {siteConfig.tagline}</title>
+        <title>{`${siteConfig.siteName} | ${siteConfig.tagline}`}</title>
         <meta
           name="description"
           content={`${siteConfig.siteName} - Premium 2, 3 & 4 BHK apartments starting from ${siteConfig.pricing.starting}. ${siteConfig.features.amenities} amenities, ${siteConfig.features.clubhouseSize} clubhouse, ${siteConfig.features.metroDistance} from metro. RERA: ${siteConfig.rera.number}`}

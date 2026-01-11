@@ -437,9 +437,113 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* ===== GPU ACCELERATION UTILITIES ===== */
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ===== STAGGER CONTAINER ===== */
+
+.stagger-container > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-container.visible > *:nth-child(1) { animation: fadeInUp 0.5s ease 0.1s forwards; }
+.stagger-container.visible > *:nth-child(2) { animation: fadeInUp 0.5s ease 0.2s forwards; }
+.stagger-container.visible > *:nth-child(3) { animation: fadeInUp 0.5s ease 0.3s forwards; }
+.stagger-container.visible > *:nth-child(4) { animation: fadeInUp 0.5s ease 0.4s forwards; }
+.stagger-container.visible > *:nth-child(5) { animation: fadeInUp 0.5s ease 0.5s forwards; }
+.stagger-container.visible > *:nth-child(6) { animation: fadeInUp 0.5s ease 0.6s forwards; }
+
+/* ===== SMOOTH APPEARANCE ===== */
+
+.smooth-appear {
+  animation: smoothAppear 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes smoothAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== ELASTIC ANIMATIONS ===== */
+
+@keyframes elasticBounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15); }
+  50% { transform: scale(0.95); }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-elastic {
+  animation: elasticBounce 0.6s ease;
+}
+
+/* ===== FOCUS RING ANIMATION ===== */
+
+@keyframes focusRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 154, 70, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(139, 154, 70, 0);
+  }
+}
+
+.animate-focus-ring:focus {
+  animation: focusRing 0.3s ease forwards;
+}
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
+@media (max-width: 768px) {
+  /* Reduce animation duration on mobile for snappier feel */
+  .animate-fadeInUp,
+  .animate-fadeInDown,
+  .animate-fadeInLeft,
+  .animate-fadeInRight {
+    animation-duration: 0.4s;
+  }
+
+  /* Reduce hover effects on mobile since they trigger on tap */
+  .hover-lift,
+  .hover-scale {
+    transition-duration: 0.2s;
+  }
+}
+
+/* ===== WILL-CHANGE UTILITIES ===== */
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
 /* ===== REDUCED MOTION ===== */
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .animate-fadeIn,
   .animate-fadeInUp,
   .animate-fadeInDown,
@@ -451,16 +555,25 @@
   .animate-pulse,
   .animate-spin,
   .animate-float,
-  .animate-shake {
-    animation: none;
+  .animate-shake,
+  .animate-elastic,
+  .smooth-appear {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
-  
+
   .hover-lift:hover,
   .hover-scale:hover {
     transform: none;
   }
-  
+
   .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stagger-container > * {
     opacity: 1;
     transform: none;
   }
