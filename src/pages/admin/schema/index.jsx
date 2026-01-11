@@ -776,7 +776,7 @@ const AdminSchemaPage = () => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Typography variant="body2">
               Schema markup helps search engines understand your content and can result in rich snippets in search results.
-              <strong> Test your schemas using Google's Rich Results Test tool.</strong>
+              <strong> Test your schemas using Google&apos;s Rich Results Test tool.</strong>
             </Typography>
           </Box>
         </Alert>

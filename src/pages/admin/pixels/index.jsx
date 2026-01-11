@@ -930,7 +930,7 @@ fbq('track', 'PageView');
                                 Respect Do Not Track
                               </Typography>
                               <Typography variant="caption" color="text.secondary">
-                                Honor browser's DNT setting
+                                Honor browser&apos;s DNT setting
                               </Typography>
                             </Box>
                           }
