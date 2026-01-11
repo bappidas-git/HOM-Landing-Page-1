@@ -264,7 +264,7 @@ const AdminDashboardPage = () => {
         <Box>
           <Grid container spacing={3}>
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <Grid item xs={12} sm={6} lg={2} key={i}>
+              <Grid item xs={4} md={6} lg={4} key={i}>
                 <Skeleton variant="rounded" height={140} sx={{ borderRadius: 3 }} />
               </Grid>
             ))}
@@ -290,45 +290,18 @@ const AdminDashboardPage = () => {
 
       <Box>
         {/* Page Header */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-          <Box>
-            <Typography variant="h5" fontWeight="bold" gutterBottom>
-              Dashboard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Welcome back! Here&apos;s what&apos;s happening with your leads today.
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            <Button
-              variant="outlined"
-              startIcon={<Icon icon="mdi:refresh" />}
-              onClick={loadDashboardData}
-              sx={{ borderRadius: 2, textTransform: 'none' }}
-            >
-              Refresh
-            </Button>
-            <Button
-              variant="contained"
-              startIcon={<Icon icon="mdi:download" />}
-              onClick={handleExportLeads}
-              sx={{
-                borderRadius: 2,
-                textTransform: 'none',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                '&:hover': {
-                  background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
-                },
-              }}
-            >
-              Export Leads
-            </Button>
-          </Box>
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="h5" fontWeight="bold" gutterBottom>
+            Dashboard
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Welcome back! Here&apos;s what&apos;s happening with your leads today.
+          </Typography>
         </Box>
 
         {/* Stats Cards */}
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} lg={2}>
+          <Grid item xs={4} md={6} lg={4}>
             <StatCard
               title="Total Leads"
               value={stats.totalLeads}
@@ -339,7 +312,7 @@ const AdminDashboardPage = () => {
               loading={loading}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={2}>
+          <Grid item xs={4} md={6} lg={4}>
             <StatCard
               title="New Today"
               value={stats.newLeads}
@@ -350,7 +323,7 @@ const AdminDashboardPage = () => {
               loading={loading}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={2}>
+          <Grid item xs={4} md={6} lg={4}>
             <StatCard
               title="Contacted"
               value={stats.contactedLeads}
@@ -361,7 +334,7 @@ const AdminDashboardPage = () => {
               loading={loading}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={2}>
+          <Grid item xs={4} md={6} lg={4}>
             <StatCard
               title="Site Visits"
               value={stats.siteVisits}
@@ -372,7 +345,7 @@ const AdminDashboardPage = () => {
               loading={loading}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={2}>
+          <Grid item xs={4} md={6} lg={4}>
             <StatCard
               title="Converted"
               value={stats.convertedLeads}
@@ -383,7 +356,7 @@ const AdminDashboardPage = () => {
               loading={loading}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={2}>
+          <Grid item xs={4} md={6} lg={4}>
             <StatCard
               title="Conversion Rate"
               value={`${stats.conversionRate}%`}
