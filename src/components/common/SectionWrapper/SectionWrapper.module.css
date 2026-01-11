@@ -1,4 +1,4 @@
-/* SectionWrapper Component Styles */
+/* SectionWrapper Component Styles - Modern Minimalistic */
 
 .section {
   position: relative;
@@ -16,22 +16,21 @@
 }
 
 .bgPaper {
-  background-color: #f8f9fa;
+  background-color: #FAFAFA;
 }
 
 .bgDark {
-  background-color: #1a1a2e;
+  background-color: #000000;
   color: #ffffff;
 }
 
 .bgGradient {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
-  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
 }
 
 .bgPattern {
-  background-color: #f8f9fa;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B9A46' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-color: #FAFAFA;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2h2v2h20v2H22v2.5h-2zm0-9V8H0V6h20V4h2v2h20v2H22v3.5h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Padding variants */
@@ -41,51 +40,51 @@
 }
 
 .paddingSmall {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 48px;
+  padding-bottom: 48px;
 }
 
 .paddingMedium {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 72px;
+  padding-bottom: 72px;
 }
 
 .paddingLarge {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 96px;
+  padding-bottom: 96px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 899px) {
   .paddingSmall {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 36px;
+    padding-bottom: 36px;
   }
 
   .paddingMedium {
-    padding-top: 45px;
-    padding-bottom: 45px;
+    padding-top: 56px;
+    padding-bottom: 56px;
   }
 
   .paddingLarge {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 }
 
 @media (max-width: 599px) {
   .paddingSmall {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 
   .paddingMedium {
-    padding-top: 36px;
-    padding-bottom: 36px;
+    padding-top: 44px;
+    padding-bottom: 44px;
   }
 
   .paddingLarge {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 56px;
+    padding-bottom: 56px;
   }
 }

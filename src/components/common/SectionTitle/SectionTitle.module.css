@@ -1,4 +1,4 @@
-/* SectionTitle Component Styles */
+/* SectionTitle Component Styles - Modern Minimalistic */
 
 .container {
   margin-bottom: 48px;
@@ -20,23 +20,25 @@
 /* Pre-title */
 .preTitle {
   display: inline-block;
-  color: #8B9A46;
-  font-size: 0.875rem;
+  color: #006AFF;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
-  margin-bottom: 8px;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
 }
 
 .preTitle.light {
-  color: #a3b15e;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Title */
 .title {
-  color: #1a1a2e;
+  color: #2A2A33;
   margin-bottom: 16px;
   font-weight: 700;
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .title.light {
@@ -45,9 +47,11 @@
 
 /* Subtitle */
 .subtitle {
-  color: #666666;
-  max-width: 700px;
+  color: #6B6B76;
+  max-width: 640px;
   margin-top: 16px;
+  line-height: 1.7;
+  font-size: 1.05rem;
 }
 
 .center .subtitle {
@@ -61,7 +65,7 @@
 
 /* Decorations */
 .decoration {
-  margin-top: 16px;
+  margin-top: 20px;
   margin-bottom: 16px;
 }
 
@@ -72,20 +76,20 @@
 
 /* Line decoration */
 .line {
-  width: 60px;
-  height: 4px;
-  background: linear-gradient(90deg, #8B9A46 0%, #c9a227 100%);
+  width: 48px;
+  height: 3px;
+  background: #006AFF;
   border-radius: 2px;
 }
 
 .line.light {
-  background: linear-gradient(90deg, #a3b15e 0%, #c9a227 100%);
+  background: #ffffff;
 }
 
 /* Dots decoration */
 .dots {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .center .dots {
@@ -93,40 +97,41 @@
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: #8B9A46;
+  background-color: #006AFF;
 }
 
 .dot:nth-child(2) {
-  background-color: #c9a227;
+  background-color: #2A2A33;
 }
 
 .dot:nth-child(3) {
-  background-color: #b87333;
+  background-color: #D4D4D4;
 }
 
 .dot.light {
-  background-color: #a3b15e;
+  background-color: #ffffff;
 }
 
 /* Gradient decoration */
 .gradient {
-  width: 120px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #8B9A46, transparent);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #006AFF 0%, transparent 100%);
   border-radius: 2px;
 }
 
 /* Responsive */
 @media (max-width: 899px) {
   .container {
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
 
   .subtitle {
     max-width: 100%;
+    font-size: 1rem;
   }
 }
 
@@ -135,11 +140,15 @@
     margin-bottom: 32px;
   }
 
+  .preTitle {
+    font-size: 0.75rem;
+  }
+
   .line {
-    width: 48px;
+    width: 40px;
   }
 
   .gradient {
-    width: 80px;
+    width: 60px;
   }
 }

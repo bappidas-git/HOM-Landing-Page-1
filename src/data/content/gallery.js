@@ -18,7 +18,7 @@ export const galleryContent = {
     { id: 'aerial', label: 'Aerial Views', icon: 'flight' },
   ],
 
-  // Gallery Images
+  // Gallery Images with placeholder URLs
   images: [
     // Exterior Views
     {
@@ -26,8 +26,8 @@ export const galleryContent = {
       category: 'exterior',
       title: 'Tower Elevation - Day View',
       description: 'Premium tower facade with modern architecture',
-      src: '/images/gallery/exterior-day.jpg',
-      thumbnail: '/images/gallery/thumbnails/exterior-day.jpg',
+      src: 'https://placehold.co/1200x800/1a1a1a/ffffff?text=Tower+Day+View+1200x800',
+      thumbnail: 'https://placehold.co/400x300/1a1a1a/ffffff?text=Tower+Day+400x300',
       featured: true,
     },
     {
@@ -35,8 +35,8 @@ export const galleryContent = {
       category: 'exterior',
       title: 'Tower Elevation - Night View',
       description: 'Stunning night illumination of the towers',
-      src: '/images/gallery/exterior-night.jpg',
-      thumbnail: '/images/gallery/thumbnails/exterior-night.jpg',
+      src: 'https://placehold.co/1200x800/0a0a0a/ffffff?text=Tower+Night+View+1200x800',
+      thumbnail: 'https://placehold.co/400x300/0a0a0a/ffffff?text=Tower+Night+400x300',
       featured: false,
     },
     {
@@ -44,8 +44,8 @@ export const galleryContent = {
       category: 'exterior',
       title: 'Entrance Gate',
       description: 'Grand entrance to District 25',
-      src: '/images/gallery/entrance.jpg',
-      thumbnail: '/images/gallery/thumbnails/entrance.jpg',
+      src: 'https://placehold.co/1200x800/2a2a2a/ffffff?text=Entrance+Gate+1200x800',
+      thumbnail: 'https://placehold.co/400x300/2a2a2a/ffffff?text=Entrance+400x300',
       featured: false,
     },
     {
@@ -53,8 +53,8 @@ export const galleryContent = {
       category: 'exterior',
       title: 'Spine Road',
       description: '1km spine road connecting the district',
-      src: '/images/gallery/spine-road.jpg',
-      thumbnail: '/images/gallery/thumbnails/spine-road.jpg',
+      src: 'https://placehold.co/1200x800/333333/ffffff?text=Spine+Road+1200x800',
+      thumbnail: 'https://placehold.co/400x300/333333/ffffff?text=Spine+Road+400x300',
       featured: false,
     },
 
@@ -64,8 +64,8 @@ export const galleryContent = {
       category: 'clubhouse',
       title: 'Club SOHO - Main Building',
       description: '7-acre clubhouse with world-class facilities',
-      src: '/images/gallery/clubhouse-main.jpg',
-      thumbnail: '/images/gallery/thumbnails/clubhouse-main.jpg',
+      src: 'https://placehold.co/1200x800/006AFF/ffffff?text=Club+SOHO+1200x800',
+      thumbnail: 'https://placehold.co/400x300/006AFF/ffffff?text=Club+SOHO+400x300',
       featured: true,
     },
     {
@@ -73,8 +73,8 @@ export const galleryContent = {
       category: 'clubhouse',
       title: 'Olympic Length Pool',
       description: 'State-of-the-art Olympic length swimming pool',
-      src: '/images/gallery/olympic-pool.jpg',
-      thumbnail: '/images/gallery/thumbnails/olympic-pool.jpg',
+      src: 'https://placehold.co/1200x800/0052CC/ffffff?text=Olympic+Pool+1200x800',
+      thumbnail: 'https://placehold.co/400x300/0052CC/ffffff?text=Olympic+Pool+400x300',
       featured: true,
     },
     {
@@ -82,8 +82,8 @@ export const galleryContent = {
       category: 'clubhouse',
       title: 'Indoor Pool',
       description: 'Temperature-controlled indoor pool',
-      src: '/images/gallery/indoor-pool.jpg',
-      thumbnail: '/images/gallery/thumbnails/indoor-pool.jpg',
+      src: 'https://placehold.co/1200x800/003D99/ffffff?text=Indoor+Pool+1200x800',
+      thumbnail: 'https://placehold.co/400x300/003D99/ffffff?text=Indoor+Pool+400x300',
       featured: false,
     },
     {
@@ -91,8 +91,8 @@ export const galleryContent = {
       category: 'clubhouse',
       title: 'Party Lawn',
       description: 'Spacious party lawn for celebrations',
-      src: '/images/gallery/party-lawn.jpg',
-      thumbnail: '/images/gallery/thumbnails/party-lawn.jpg',
+      src: 'https://placehold.co/1200x800/00864D/ffffff?text=Party+Lawn+1200x800',
+      thumbnail: 'https://placehold.co/400x300/00864D/ffffff?text=Party+Lawn+400x300',
       featured: false,
     },
     {
@@ -100,8 +100,8 @@ export const galleryContent = {
       category: 'clubhouse',
       title: 'SOHO Zone',
       description: 'Vibrant flea market and activity zone',
-      src: '/images/gallery/soho-zone.jpg',
-      thumbnail: '/images/gallery/thumbnails/soho-zone.jpg',
+      src: 'https://placehold.co/1200x800/4a4a4a/ffffff?text=SOHO+Zone+1200x800',
+      thumbnail: 'https://placehold.co/400x300/4a4a4a/ffffff?text=SOHO+Zone+400x300',
       featured: false,
     },
 
@@ -111,8 +111,8 @@ export const galleryContent = {
       category: 'amenities',
       title: 'Tennis Court',
       description: 'Professional-grade tennis courts',
-      src: '/images/gallery/tennis-court.jpg',
-      thumbnail: '/images/gallery/thumbnails/tennis-court.jpg',
+      src: 'https://placehold.co/1200x800/1a1a1a/ffffff?text=Tennis+Court+1200x800',
+      thumbnail: 'https://placehold.co/400x300/1a1a1a/ffffff?text=Tennis+400x300',
       featured: true,
     },
     {
@@ -120,8 +120,8 @@ export const galleryContent = {
       category: 'amenities',
       title: 'Basketball Court',
       description: 'Full-size basketball court',
-      src: '/images/gallery/basketball.jpg',
-      thumbnail: '/images/gallery/thumbnails/basketball.jpg',
+      src: 'https://placehold.co/1200x800/2a2a2a/ffffff?text=Basketball+1200x800',
+      thumbnail: 'https://placehold.co/400x300/2a2a2a/ffffff?text=Basketball+400x300',
       featured: false,
     },
     {
@@ -129,8 +129,8 @@ export const galleryContent = {
       category: 'amenities',
       title: 'Kids Play Zone',
       description: 'Dedicated play areas for children',
-      src: '/images/gallery/kids-zone.jpg',
-      thumbnail: '/images/gallery/thumbnails/kids-zone.jpg',
+      src: 'https://placehold.co/1200x800/3a3a3a/ffffff?text=Kids+Zone+1200x800',
+      thumbnail: 'https://placehold.co/400x300/3a3a3a/ffffff?text=Kids+Zone+400x300',
       featured: false,
     },
     {
@@ -138,8 +138,8 @@ export const galleryContent = {
       category: 'amenities',
       title: 'Butterfly Garden',
       description: 'Beautiful butterfly garden walkway',
-      src: '/images/gallery/butterfly-garden.jpg',
-      thumbnail: '/images/gallery/thumbnails/butterfly-garden.jpg',
+      src: 'https://placehold.co/1200x800/00864D/ffffff?text=Butterfly+Garden+1200x800',
+      thumbnail: 'https://placehold.co/400x300/00864D/ffffff?text=Garden+400x300',
       featured: false,
     },
     {
@@ -147,8 +147,8 @@ export const galleryContent = {
       category: 'amenities',
       title: 'Yoga Deck',
       description: 'Serene yoga and meditation deck',
-      src: '/images/gallery/yoga-deck.jpg',
-      thumbnail: '/images/gallery/thumbnails/yoga-deck.jpg',
+      src: 'https://placehold.co/1200x800/4a4a4a/ffffff?text=Yoga+Deck+1200x800',
+      thumbnail: 'https://placehold.co/400x300/4a4a4a/ffffff?text=Yoga+Deck+400x300',
       featured: false,
     },
     {
@@ -156,8 +156,8 @@ export const galleryContent = {
       category: 'amenities',
       title: 'Spa & Salon',
       description: 'Luxury spa and salon facilities',
-      src: '/images/gallery/spa.jpg',
-      thumbnail: '/images/gallery/thumbnails/spa.jpg',
+      src: 'https://placehold.co/1200x800/5a5a5a/ffffff?text=Spa+Salon+1200x800',
+      thumbnail: 'https://placehold.co/400x300/5a5a5a/ffffff?text=Spa+400x300',
       featured: false,
     },
 
@@ -167,8 +167,8 @@ export const galleryContent = {
       category: 'masterplan',
       title: 'District 25 Master Plan',
       description: 'Complete township layout',
-      src: '/images/gallery/masterplan.jpg',
-      thumbnail: '/images/gallery/thumbnails/masterplan.jpg',
+      src: 'https://placehold.co/1200x800/006AFF/ffffff?text=Master+Plan+1200x800',
+      thumbnail: 'https://placehold.co/400x300/006AFF/ffffff?text=Master+Plan+400x300',
       featured: true,
     },
     {
@@ -176,8 +176,8 @@ export const galleryContent = {
       category: 'masterplan',
       title: 'Phase 2 Layout',
       description: 'Detailed Phase 2 development plan',
-      src: '/images/gallery/phase2-layout.jpg',
-      thumbnail: '/images/gallery/thumbnails/phase2-layout.jpg',
+      src: 'https://placehold.co/1200x800/0052CC/ffffff?text=Phase+2+Layout+1200x800',
+      thumbnail: 'https://placehold.co/400x300/0052CC/ffffff?text=Phase+2+400x300',
       featured: false,
     },
 
@@ -186,9 +186,9 @@ export const galleryContent = {
       id: 'aerial-1',
       category: 'aerial',
       title: 'Aerial View - Complete Township',
-      description: 'Bird\'s eye view of District 25',
-      src: '/images/gallery/aerial-full.jpg',
-      thumbnail: '/images/gallery/thumbnails/aerial-full.jpg',
+      description: "Bird's eye view of District 25",
+      src: 'https://placehold.co/1200x800/1a1a1a/ffffff?text=Aerial+View+1200x800',
+      thumbnail: 'https://placehold.co/400x300/1a1a1a/ffffff?text=Aerial+400x300',
       featured: true,
     },
     {
@@ -196,8 +196,8 @@ export const galleryContent = {
       category: 'aerial',
       title: 'Aerial View - Clubhouse',
       description: 'Aerial perspective of 7-acre clubhouse',
-      src: '/images/gallery/aerial-clubhouse.jpg',
-      thumbnail: '/images/gallery/thumbnails/aerial-clubhouse.jpg',
+      src: 'https://placehold.co/1200x800/2a2a2a/ffffff?text=Aerial+Clubhouse+1200x800',
+      thumbnail: 'https://placehold.co/400x300/2a2a2a/ffffff?text=Aerial+Club+400x300',
       featured: false,
     },
     {
@@ -205,8 +205,8 @@ export const galleryContent = {
       category: 'aerial',
       title: 'Aerial View - Green Spaces',
       description: '80% open space and 40% green coverage',
-      src: '/images/gallery/aerial-green.jpg',
-      thumbnail: '/images/gallery/thumbnails/aerial-green.jpg',
+      src: 'https://placehold.co/1200x800/00864D/ffffff?text=Green+Spaces+1200x800',
+      thumbnail: 'https://placehold.co/400x300/00864D/ffffff?text=Green+400x300',
       featured: false,
     },
   ],
@@ -214,10 +214,10 @@ export const galleryContent = {
   // Virtual Tour
   virtualTour: {
     enabled: true,
-    title: '360° Virtual Tour',
+    title: '360 Virtual Tour',
     description: 'Experience District 25 from anywhere',
-    embedUrl: null, // Placeholder for virtual tour embed
-    thumbnail: '/images/gallery/virtual-tour-thumb.jpg',
+    embedUrl: null,
+    thumbnail: 'https://placehold.co/800x450/1a1a1a/ffffff?text=Virtual+Tour+800x450',
   },
 
   // Video Gallery
@@ -226,31 +226,31 @@ export const galleryContent = {
       id: 'video-1',
       title: 'Project Walkthrough',
       description: 'Complete walkthrough of District 25 Phase 2',
-      thumbnail: '/images/gallery/video-walkthrough.jpg',
-      videoUrl: null, // Placeholder for video URL
+      thumbnail: 'https://placehold.co/640x360/1a1a1a/ffffff?text=Walkthrough+640x360',
+      videoUrl: null,
       duration: '3:45',
     },
     {
       id: 'video-2',
       title: 'Sample Flat Tour',
       description: 'Explore our beautifully designed sample apartment',
-      thumbnail: '/images/gallery/video-sample-flat.jpg',
-      videoUrl: null, // Placeholder for video URL
+      thumbnail: 'https://placehold.co/640x360/2a2a2a/ffffff?text=Sample+Flat+640x360',
+      videoUrl: null,
       duration: '5:20',
     },
     {
       id: 'video-3',
       title: 'Clubhouse Tour',
       description: 'Discover the 7-acre Club SOHO',
-      thumbnail: '/images/gallery/video-clubhouse.jpg',
-      videoUrl: null, // Placeholder for video URL
+      thumbnail: 'https://placehold.co/640x360/006AFF/ffffff?text=Clubhouse+Tour+640x360',
+      videoUrl: null,
       duration: '4:15',
     },
   ],
 
   // Display Configuration
   displayConfig: {
-    layout: 'masonry', // 'masonry' | 'grid'
+    layout: 'masonry',
     initialDisplayCount: 8,
     showAllText: 'View All Photos',
     enableLightbox: true,

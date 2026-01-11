@@ -1,4 +1,4 @@
-/* Hero Section Styles */
+/* Hero Section Styles - Modern Minimalistic */
 
 .hero {
   min-height: 100vh;
@@ -9,8 +9,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  padding: 120px 0 80px;
+  padding: 100px 0 60px;
 }
 
 .container {
@@ -19,50 +18,53 @@
 }
 
 .grid {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 160px);
 }
 
 /* Content Side */
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* Badge */
 .badge {
-  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+  background: #006AFF;
   color: #ffffff;
   font-weight: 600;
-  padding: 6px 16px;
+  padding: 8px 16px;
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(139, 154, 70, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(139, 154, 70, 0);
-  }
+  letter-spacing: 0.05em;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
 }
 
 /* Title */
 .title {
   color: #ffffff;
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
   line-height: 1.1;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.03em;
 }
 
 .highlight {
-  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: rgba(0, 106, 255, 0.4);
+  z-index: -1;
 }
 
 /* Subtitle */
@@ -70,14 +72,15 @@
   color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
   max-width: 500px;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1.125rem;
 }
 
 /* Highlights Grid */
 .highlightsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
   margin-top: 8px;
 }
 
@@ -88,8 +91,8 @@
   padding: 16px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -99,15 +102,16 @@
 }
 
 .highlightIcon {
-  color: #c9a227;
-  font-size: 28px !important;
+  color: #ffffff;
+  font-size: 24px !important;
+  opacity: 0.9;
 }
 
 .highlightTitle {
   display: block;
   color: #ffffff;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.3;
 }
 
@@ -121,29 +125,39 @@
 /* CTA Buttons */
 .ctaButtons {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   margin-top: 8px;
 }
 
 .ctaPrimary {
-  background: linear-gradient(135deg, #8B9A46 0%, #6b7a36 100%);
+  background: #006AFF;
   padding: 14px 32px;
   font-size: 1rem;
+  font-weight: 600;
   text-transform: none;
-  box-shadow: 0 4px 20px rgba(139, 154, 70, 0.4);
+  border-radius: 12px;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(0, 106, 255, 0.4);
+  transition: all 0.3s ease;
 }
 
 .ctaPrimary:hover {
-  background: linear-gradient(135deg, #6b7a36 0%, #8B9A46 100%);
-  box-shadow: 0 6px 25px rgba(139, 154, 70, 0.5);
+  background: #0052CC;
+  box-shadow: 0 6px 20px rgba(0, 106, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .ctaSecondary {
-  border-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   color: #ffffff;
   padding: 14px 32px;
   font-size: 1rem;
+  font-weight: 600;
   text-transform: none;
+  border-radius: 12px;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
 .ctaSecondary:hover {
@@ -156,7 +170,7 @@
   display: flex;
   gap: 24px;
   margin-top: 16px;
-  padding-top: 24px;
+  padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -167,8 +181,9 @@
 }
 
 .trustIcon {
-  color: #c9a227;
-  font-size: 20px !important;
+  color: #ffffff;
+  font-size: 18px !important;
+  opacity: 0.8;
 }
 
 .trustText {
@@ -186,8 +201,7 @@
   background: #ffffff;
   border-radius: 20px;
   padding: 32px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
 /* Scroll Indicator */
@@ -199,10 +213,12 @@
   color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
 .scrollIndicator:hover {
   color: #ffffff;
+  transform: translateX(-50%) translateY(4px);
 }
 
 .scrollIndicator span {
@@ -217,18 +233,17 @@
 
   .highlightsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
   .highlightItem {
-    padding: 12px;
+    padding: 14px;
   }
 }
 
 @media (max-width: 899px) {
   .hero {
-    padding: 100px 0 60px;
-    background-attachment: scroll;
+    padding: 90px 0 50px;
   }
 
   .title {
@@ -275,24 +290,24 @@
   }
 
   .title {
-    font-size: 1.75rem;
+    font-size: 1.85rem;
   }
 
   .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .highlightsGrid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
   }
 
   .highlightItem {
-    padding: 10px;
+    padding: 12px;
   }
 
   .highlightIcon {
-    font-size: 24px !important;
+    font-size: 22px !important;
   }
 
   .highlightTitle {
@@ -305,7 +320,7 @@
 
   .trustElements {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .formContainer {

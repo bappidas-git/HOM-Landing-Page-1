@@ -32,7 +32,7 @@ export const heroContent = {
     {
       id: 'price',
       icon: 'currency_rupee',
-      title: 'Starting ₹1.24 Cr*',
+      title: 'Starting 1.24 Cr*',
       description: 'Onwards',
     },
     {
@@ -72,11 +72,11 @@ export const heroContent = {
     source: 'hero_form',
   },
 
-  // Background Configuration
+  // Background Configuration - Using placeholder image
   background: {
-    image: '/images/hero/hero-bg.jpg',
-    overlay: 'linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(26, 26, 46, 0.7) 50%, rgba(26, 26, 46, 0.5) 100%)',
-    video: null, // Optional video background
+    image: 'https://placehold.co/1920x1080/1a1a1a/333333?text=Premium+Living+1920x1080',
+    overlay: 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%)',
+    video: null,
   },
 
   // Trust Badges (shown at bottom of hero)

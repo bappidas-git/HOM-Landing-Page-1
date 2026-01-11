@@ -1,4 +1,4 @@
-/* Loading Component Styles */
+/* Loading Component Styles - Modern Minimalistic */
 
 .spinnerContainer {
   display: flex;
@@ -23,9 +23,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.98);
   z-index: 9999;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
 }
 
 .linearContainer {
@@ -41,7 +41,7 @@
 }
 
 .skeletonItem {
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .overlay {
@@ -54,7 +54,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(26, 26, 46, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 10;
   border-radius: inherit;
 }
@@ -73,7 +73,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+  background: #ffffff;
   z-index: 9999;
 }
 
@@ -89,19 +89,26 @@
 }
 
 .logoText {
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  color: #2A2A33;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .tagline {
-  color: #8B9A46;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.2em;
+  color: #006AFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   margin-top: 8px;
   display: block;
+  font-size: 0.7rem;
+}
+
+.lottieContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pageSpinner {
@@ -109,7 +116,7 @@
 }
 
 .pageMessage {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6B6B76;
   margin-top: 8px;
 }
 
