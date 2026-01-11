@@ -1,0 +1,17 @@
+/**
+ * NextSteps Component Styles
+ */
+
+.section {
+  position: relative;
+}
+
+.stepCard {
+  min-height: 220px;
+}
+
+@media (max-width: 600px) {
+  .stepCard {
+    min-height: auto;
+  }
+}
