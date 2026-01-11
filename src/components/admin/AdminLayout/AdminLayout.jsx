@@ -327,20 +327,6 @@ const AdminLayout = ({ children, title }) => {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Refresh Button */}
-          <Tooltip title="Refresh">
-            <IconButton sx={{ color: 'text.primary' }} onClick={() => router.replace(router.asPath)}>
-              <Icon icon="mdi:refresh" />
-            </IconButton>
-          </Tooltip>
-
-          {/* Dark Mode Toggle - Placeholder */}
-          <Tooltip title="Theme">
-            <IconButton sx={{ color: 'text.primary' }}>
-              <Icon icon="mdi:weather-night" />
-            </IconButton>
-          </Tooltip>
-
           {/* Notifications */}
           <Tooltip title="Notifications">
             <IconButton
@@ -559,18 +545,6 @@ const AdminLayout = ({ children, title }) => {
               {user?.name?.[0] || 'A'}
             </Avatar>
           </IconButton>
-
-          {/* User Info (Desktop) */}
-          {!isMobile && (
-            <Box sx={{ ml: 1, display: { xs: 'none', sm: 'block' } }}>
-              <Typography variant="body2" fontWeight={600}>
-                {user?.name || 'Admin User'}
-              </Typography>
-              <Typography variant="caption" color="text.secondary">
-                Admin
-              </Typography>
-            </Box>
-          )}
 
           <Menu
             anchorEl={anchorEl}
