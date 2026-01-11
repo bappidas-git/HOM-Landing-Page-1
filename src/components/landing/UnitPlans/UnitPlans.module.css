@@ -1,0 +1,356 @@
+/* Unit Plans Section Styles */
+
+/* Summary Stats */
+.summaryStats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.statIcon {
+  font-size: 28px !important;
+  color: #8B9A46;
+  margin-bottom: 8px;
+}
+
+.statValue {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.statItem span {
+  color: #666666;
+}
+
+/* Tower Tabs */
+.towerTabs {
+  margin-bottom: 24px;
+}
+
+.tabs {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.tab {
+  min-height: 64px;
+  text-transform: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tabLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.unitTypeChip {
+  font-size: 0.65rem;
+  height: 20px;
+  background: rgba(139, 154, 70, 0.15);
+  color: #6b7a36;
+}
+
+/* Tower Card */
+.towerCard {
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+.towerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.towerName {
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.statusChip {
+  text-transform: capitalize;
+}
+
+.towerMeta {
+  text-align: right;
+}
+
+.unitType {
+  font-weight: 600;
+  color: #8B9A46;
+}
+
+.sba {
+  color: #666666;
+}
+
+/* Tower Info */
+.towerInfo {
+  margin-bottom: 24px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.infoItem span {
+  color: #8B9A46;
+}
+
+/* Highlights */
+.highlights {
+  margin-bottom: 24px;
+}
+
+.highlightsTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+.highlightChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.highlightChip {
+  border-color: #8B9A46;
+}
+
+.highlightChip span {
+  color: #8B9A46;
+  font-size: 14px !important;
+}
+
+/* Table */
+.tableContainer {
+  border-radius: 12px;
+  box-shadow: none;
+  border: 1px solid #f0f0f0;
+}
+
+.hoveredRow {
+  background-color: rgba(139, 154, 70, 0.1) !important;
+}
+
+/* Key Plan Card */
+.keyPlanCard {
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+.keyPlanTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Key Plan Visual */
+.keyPlanVisual {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.keyPlanGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.05) 0%, rgba(201, 162, 39, 0.05) 100%);
+  border-radius: 16px;
+}
+
+.keyPlanUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.keyPlanUnit:hover,
+.keyPlanUnit.highlighted {
+  border-color: #8B9A46;
+  background: rgba(139, 154, 70, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(139, 154, 70, 0.2);
+}
+
+.keyPlanUnit h6 {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.keyPlanUnit span {
+  color: #666666;
+  font-size: 0.7rem;
+}
+
+.compassRose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #8B9A46;
+}
+
+.compassRose span {
+  font-size: 24px !important;
+}
+
+/* Legend */
+.legend {
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.legendTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.legendItem:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA */
+.ctaWrapper {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.ctaButton {
+  padding: 14px 40px;
+  font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .summaryStats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .statItem {
+    flex: 1 1 30%;
+  }
+
+  .towerHeader {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .towerMeta {
+    text-align: left;
+  }
+
+  .keyPlanGrid {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .keyPlanUnit {
+    padding: 20px 12px;
+  }
+}
+
+@media (max-width: 599px) {
+  .summaryStats {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .statItem {
+    flex: 1 1 45%;
+  }
+
+  .statIcon {
+    font-size: 24px !important;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .tab {
+    min-height: 56px;
+    font-size: 0.8rem;
+  }
+
+  .towerName {
+    font-size: 1.5rem;
+  }
+
+  .infoItem {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  .keyPlanUnit {
+    padding: 16px 10px;
+  }
+
+  .keyPlanUnit h6 {
+    font-size: 1rem;
+  }
+
+  .legendItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .ctaWrapper {
+    margin-top: 32px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}

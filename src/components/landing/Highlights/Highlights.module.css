@@ -1,0 +1,198 @@
+/* Highlights Section Styles */
+
+.highlightsGrid {
+  margin-top: 16px;
+}
+
+/* Highlight Card */
+.highlightCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlightCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.highlightCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.highlightCard:hover::before {
+  transform: scaleX(1);
+}
+
+/* Icon */
+.iconWrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.highlightCard:hover .iconWrapper {
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+}
+
+.icon {
+  font-size: 40px !important;
+  color: #8B9A46;
+  transition: all 0.3s ease;
+}
+
+.highlightCard:hover .icon {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Card Content */
+.cardTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.cardDescription {
+  color: #666666;
+  line-height: 1.7;
+  flex-grow: 1;
+}
+
+/* Features Strip */
+.featuresStrip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 48px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.05) 0%, rgba(201, 162, 39, 0.05) 100%);
+  border-radius: 16px;
+}
+
+.featureChip {
+  padding: 8px 16px;
+  border-color: #8B9A46;
+  color: #1a1a2e;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.featureChip:hover {
+  background: #8B9A46;
+  color: #ffffff;
+  border-color: #8B9A46;
+}
+
+.featureChip span {
+  color: #8B9A46;
+}
+
+.featureChip:hover span {
+  color: #ffffff;
+}
+
+/* CTA */
+.ctaWrapper {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.ctaButton {
+  padding: 14px 40px;
+  font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .highlightCard {
+    padding: 28px 24px;
+  }
+
+  .iconWrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .icon {
+    font-size: 36px !important;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+
+  .featuresStrip {
+    padding: 20px 16px;
+    margin-top: 36px;
+  }
+}
+
+@media (max-width: 599px) {
+  .highlightCard {
+    padding: 24px 20px;
+  }
+
+  .iconWrapper {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+
+  .icon {
+    font-size: 32px !important;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .cardDescription {
+    font-size: 0.875rem;
+  }
+
+  .featuresStrip {
+    gap: 8px;
+    padding: 16px 12px;
+  }
+
+  .featureChip {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+  }
+
+  .ctaWrapper {
+    margin-top: 36px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}
