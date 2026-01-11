@@ -1,6 +1,6 @@
 /**
  * Admin Leads Page
- * Leads management with data table, filters, and actions
+ * Leads management with data table, filters, and actions - Matching reference code design
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -8,20 +8,41 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import {
   Box,
+  Paper,
   Typography,
-  Alert,
-  Snackbar,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,
+  Chip,
+  Avatar,
+  TextField,
+  InputAdornment,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   Button,
+  Grid,
+  Divider,
+  IconButton,
+  Tooltip,
+  Skeleton,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  useTheme,
+  Checkbox,
 } from '@mui/material';
+import { Icon } from '@iconify/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import AdminLayout from '@/components/admin/AdminLayout';
-import LeadsTable from '@/components/admin/LeadsTable';
 import { withAuth } from '@/context/AuthContext';
-import { getLeads, deleteLead, bulkUpdateLeads, bulkDeleteLeads } from '@/lib/api/leads';
+import { LEAD_STATUS_OPTIONS } from '@/lib/constants';
 
 // Enhanced mock data with more realistic entries
 const mockLeads = [
@@ -42,30 +63,83 @@ const mockLeads = [
   { id: 15, name: 'Naveen Kumar', email: 'naveen.kumar@email.com', mobile: '9876543224', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-05T10:45:00' },
 ];
 
+// Utility functions
+const formatDate = (dateString) => {
+  if (!dateString) return '-';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
+const formatSource = (source) => {
+  const sources = {
+    hero_form: 'Hero Form',
+    popup_form: 'Popup Form',
+    cta_form: 'CTA Form',
+  };
+  return sources[source] || source;
+};
+
+const getStatusConfig = (status) => {
+  return LEAD_STATUS_OPTIONS.find((opt) => opt.value === status) || { label: status, color: '#9e9e9e' };
+};
+
+const getPriorityColor = (priority) => {
+  const colors = {
+    high: '#f44336',
+    medium: '#ff9800',
+    low: '#9e9e9e',
+  };
+  return colors[priority] || '#9e9e9e';
+};
+
+const getSourceColor = (source) => {
+  const colors = {
+    hero_form: '#667eea',
+    popup_form: '#1a1a2e',
+    cta_form: '#c9a227',
+  };
+  return colors[source] || '#667eea';
+};
+
 /**
  * Admin Leads Page Component
  */
 const AdminLeadsPage = () => {
   const router = useRouter();
+  const theme = useTheme();
   const [loading, setLoading] = useState(true);
   const [leads, setLeads] = useState([]);
-  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
-  const [deleteDialog, setDeleteDialog] = useState({ open: false, leadId: null, isBulk: false, ids: [] });
+  const [filteredLeads, setFilteredLeads] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sourceFilter, setSourceFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [selectedLeads, setSelectedLeads] = useState([]);
+
+  // Dialog state
+  const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+  const [selectedLead, setSelectedLead] = useState(null);
+  const [editNotes, setEditNotes] = useState('');
+  const [editStatus, setEditStatus] = useState('');
 
   // Load leads data
   const loadLeads = useCallback(async () => {
     setLoading(true);
     try {
-      // In a real app, fetch from API
-      // const response = await getLeads();
-      // setLeads(response.data);
-
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 600));
-      setLeads(mockLeads);
+      const sorted = [...mockLeads].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setLeads(sorted);
+      setFilteredLeads(sorted);
     } catch (error) {
       console.error('Failed to load leads:', error);
-      showSnackbar('Failed to load leads', 'error');
     } finally {
       setLoading(false);
     }
@@ -75,69 +149,76 @@ const AdminLeadsPage = () => {
     loadLeads();
   }, [loadLeads]);
 
-  // Show snackbar notification
-  const showSnackbar = (message, severity = 'success') => {
-    setSnackbar({ open: true, message, severity });
+  // Filter leads
+  useEffect(() => {
+    let filtered = [...leads];
+
+    // Filter by source
+    if (sourceFilter !== 'all') {
+      filtered = filtered.filter((lead) => lead.source === sourceFilter);
+    }
+
+    // Filter by status
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter((lead) => lead.status === statusFilter);
+    }
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (lead) =>
+          lead.email?.toLowerCase().includes(query) ||
+          lead.name?.toLowerCase().includes(query) ||
+          lead.mobile?.toLowerCase().includes(query)
+      );
+    }
+
+    setFilteredLeads(filtered);
+    setPage(0);
+  }, [searchQuery, sourceFilter, statusFilter, leads]);
+
+  // Handle view details
+  const handleViewDetails = (lead) => {
+    setSelectedLead(lead);
+    setEditNotes(lead.notes || '');
+    setEditStatus(lead.status);
+    setDetailsDialogOpen(true);
   };
 
-  // Handle view lead
-  const handleViewLead = (id) => {
-    router.push(`/admin/leads/${id}`);
-  };
-
-  // Handle edit lead
-  const handleEditLead = (id) => {
-    router.push(`/admin/leads/${id}?edit=true`);
-  };
-
-  // Handle delete lead
-  const handleDeleteLead = (id) => {
-    setDeleteDialog({ open: true, leadId: id, isBulk: false, ids: [] });
-  };
-
-  // Handle bulk delete
-  const handleBulkDelete = (ids) => {
-    setDeleteDialog({ open: true, leadId: null, isBulk: true, ids });
-  };
-
-  // Confirm delete
-  const confirmDelete = async () => {
+  // Handle update lead
+  const handleUpdateLead = async () => {
     try {
-      if (deleteDialog.isBulk) {
-        // In real app: await bulkDeleteLeads(deleteDialog.ids);
-        setLeads(leads.filter(lead => !deleteDialog.ids.includes(lead.id)));
-        showSnackbar(`${deleteDialog.ids.length} leads deleted successfully`);
-      } else {
-        // In real app: await deleteLead(deleteDialog.leadId);
-        setLeads(leads.filter(lead => lead.id !== deleteDialog.leadId));
-        showSnackbar('Lead deleted successfully');
-      }
+      // Update local state
+      setLeads((prev) =>
+        prev.map((lead) =>
+          lead.id === selectedLead.id
+            ? { ...lead, status: editStatus, notes: editNotes, updatedAt: new Date().toISOString() }
+            : lead
+        )
+      );
+      setDetailsDialogOpen(false);
     } catch (error) {
-      console.error('Failed to delete:', error);
-      showSnackbar('Failed to delete lead(s)', 'error');
-    } finally {
-      setDeleteDialog({ open: false, leadId: null, isBulk: false, ids: [] });
+      console.error('Error updating lead:', error);
     }
   };
 
-  // Handle bulk status change
-  const handleBulkStatusChange = async (ids, status) => {
+  // Handle delete lead
+  const handleDeleteLead = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this lead?')) return;
+
     try {
-      // In real app: await bulkUpdateLeads(ids, { status });
-      setLeads(leads.map(lead =>
-        ids.includes(lead.id) ? { ...lead, status } : lead
-      ));
-      showSnackbar(`${ids.length} leads updated to ${status.replace('_', ' ')}`);
+      setLeads((prev) => prev.filter((lead) => lead.id !== id));
+      setDetailsDialogOpen(false);
     } catch (error) {
-      console.error('Failed to update status:', error);
-      showSnackbar('Failed to update lead status', 'error');
+      console.error('Error deleting lead:', error);
     }
   };
 
   // Handle export
-  const handleExport = (dataToExport) => {
+  const handleExport = () => {
     const headers = ['ID', 'Name', 'Email', 'Mobile', 'Source', 'Status', 'Priority', 'Site Visit', 'Created At'];
-    const rows = dataToExport.map(lead => [
+    const rows = filteredLeads.map(lead => [
       lead.id,
       lead.name,
       lead.email,
@@ -160,9 +241,24 @@ const AdminLeadsPage = () => {
     link.download = `leads-export-${new Date().toISOString().split('T')[0]}.csv`;
     link.click();
     URL.revokeObjectURL(url);
-
-    showSnackbar(`${dataToExport.length} leads exported successfully`);
   };
+
+  // Calculate stats
+  const totalCount = leads.length;
+  const newCount = leads.filter((l) => l.status === 'new').length;
+  const contactedCount = leads.filter((l) => l.status === 'contacted').length;
+  const convertedCount = leads.filter((l) => l.status === 'converted').length;
+
+  if (loading) {
+    return (
+      <AdminLayout title="Leads">
+        <Box>
+          <Skeleton variant="rounded" height={60} sx={{ mb: 3, borderRadius: 2 }} />
+          <Skeleton variant="rounded" height={400} sx={{ borderRadius: 3 }} />
+        </Box>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout title="Leads">
@@ -171,72 +267,618 @@ const AdminLeadsPage = () => {
       </Head>
 
       <Box>
-        {/* Header */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a1a2e', mb: 0.5 }}>
-            Leads Management
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Manage, track, and convert all your leads in one place
-          </Typography>
-        </Box>
+        {/* Page Header */}
+        <Typography variant="h5" fontWeight="bold" gutterBottom>
+          Leads Management
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+          Manage, track, and convert all your leads in one place
+        </Typography>
 
-        {/* Leads Table with all features */}
-        <LeadsTable
-          leads={leads}
-          loading={loading}
-          title="All Leads"
-          onView={handleViewLead}
-          onEdit={handleEditLead}
-          onDelete={handleDeleteLead}
-          onBulkDelete={handleBulkDelete}
-          onBulkStatusChange={handleBulkStatusChange}
-          onExport={handleExport}
-          onRefresh={loadLeads}
-        />
-      </Box>
+        {/* Stats Summary */}
+        <Grid container spacing={2} sx={{ mb: 3 }}>
+          <Grid item xs={6} md={3}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 2,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: 'divider',
+                cursor: 'pointer',
+                bgcolor: statusFilter === 'all' ? 'rgba(102, 126, 234, 0.1)' : 'transparent',
+                '&:hover': { bgcolor: 'rgba(102, 126, 234, 0.08)' },
+                transition: 'all 0.2s ease',
+              }}
+              onClick={() => setStatusFilter('all')}
+            >
+              <Typography variant="h4" fontWeight="bold" sx={{ color: '#667eea' }}>
+                {totalCount}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Total Leads
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 2,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: 'divider',
+                cursor: 'pointer',
+                bgcolor: statusFilter === 'new' ? 'rgba(33, 150, 243, 0.1)' : 'transparent',
+                '&:hover': { bgcolor: 'rgba(33, 150, 243, 0.08)' },
+                transition: 'all 0.2s ease',
+              }}
+              onClick={() => setStatusFilter('new')}
+            >
+              <Typography variant="h4" fontWeight="bold" sx={{ color: '#2196f3' }}>
+                {newCount}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                New / Unread
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 2,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: 'divider',
+                cursor: 'pointer',
+                bgcolor: statusFilter === 'contacted' ? 'rgba(255, 152, 0, 0.1)' : 'transparent',
+                '&:hover': { bgcolor: 'rgba(255, 152, 0, 0.08)' },
+                transition: 'all 0.2s ease',
+              }}
+              onClick={() => setStatusFilter('contacted')}
+            >
+              <Typography variant="h4" fontWeight="bold" sx={{ color: '#ff9800' }}>
+                {contactedCount}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Contacted
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 2,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: 'divider',
+                cursor: 'pointer',
+                bgcolor: statusFilter === 'converted' ? 'rgba(76, 175, 80, 0.1)' : 'transparent',
+                '&:hover': { bgcolor: 'rgba(76, 175, 80, 0.08)' },
+                transition: 'all 0.2s ease',
+              }}
+              onClick={() => setStatusFilter('converted')}
+            >
+              <Typography variant="h4" fontWeight="bold" sx={{ color: '#4caf50' }}>
+                {convertedCount}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Converted
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
 
-      {/* Delete Confirmation Dialog */}
-      <Dialog
-        open={deleteDialog.open}
-        onClose={() => setDeleteDialog({ open: false, leadId: null, isBulk: false, ids: [] })}
-      >
-        <DialogTitle>
-          {deleteDialog.isBulk ? 'Delete Selected Leads?' : 'Delete Lead?'}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {deleteDialog.isBulk
-              ? `Are you sure you want to delete ${deleteDialog.ids.length} selected leads? This action cannot be undone.`
-              : 'Are you sure you want to delete this lead? This action cannot be undone.'
-            }
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDeleteDialog({ open: false, leadId: null, isBulk: false, ids: [] })}>
-            Cancel
-          </Button>
-          <Button onClick={confirmDelete} color="error" variant="contained">
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Snackbar Notifications */}
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={4000}
-        onClose={() => setSnackbar({ ...snackbar, open: false })}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      >
-        <Alert
-          onClose={() => setSnackbar({ ...snackbar, open: false })}
-          severity={snackbar.severity}
-          variant="filled"
+        {/* Filters */}
+        <Paper
+          elevation={0}
+          sx={{
+            p: 2,
+            mb: 3,
+            borderRadius: 3,
+            border: '1px solid',
+            borderColor: 'divider',
+          }}
         >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} md={4}>
+              <TextField
+                fullWidth
+                placeholder="Search by name, email, or mobile..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Icon icon="mdi:magnify" />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: 2,
+                  },
+                }}
+              />
+            </Grid>
+            <Grid item xs={6} md={2}>
+              <FormControl fullWidth>
+                <InputLabel>Source</InputLabel>
+                <Select
+                  value={sourceFilter}
+                  label="Source"
+                  onChange={(e) => setSourceFilter(e.target.value)}
+                  sx={{ borderRadius: 2 }}
+                >
+                  <MenuItem value="all">All Sources</MenuItem>
+                  <MenuItem value="hero_form">Hero Form</MenuItem>
+                  <MenuItem value="popup_form">Popup Form</MenuItem>
+                  <MenuItem value="cta_form">CTA Form</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6} md={2}>
+              <FormControl fullWidth>
+                <InputLabel>Status</InputLabel>
+                <Select
+                  value={statusFilter}
+                  label="Status"
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  sx={{ borderRadius: 2 }}
+                >
+                  <MenuItem value="all">All Status</MenuItem>
+                  {LEAD_STATUS_OPTIONS.map((status) => (
+                    <MenuItem key={status.value} value={status.value}>
+                      {status.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Box sx={{ display: 'flex', gap: 2, justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
+                <Button
+                  variant="outlined"
+                  startIcon={<Icon icon="mdi:refresh" />}
+                  onClick={loadLeads}
+                  sx={{ borderRadius: 2, textTransform: 'none' }}
+                >
+                  Refresh
+                </Button>
+                <Button
+                  variant="outlined"
+                  startIcon={<Icon icon="mdi:filter-remove" />}
+                  onClick={() => {
+                    setSourceFilter('all');
+                    setStatusFilter('all');
+                    setSearchQuery('');
+                  }}
+                  sx={{ borderRadius: 2, textTransform: 'none' }}
+                >
+                  Clear
+                </Button>
+                <Button
+                  variant="contained"
+                  startIcon={<Icon icon="mdi:download" />}
+                  onClick={handleExport}
+                  sx={{
+                    borderRadius: 2,
+                    textTransform: 'none',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    '&:hover': {
+                      background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
+                    },
+                  }}
+                >
+                  Export
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Paper>
+
+        {/* Leads Table */}
+        <Paper
+          elevation={0}
+          sx={{
+            borderRadius: 3,
+            border: '1px solid',
+            borderColor: 'divider',
+            overflow: 'hidden',
+          }}
+        >
+          <Box
+            sx={{
+              p: 2.5,
+              borderBottom: '1px solid',
+              borderColor: 'divider',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Typography variant="h6" fontWeight="bold">
+                All Leads
+              </Typography>
+              <Chip
+                label={`${filteredLeads.length} leads found`}
+                size="small"
+                sx={{ bgcolor: 'rgba(102, 126, 234, 0.1)', color: '#667eea' }}
+              />
+            </Box>
+            <IconButton onClick={loadLeads} size="small">
+              <Icon icon="mdi:refresh" />
+            </IconButton>
+          </Box>
+
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow sx={{ bgcolor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)' }}>
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      indeterminate={selectedLeads.length > 0 && selectedLeads.length < filteredLeads.length}
+                      checked={filteredLeads.length > 0 && selectedLeads.length === filteredLeads.length}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectedLeads(filteredLeads.map(l => l.id));
+                        } else {
+                          setSelectedLeads([]);
+                        }
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Lead</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Priority</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Site Visit</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
+                  <TableCell align="right" sx={{ fontWeight: 600 }}>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <AnimatePresence>
+                  {filteredLeads
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((lead) => {
+                      const statusConfig = getStatusConfig(lead.status);
+                      const isNew = lead.status === 'new';
+                      return (
+                        <motion.tr
+                          key={lead.id}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          component={TableRow}
+                          hover
+                          sx={{
+                            bgcolor: isNew
+                              ? theme.palette.mode === 'dark'
+                                ? 'rgba(33, 150, 243, 0.05)'
+                                : 'rgba(33, 150, 243, 0.03)'
+                              : 'transparent',
+                          }}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              checked={selectedLeads.includes(lead.id)}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setSelectedLeads([...selectedLeads, lead.id]);
+                                } else {
+                                  setSelectedLeads(selectedLeads.filter(id => id !== lead.id));
+                                }
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                              <Avatar
+                                sx={{
+                                  width: 36,
+                                  height: 36,
+                                  fontSize: '0.875rem',
+                                  bgcolor: getSourceColor(lead.source),
+                                  color: '#fff',
+                                }}
+                              >
+                                {lead.name?.[0]?.toUpperCase() || '?'}
+                              </Avatar>
+                              <Box>
+                                <Typography variant="body2" fontWeight={500}>
+                                  {lead.name}
+                                </Typography>
+                                <Typography variant="caption" color="text.secondary">
+                                  {lead.mobile}
+                                </Typography>
+                              </Box>
+                            </Box>
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant="body2" color="text.secondary">
+                              {lead.email}
+                            </Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={formatSource(lead.source)}
+                              size="small"
+                              variant="outlined"
+                              sx={{
+                                borderRadius: 1.5,
+                                fontSize: '0.75rem',
+                                borderColor: getSourceColor(lead.source),
+                                color: getSourceColor(lead.source),
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={statusConfig.label}
+                              size="small"
+                              sx={{
+                                bgcolor: `${statusConfig.color}15`,
+                                color: statusConfig.color,
+                                fontWeight: 500,
+                                textTransform: 'capitalize',
+                                borderRadius: 1.5,
+                                fontSize: '0.75rem',
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Chip
+                              label={lead.priority}
+                              size="small"
+                              sx={{
+                                bgcolor: `${getPriorityColor(lead.priority)}15`,
+                                color: getPriorityColor(lead.priority),
+                                fontWeight: 500,
+                                textTransform: 'capitalize',
+                                borderRadius: 1.5,
+                                fontSize: '0.75rem',
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            {lead.wantsSiteVisit ? (
+                              <Icon icon="mdi:check-circle" style={{ color: '#4caf50', fontSize: 20 }} />
+                            ) : (
+                              <Typography color="text.disabled">-</Typography>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant="caption" color="text.secondary">
+                              {formatDate(lead.createdAt)}
+                            </Typography>
+                          </TableCell>
+                          <TableCell align="right">
+                            <Tooltip title="View Details">
+                              <IconButton
+                                size="small"
+                                onClick={() => handleViewDetails(lead)}
+                                sx={{ color: 'primary.main' }}
+                              >
+                                <Icon icon="mdi:eye" />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Delete">
+                              <IconButton
+                                size="small"
+                                onClick={() => handleDeleteLead(lead.id)}
+                                sx={{ color: 'error.main' }}
+                              >
+                                <Icon icon="mdi:delete-outline" />
+                              </IconButton>
+                            </Tooltip>
+                          </TableCell>
+                        </motion.tr>
+                      );
+                    })}
+                </AnimatePresence>
+                {filteredLeads.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={9} align="center" sx={{ py: 6 }}>
+                      <Icon icon="mdi:email-search-outline" style={{ fontSize: 48, opacity: 0.3 }} />
+                      <Typography color="text.secondary" sx={{ mt: 1 }}>
+                        No leads found
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <TablePagination
+            component="div"
+            count={filteredLeads.length}
+            page={page}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={(e) => {
+              setRowsPerPage(parseInt(e.target.value, 10));
+              setPage(0);
+            }}
+            rowsPerPageOptions={[5, 10, 25, 50]}
+          />
+        </Paper>
+
+        {/* Lead Details Dialog */}
+        <Dialog
+          open={detailsDialogOpen}
+          onClose={() => setDetailsDialogOpen(false)}
+          maxWidth="md"
+          fullWidth
+          PaperProps={{
+            sx: { borderRadius: 3 },
+          }}
+        >
+          {selectedLead && (
+            <>
+              <DialogTitle>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Icon icon="mdi:account-details" style={{ fontSize: 24 }} />
+                    Lead Details
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Chip
+                      label={formatSource(selectedLead.source)}
+                      size="small"
+                      sx={{
+                        bgcolor: `${getSourceColor(selectedLead.source)}15`,
+                        color: getSourceColor(selectedLead.source),
+                        textTransform: 'capitalize',
+                      }}
+                    />
+                    <Chip
+                      label={getStatusConfig(selectedLead.status).label}
+                      color="primary"
+                      size="small"
+                      sx={{
+                        bgcolor: `${getStatusConfig(selectedLead.status).color}15`,
+                        color: getStatusConfig(selectedLead.status).color,
+                        textTransform: 'capitalize',
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </DialogTitle>
+              <DialogContent dividers>
+                <Grid container spacing={3}>
+                  {/* Contact Info */}
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom>
+                      Contact Information
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Name:</Typography>
+                        <Typography variant="body2" fontWeight={500}>{selectedLead.name}</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Email:</Typography>
+                        <Typography variant="body2">{selectedLead.email}</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Mobile:</Typography>
+                        <Typography variant="body2">{selectedLead.mobile}</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Date:</Typography>
+                        <Typography variant="body2">{formatDate(selectedLead.createdAt)}</Typography>
+                      </Box>
+                    </Box>
+                  </Grid>
+
+                  {/* Lead Info */}
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom>
+                      Lead Details
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Source:</Typography>
+                        <Typography variant="body2">{formatSource(selectedLead.source)}</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Priority:</Typography>
+                        <Chip
+                          label={selectedLead.priority}
+                          size="small"
+                          sx={{
+                            bgcolor: `${getPriorityColor(selectedLead.priority)}15`,
+                            color: getPriorityColor(selectedLead.priority),
+                            textTransform: 'capitalize',
+                            height: 22,
+                          }}
+                        />
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="body2" color="text.secondary">Site Visit:</Typography>
+                        <Typography variant="body2">{selectedLead.wantsSiteVisit ? 'Yes' : 'No'}</Typography>
+                      </Box>
+                      {selectedLead.siteVisitDate && (
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <Typography variant="body2" color="text.secondary">Visit Date:</Typography>
+                          <Typography variant="body2">{selectedLead.siteVisitDate}</Typography>
+                        </Box>
+                      )}
+                    </Box>
+                  </Grid>
+
+                  {/* Update Status */}
+                  <Grid item xs={12}>
+                    <Divider sx={{ my: 1 }} />
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom sx={{ mt: 2 }}>
+                      Update Lead
+                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={4}>
+                        <FormControl fullWidth>
+                          <InputLabel>Status</InputLabel>
+                          <Select
+                            value={editStatus}
+                            label="Status"
+                            onChange={(e) => setEditStatus(e.target.value)}
+                          >
+                            {LEAD_STATUS_OPTIONS.map((status) => (
+                              <MenuItem key={status.value} value={status.value} sx={{ textTransform: 'capitalize' }}>
+                                {status.label}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={12} md={8}>
+                        <TextField
+                          fullWidth
+                          label="Notes"
+                          multiline
+                          rows={2}
+                          value={editNotes}
+                          onChange={(e) => setEditNotes(e.target.value)}
+                          placeholder="Add internal notes about this lead..."
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions sx={{ p: 2, justifyContent: 'space-between' }}>
+                <Button
+                  color="error"
+                  startIcon={<Icon icon="mdi:delete-outline" />}
+                  onClick={() => handleDeleteLead(selectedLead.id)}
+                >
+                  Delete
+                </Button>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  <Button onClick={() => setDetailsDialogOpen(false)}>Cancel</Button>
+                  <Button
+                    variant="contained"
+                    onClick={handleUpdateLead}
+                    sx={{
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      '&:hover': {
+                        background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
+                      },
+                    }}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
+              </DialogActions>
+            </>
+          )}
+        </Dialog>
+      </Box>
     </AdminLayout>
   );
 };
