@@ -1,0 +1,71 @@
+{
+  "name": "nambia-landing-page",
+  "version": "1.0.0",
+  "description": "Professional real estate landing page with admin panel for PPC marketing and SEO optimization",
+  "author": "Assam Digital",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"next dev -p 3000\" \"json-server --watch db.json --port 3001\"",
+    "dev:next": "next dev",
+    "dev:api": "json-server --watch db.json --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next build && next export"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.13.3",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/lab": "^6.0.0-beta.14",
+    "@mui/material": "^6.1.6",
+    "@mui/x-data-grid": "^7.22.2",
+    "@mui/x-date-pickers": "^7.22.2",
+    "axios": "^1.7.7",
+    "canvas-confetti": "^1.9.3",
+    "chart.js": "^4.4.6",
+    "clsx": "^2.1.1",
+    "cookies-next": "^4.3.0",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^11.11.11",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "next": "14.2.15",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.2",
+    "react-hot-toast": "^2.4.1",
+    "react-intersection-observer": "^9.13.1",
+    "react-phone-input-2": "^2.15.1",
+    "sharp": "^0.33.5",
+    "sweetalert2": "^11.26.17",
+    "swiper": "^11.1.14",
+    "uuid": "^10.0.0",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.15",
+    "json-server": "^0.17.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "real-estate",
+    "landing-page",
+    "nextjs",
+    "mui",
+    "framer-motion",
+    "seo",
+    "ppc",
+    "lead-generation",
+    "admin-panel"
+  ],
+  "license": "MIT"
+}

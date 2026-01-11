@@ -1,0 +1,409 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@realestate.com",
+      "password": "admin123",
+      "name": "Admin User",
+      "role": "admin",
+      "avatar": "https://placehold.co/100x100/1976d2/ffffff?text=A",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "lastLogin": "2024-01-15T10:30:00.000Z"
+    }
+  ],
+  "leads": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "mobile": "9876543210",
+      "message": "Interested in 3BHK apartments",
+      "source": "hero_form",
+      "wantsSiteVisit": true,
+      "siteVisitDate": "2024-01-20",
+      "siteVisitTime": "10:00 AM",
+      "wantsPickupDrop": true,
+      "pickupLocation": "Koramangala, Bangalore",
+      "dropLocation": "Same as pickup",
+      "wantsLunchMeeting": true,
+      "mealPreference": "lunch",
+      "ipAddress": "192.168.1.1",
+      "location": {
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "country": "India",
+        "latitude": 12.9716,
+        "longitude": 77.5946
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "status": "new",
+      "priority": "high",
+      "notes": [],
+      "assignedTo": null,
+      "followUpDate": null,
+      "createdAt": "2024-01-15T09:30:00.000Z",
+      "updatedAt": "2024-01-15T09:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "mobile": "9876543211",
+      "message": "Looking for 4BHK with good view",
+      "source": "popup_form",
+      "wantsSiteVisit": false,
+      "siteVisitDate": null,
+      "siteVisitTime": null,
+      "wantsPickupDrop": false,
+      "pickupLocation": null,
+      "dropLocation": null,
+      "wantsLunchMeeting": false,
+      "mealPreference": null,
+      "ipAddress": "192.168.1.2",
+      "location": {
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "latitude": 19.076,
+        "longitude": 72.8777
+      },
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)",
+      "status": "contacted",
+      "priority": "medium",
+      "notes": [
+        {
+          "id": 1,
+          "text": "Called and discussed requirements",
+          "createdBy": "admin",
+          "createdAt": "2024-01-15T11:00:00.000Z"
+        }
+      ],
+      "assignedTo": 1,
+      "followUpDate": "2024-01-22T00:00:00.000Z",
+      "createdAt": "2024-01-14T14:20:00.000Z",
+      "updatedAt": "2024-01-15T11:00:00.000Z"
+    }
+  ],
+  "submittedContacts": [
+    {
+      "id": 1,
+      "mobile": "9876543210",
+      "email": "john.doe@example.com",
+      "submittedAt": "2024-01-15T09:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "mobile": "9876543211",
+      "email": "jane.smith@example.com",
+      "submittedAt": "2024-01-14T14:20:00.000Z"
+    }
+  ],
+  "seoSettings": {
+    "id": 1,
+    "title": "Nambiar District 25 Phase 2 | Premium 2, 3 & 4 BHK Apartments in Bangalore",
+    "description": "Discover luxury living at Nambiar District 25 Phase 2. Premium 2, 3 & 4 BHK apartments starting at ₹1.53 Cr. World-class amenities, prime location near Electronic City. Book your site visit today!",
+    "keywords": "Nambiar District 25, apartments in Bangalore, 3BHK apartments Electronic City, luxury apartments Sarjapur Road, Nambiar builders, premium flats Bangalore",
+    "canonicalUrl": "https://www.nambiardistrict25.com",
+    "robots": "index, follow",
+    "ogTitle": "Nambiar District 25 Phase 2 | Luxury Apartments in Bangalore",
+    "ogDescription": "Experience the SOHO Life at Nambiar District 25 Phase 2. Premium apartments with world-class amenities.",
+    "ogImage": "https://placehold.co/1200x630/1a1a2e/ffffff?text=Nambiar+District+25",
+    "ogType": "website",
+    "ogLocale": "en_IN",
+    "twitterCard": "summary_large_image",
+    "twitterTitle": "Nambiar District 25 Phase 2 | Premium Apartments",
+    "twitterDescription": "Luxury 2, 3 & 4 BHK apartments in Bangalore's fastest growing neighborhood",
+    "twitterImage": "https://placehold.co/1200x600/1a1a2e/ffffff?text=Nambiar+District+25",
+    "twitterSite": "@nambiarbuilders",
+    "author": "Nambiar Builders",
+    "language": "en",
+    "geoRegion": "IN-KA",
+    "geoPlacename": "Bangalore, Karnataka",
+    "geoPosition": "12.9716;77.5946",
+    "updatedAt": "2024-01-15T00:00:00.000Z"
+  },
+  "pixelSettings": {
+    "id": 1,
+    "googleAnalyticsId": "G-XXXXXXXXXX",
+    "googleAnalyticsEnabled": true,
+    "googleTagManagerId": "GTM-XXXXXXX",
+    "googleTagManagerEnabled": true,
+    "facebookPixelId": "XXXXXXXXXXXXXXX",
+    "facebookPixelEnabled": true,
+    "googleAdsConversionId": "AW-XXXXXXXXX",
+    "googleAdsConversionLabel": "XXXXXXXX",
+    "googleAdsEnabled": true,
+    "linkedInInsightTag": "",
+    "linkedInEnabled": false,
+    "hotjarId": "",
+    "hotjarEnabled": false,
+    "customHeadScripts": "",
+    "customBodyStartScripts": "",
+    "customBodyEndScripts": "",
+    "updatedAt": "2024-01-15T00:00:00.000Z"
+  },
+  "schemaSettings": {
+    "id": 1,
+    "organizationSchema": {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Nambiar Builders",
+      "url": "https://www.nambiarbuilders.com",
+      "logo": "https://placehold.co/200x60/1a1a2e/ffffff?text=Nambiar",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-7026034444",
+        "contactType": "sales",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Hindi", "Kannada"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/nambiarbuilders",
+        "https://www.instagram.com/nambiarbuilders",
+        "https://www.linkedin.com/company/nambiarbuilders"
+      ]
+    },
+    "realEstateSchema": {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Nambiar District 25",
+      "image": "https://placehold.co/800x600/1a1a2e/ffffff?text=District+25",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chandapura Dommasandra Road",
+        "addressLocality": "Dommasandra",
+        "addressRegion": "Karnataka",
+        "postalCode": "562125",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 12.9052,
+        "longitude": 77.7091
+      },
+      "telephone": "+91-7026034444",
+      "priceRange": "₹1.53 Cr - ₹3.5 Cr"
+    },
+    "apartmentSchema": {
+      "@context": "https://schema.org",
+      "@type": "Apartment",
+      "name": "Nambiar District 25 Phase 2",
+      "description": "Premium 2, 3 & 4 BHK luxury apartments in Bangalore",
+      "numberOfRooms": "2-4",
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": "1245-2995",
+        "unitCode": "SQF"
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Swimming Pool" },
+        { "@type": "LocationFeatureSpecification", "name": "Gymnasium" },
+        { "@type": "LocationFeatureSpecification", "name": "Clubhouse" },
+        { "@type": "LocationFeatureSpecification", "name": "Jogging Track" }
+      ]
+    },
+    "faqSchema": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": []
+    },
+    "breadcrumbSchema": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.nambiardistrict25.com"
+        }
+      ]
+    },
+    "localBusinessSchema": {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Nambiar District 25 Sales Office",
+      "image": "https://placehold.co/800x600/1a1a2e/ffffff?text=Sales+Office",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Chandapura Dommasandra Road",
+        "addressLocality": "Bangalore",
+        "addressRegion": "Karnataka",
+        "postalCode": "562125",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 09:00-21:00",
+      "telephone": "+91-7026034444"
+    },
+    "customSchemas": [],
+    "updatedAt": "2024-01-15T00:00:00.000Z"
+  },
+  "keywords": [
+    {
+      "id": 1,
+      "keyword": "Nambiar District 25",
+      "type": "primary",
+      "searchVolume": 1200,
+      "difficulty": "medium",
+      "position": 1,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "keyword": "apartments in Electronic City",
+      "type": "secondary",
+      "searchVolume": 2400,
+      "difficulty": "high",
+      "position": 5,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "keyword": "3BHK flats Sarjapur Road",
+      "type": "long-tail",
+      "searchVolume": 880,
+      "difficulty": "low",
+      "position": 3,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "keyword": "luxury apartments Bangalore",
+      "type": "secondary",
+      "searchVolume": 5400,
+      "difficulty": "high",
+      "position": 12,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "keyword": "Nambiar builders projects",
+      "type": "branded",
+      "searchVolume": 720,
+      "difficulty": "low",
+      "position": 2,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": 1,
+      "userId": 1,
+      "userName": "Admin User",
+      "action": "LOGIN",
+      "module": "auth",
+      "description": "User logged in successfully",
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "metadata": {},
+      "createdAt": "2024-01-15T10:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "userName": "Admin User",
+      "action": "UPDATE",
+      "module": "seo",
+      "description": "Updated SEO meta title",
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "metadata": {
+        "field": "title",
+        "oldValue": "Old Title",
+        "newValue": "Nambiar District 25 Phase 2 | Premium Apartments"
+      },
+      "createdAt": "2024-01-15T11:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "userName": "Admin User",
+      "action": "UPDATE",
+      "module": "leads",
+      "description": "Updated lead status",
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      "metadata": {
+        "leadId": 2,
+        "field": "status",
+        "oldValue": "new",
+        "newValue": "contacted"
+      },
+      "createdAt": "2024-01-15T11:00:00.000Z"
+    }
+  ],
+  "dashboardStats": {
+    "id": 1,
+    "totalLeads": 156,
+    "newLeads": 23,
+    "contactedLeads": 89,
+    "convertedLeads": 34,
+    "lostLeads": 10,
+    "siteVisitsScheduled": 45,
+    "siteVisitsCompleted": 38,
+    "leadsBySource": {
+      "hero_form": 67,
+      "popup_form": 52,
+      "cta_form": 37
+    },
+    "leadsByDay": [
+      { "date": "2024-01-09", "count": 12 },
+      { "date": "2024-01-10", "count": 18 },
+      { "date": "2024-01-11", "count": 15 },
+      { "date": "2024-01-12", "count": 22 },
+      { "date": "2024-01-13", "count": 8 },
+      { "date": "2024-01-14", "count": 19 },
+      { "date": "2024-01-15", "count": 14 }
+    ],
+    "conversionRate": 21.79,
+    "averageResponseTime": "2.5 hours",
+    "topLocations": [
+      { "city": "Bangalore", "count": 89 },
+      { "city": "Mumbai", "count": 34 },
+      { "city": "Chennai", "count": 18 },
+      { "city": "Hyderabad", "count": 15 }
+    ],
+    "updatedAt": "2024-01-15T12:00:00.000Z"
+  },
+  "settings": {
+    "id": 1,
+    "siteName": "Nambiar District 25",
+    "siteUrl": "https://www.nambiardistrict25.com",
+    "contactEmail": "sales@nambiardistrict25.com",
+    "contactPhone": "+91-7026034444",
+    "whatsappNumber": "+917026034444",
+    "address": "Chandapura Dommasandra Road, Dommasandra, Bengaluru - 562125",
+    "socialLinks": {
+      "facebook": "https://www.facebook.com/nambiarbuilders",
+      "instagram": "https://www.instagram.com/nambiarbuilders",
+      "linkedin": "https://www.linkedin.com/company/nambiarbuilders",
+      "youtube": "https://www.youtube.com/nambiarbuilders",
+      "twitter": "https://twitter.com/nambiarbuilders"
+    },
+    "leadNotificationEmails": [
+      "sales@nambiardistrict25.com",
+      "admin@nambiardistrict25.com"
+    ],
+    "enableSiteVisitBooking": true,
+    "enablePickupDrop": true,
+    "enableMealBooking": true,
+    "siteVisitTimeSlots": [
+      "09:00 AM",
+      "10:00 AM",
+      "11:00 AM",
+      "12:00 PM",
+      "02:00 PM",
+      "03:00 PM",
+      "04:00 PM",
+      "05:00 PM"
+    ],
+    "mealOptions": ["breakfast", "lunch", "coffee"],
+    "maintenanceMode": false,
+    "updatedAt": "2024-01-15T00:00:00.000Z"
+  }
+}

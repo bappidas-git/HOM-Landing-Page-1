@@ -1,0 +1,333 @@
+HOM-landing-1/
+├── .env.local
+├── .env.example
+├── .gitignore
+├── package.json
+├── next.config.js
+├── jsconfig.json
+├── db.json
+│
+├── public/
+│   ├── favicon.ico
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── images/
+│       └── placeholder/
+│
+└── src/
+    ├── pages/
+    │   ├── _app.jsx
+    │   ├── _document.jsx
+    │   ├── index.jsx
+    │   ├── thank-you.jsx
+    │   ├── 404.jsx
+    │   ├── 500.jsx
+    │   └── admin/
+    │       ├── index.jsx
+    │       ├── login.jsx
+    │       ├── dashboard.jsx
+    │       ├── leads/
+    │       │   ├── index.jsx
+    │       │   └── [id].jsx
+    │       ├── seo/
+    │       │   └── index.jsx
+    │       ├── pixels/
+    │       │   └── index.jsx
+    │       ├── schema/
+    │       │   └── index.jsx
+    │       ├── keywords/
+    │       │   └── index.jsx
+    │       ├── settings/
+    │       │   └── index.jsx
+    │       └── audit-log/
+    │           └── index.jsx
+    │
+    ├── components/
+    │   ├── common/
+    │   │   ├── Header/
+    │   │   │   ├── Header.jsx
+    │   │   │   ├── Header.module.css
+    │   │   │   └── index.js
+    │   │   ├── Footer/
+    │   │   │   ├── Footer.jsx
+    │   │   │   ├── Footer.module.css
+    │   │   │   └── index.js
+    │   │   ├── BottomNavigation/
+    │   │   │   ├── BottomNavigation.jsx
+    │   │   │   ├── BottomNavigation.module.css
+    │   │   │   └── index.js
+    │   │   ├── MobileDrawer/
+    │   │   │   ├── MobileDrawer.jsx
+    │   │   │   ├── MobileDrawer.module.css
+    │   │   │   └── index.js
+    │   │   ├── LeadForm/
+    │   │   │   ├── LeadForm.jsx
+    │   │   │   ├── LeadForm.module.css
+    │   │   │   └── index.js
+    │   │   ├── LeadFormPopup/
+    │   │   │   ├── LeadFormPopup.jsx
+    │   │   │   ├── LeadFormPopup.module.css
+    │   │   │   └── index.js
+    │   │   ├── FloatingCTA/
+    │   │   │   ├── FloatingCTA.jsx
+    │   │   │   ├── FloatingCTA.module.css
+    │   │   │   └── index.js
+    │   │   ├── SectionWrapper/
+    │   │   │   ├── SectionWrapper.jsx
+    │   │   │   ├── SectionWrapper.module.css
+    │   │   │   └── index.js
+    │   │   ├── SectionTitle/
+    │   │   │   ├── SectionTitle.jsx
+    │   │   │   ├── SectionTitle.module.css
+    │   │   │   └── index.js
+    │   │   ├── AnimatedCard/
+    │   │   │   ├── AnimatedCard.jsx
+    │   │   │   ├── AnimatedCard.module.css
+    │   │   │   └── index.js
+    │   │   ├── ImageGallery/
+    │   │   │   ├── ImageGallery.jsx
+    │   │   │   ├── ImageGallery.module.css
+    │   │   │   └── index.js
+    │   │   ├── Loading/
+    │   │   │   ├── Loading.jsx
+    │   │   │   ├── Loading.module.css
+    │   │   │   └── index.js
+    │   │   ├── ScrollToTop/
+    │   │   │   ├── ScrollToTop.jsx
+    │   │   │   ├── ScrollToTop.module.css
+    │   │   │   └── index.js
+    │   │   └── SEOHead/
+    │   │       ├── SEOHead.jsx
+    │   │       └── index.js
+    │   │
+    │   ├── landing/
+    │   │   ├── Hero/
+    │   │   │   ├── Hero.jsx
+    │   │   │   ├── Hero.module.css
+    │   │   │   └── index.js
+    │   │   ├── Overview/
+    │   │   │   ├── Overview.jsx
+    │   │   │   ├── Overview.module.css
+    │   │   │   └── index.js
+    │   │   ├── Highlights/
+    │   │   │   ├── Highlights.jsx
+    │   │   │   ├── Highlights.module.css
+    │   │   │   └── index.js
+    │   │   ├── Amenities/
+    │   │   │   ├── Amenities.jsx
+    │   │   │   ├── Amenities.module.css
+    │   │   │   └── index.js
+    │   │   ├── FloorPlans/
+    │   │   │   ├── FloorPlans.jsx
+    │   │   │   ├── FloorPlanCard.jsx
+    │   │   │   ├── FloorPlans.module.css
+    │   │   │   └── index.js
+    │   │   ├── UnitPlans/
+    │   │   │   ├── UnitPlans.jsx
+    │   │   │   ├── UnitPlans.module.css
+    │   │   │   └── index.js
+    │   │   ├── Gallery/
+    │   │   │   ├── Gallery.jsx
+    │   │   │   ├── Gallery.module.css
+    │   │   │   └── index.js
+    │   │   ├── VirtualTour/
+    │   │   │   ├── VirtualTour.jsx
+    │   │   │   ├── VirtualTour.module.css
+    │   │   │   └── index.js
+    │   │   ├── Location/
+    │   │   │   ├── Location.jsx
+    │   │   │   ├── LocationMap.jsx
+    │   │   │   ├── NearbyPlaces.jsx
+    │   │   │   ├── Location.module.css
+    │   │   │   └── index.js
+    │   │   ├── Pricing/
+    │   │   │   ├── Pricing.jsx
+    │   │   │   ├── PricingCard.jsx
+    │   │   │   ├── Pricing.module.css
+    │   │   │   └── index.js
+    │   │   ├── PaymentPlan/
+    │   │   │   ├── PaymentPlan.jsx
+    │   │   │   ├── PaymentPlan.module.css
+    │   │   │   └── index.js
+    │   │   ├── Developer/
+    │   │   │   ├── Developer.jsx
+    │   │   │   ├── Developer.module.css
+    │   │   │   └── index.js
+    │   │   ├── Specifications/
+    │   │   │   ├── Specifications.jsx
+    │   │   │   ├── Specifications.module.css
+    │   │   │   └── index.js
+    │   │   ├── Testimonials/
+    │   │   │   ├── Testimonials.jsx
+    │   │   │   ├── TestimonialCard.jsx
+    │   │   │   ├── Testimonials.module.css
+    │   │   │   └── index.js
+    │   │   ├── FAQ/
+    │   │   │   ├── FAQ.jsx
+    │   │   │   ├── FAQ.module.css
+    │   │   │   └── index.js
+    │   │   ├── CTASection/
+    │   │   │   ├── CTASection.jsx
+    │   │   │   ├── CTASection.module.css
+    │   │   │   └── index.js
+    │   │   └── TrustBadges/
+    │   │       ├── TrustBadges.jsx
+    │   │       ├── TrustBadges.module.css
+    │   │       └── index.js
+    │   │
+    │   ├── admin/
+    │   │   ├── AdminLayout/
+    │   │   │   ├── AdminLayout.jsx
+    │   │   │   ├── AdminLayout.module.css
+    │   │   │   └── index.js
+    │   │   ├── Sidebar/
+    │   │   │   ├── Sidebar.jsx
+    │   │   │   ├── Sidebar.module.css
+    │   │   │   └── index.js
+    │   │   ├── AdminHeader/
+    │   │   │   ├── AdminHeader.jsx
+    │   │   │   ├── AdminHeader.module.css
+    │   │   │   └── index.js
+    │   │   ├── DashboardStats/
+    │   │   │   ├── DashboardStats.jsx
+    │   │   │   ├── DashboardStats.module.css
+    │   │   │   └── index.js
+    │   │   ├── LeadsTable/
+    │   │   │   ├── LeadsTable.jsx
+    │   │   │   ├── LeadsTable.module.css
+    │   │   │   └── index.js
+    │   │   ├── LeadDetail/
+    │   │   │   ├── LeadDetail.jsx
+    │   │   │   ├── LeadDetail.module.css
+    │   │   │   └── index.js
+    │   │   ├── SEOManager/
+    │   │   │   ├── SEOManager.jsx
+    │   │   │   ├── MetaTagsForm.jsx
+    │   │   │   ├── OpenGraphForm.jsx
+    │   │   │   ├── TwitterCardsForm.jsx
+    │   │   │   ├── SEOManager.module.css
+    │   │   │   └── index.js
+    │   │   ├── PixelManager/
+    │   │   │   ├── PixelManager.jsx
+    │   │   │   ├── GoogleTagManager.jsx
+    │   │   │   ├── FacebookPixel.jsx
+    │   │   │   ├── GoogleAnalytics.jsx
+    │   │   │   ├── PixelManager.module.css
+    │   │   │   └── index.js
+    │   │   ├── SchemaManager/
+    │   │   │   ├── SchemaManager.jsx
+    │   │   │   ├── SchemaEditor.jsx
+    │   │   │   ├── SchemaPreview.jsx
+    │   │   │   ├── SchemaManager.module.css
+    │   │   │   └── index.js
+    │   │   ├── KeywordManager/
+    │   │   │   ├── KeywordManager.jsx
+    │   │   │   ├── KeywordManager.module.css
+    │   │   │   └── index.js
+    │   │   ├── AuditLog/
+    │   │   │   ├── AuditLog.jsx
+    │   │   │   ├── AuditLog.module.css
+    │   │   │   └── index.js
+    │   │   └── Charts/
+    │   │       ├── LeadsChart.jsx
+    │   │       ├── TrafficChart.jsx
+    │   │       └── index.js
+    │   │
+    │   └── thank-you/
+    │       ├── Confetti/
+    │       │   ├── Confetti.jsx
+    │       │   └── index.js
+    │       ├── ThankYouHero/
+    │       │   ├── ThankYouHero.jsx
+    │       │   ├── ThankYouHero.module.css
+    │       │   └── index.js
+    │       ├── NextSteps/
+    │       │   ├── NextSteps.jsx
+    │       │   ├── NextSteps.module.css
+    │       │   └── index.js
+    │       └── ContactInfo/
+    │           ├── ContactInfo.jsx
+    │           ├── ContactInfo.module.css
+    │           └── index.js
+    │
+    ├── context/
+    │   ├── AuthContext.jsx
+    │   ├── LeadFormContext.jsx
+    │   ├── UIContext.jsx
+    │   └── index.js
+    │
+    ├── hooks/
+    │   ├── useAuth.js
+    │   ├── useLeadForm.js
+    │   ├── useResponsive.js
+    │   ├── useScrollPosition.js
+    │   ├── useLocalStorage.js
+    │   ├── useIntersectionObserver.js
+    │   ├── useGeolocation.js
+    │   ├── useIPAddress.js
+    │   └── index.js
+    │
+    ├── lib/
+    │   ├── api/
+    │   │   ├── axiosInstance.js
+    │   │   ├── endpoints.js
+    │   │   ├── leads.js
+    │   │   ├── auth.js
+    │   │   ├── seo.js
+    │   │   ├── pixels.js
+    │   │   ├── schema.js
+    │   │   ├── keywords.js
+    │   │   ├── auditLog.js
+    │   │   ├── dashboard.js
+    │   │   └── index.js
+    │   │
+    │   ├── utils/
+    │   │   ├── validation.js
+    │   │   ├── formatters.js
+    │   │   ├── geolocation.js
+    │   │   ├── ipAddress.js
+    │   │   ├── storage.js
+    │   │   ├── duplicateCheck.js
+    │   │   └── index.js
+    │   │
+    │   └── constants/
+    │       ├── routes.js
+    │       ├── navigationItems.js
+    │       ├── adminNavigation.js
+    │       ├── seoDefaults.js
+    │       ├── schemaTemplates.js
+    │       └── index.js
+    │
+    ├── styles/
+    │   ├── globals.css
+    │   ├── variables.css
+    │   ├── animations.css
+    │   ├── admin.css
+    │   └── thank-you.css
+    │
+    ├── theme/
+    │   ├── muiTheme.js
+    │   ├── colors.js
+    │   └── index.js
+    │
+    └── data/
+        └── content/
+            ├── siteConfig.js
+            ├── hero.js
+            ├── overview.js
+            ├── highlights.js
+            ├── amenities.js
+            ├── floorPlans.js
+            ├── unitPlans.js
+            ├── gallery.js
+            ├── location.js
+            ├── pricing.js
+            ├── paymentPlan.js
+            ├── developer.js
+            ├── specifications.js
+            ├── testimonials.js
+            ├── faq.js
+            ├── ctaSection.js
+            ├── thankYou.js
+            ├── footer.js
+            └── index.js
