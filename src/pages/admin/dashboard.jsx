@@ -518,7 +518,7 @@ const AdminDashboardPage = () => {
                     <Typography variant="caption" sx={{ opacity: 0.9 }}>
                       Converted
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#69f0ae' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff' }}>
                       {stats.convertedLeads}
                     </Typography>
                   </Box>
@@ -526,7 +526,7 @@ const AdminDashboardPage = () => {
                     <Typography variant="caption" sx={{ opacity: 0.9 }}>
                       Site Visits
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#ffcc80' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff' }}>
                       {stats.siteVisits}
                     </Typography>
                   </Box>
