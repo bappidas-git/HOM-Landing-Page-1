@@ -1,0 +1,305 @@
+/* FAQ Section Styles */
+
+/* Filter Section */
+.filterSection {
+  margin-bottom: 40px;
+}
+
+.searchField {
+  max-width: 500px;
+  margin: 0 auto 24px;
+  display: block;
+}
+
+.searchField input {
+  padding: 14px 16px;
+  font-size: 1rem;
+}
+
+.searchField fieldset {
+  border-radius: 12px;
+  border-color: #e0e0e0;
+}
+
+.searchField:hover fieldset {
+  border-color: #8B9A46 !important;
+}
+
+.searchField.Mui-focused fieldset {
+  border-color: #8B9A46 !important;
+}
+
+.searchIcon {
+  color: #999999;
+}
+
+/* Category Chips */
+.categoryChips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.categoryChip {
+  padding: 6px 16px;
+  font-weight: 500;
+  border-radius: 20px;
+  border-color: #e0e0e0;
+  color: #666666;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.categoryChip:hover {
+  border-color: #8B9A46;
+  background: rgba(139, 154, 70, 0.08);
+  color: #8B9A46;
+}
+
+.categoryChipActive {
+  background: linear-gradient(135deg, #8B9A46, #a3b15e) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+/* Accordion Container */
+.accordionContainer {
+  max-width: 900px;
+  margin: 0 auto 48px;
+}
+
+/* Accordion */
+.accordion {
+  background: #ffffff;
+  border-radius: 16px !important;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion::before {
+  display: none;
+}
+
+.accordion:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.accordion.Mui-expanded {
+  box-shadow: 0 8px 32px rgba(139, 154, 70, 0.15);
+  border-color: rgba(139, 154, 70, 0.3);
+}
+
+/* Accordion Summary */
+.accordionSummary {
+  padding: 20px 24px;
+  min-height: 72px !important;
+}
+
+.accordionSummary .MuiAccordionSummary-content {
+  margin: 0;
+}
+
+.questionWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.questionIcon {
+  color: #8B9A46;
+  font-size: 24px !important;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.question {
+  font-weight: 600;
+  color: #1a1a2e;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.expandIcon {
+  color: #8B9A46;
+  transition: transform 0.3s ease;
+}
+
+/* Accordion Details */
+.accordionDetails {
+  padding: 0 24px 24px;
+  padding-left: 64px;
+}
+
+.answer {
+  color: #555555;
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+/* No Results */
+.noResults {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f8f9fa;
+  border-radius: 16px;
+}
+
+.noResults p {
+  color: #666666;
+}
+
+/* Contact CTA */
+.contactCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 40px 48px;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.08) 0%, rgba(201, 162, 39, 0.08) 100%);
+  border-radius: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ctaContent {
+  flex: 1;
+}
+
+.ctaTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.ctaDescription {
+  color: #666666;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.ctaButton {
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: none;
+}
+
+.ctaButtonOutlined {
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: none;
+  border-width: 2px;
+}
+
+.ctaButtonOutlined:hover {
+  border-width: 2px;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .contactCta {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px;
+    gap: 24px;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ctaButton,
+  .ctaButtonOutlined {
+    width: 100%;
+  }
+
+  .accordionSummary {
+    padding: 16px 20px;
+  }
+
+  .accordionDetails {
+    padding: 0 20px 20px;
+    padding-left: 56px;
+  }
+}
+
+@media (max-width: 599px) {
+  .filterSection {
+    margin-bottom: 32px;
+  }
+
+  .searchField {
+    margin-bottom: 20px;
+  }
+
+  .categoryChips {
+    gap: 8px;
+  }
+
+  .categoryChip {
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+
+  .accordionContainer {
+    margin-bottom: 36px;
+  }
+
+  .accordion {
+    margin-bottom: 12px;
+    border-radius: 12px !important;
+  }
+
+  .accordionSummary {
+    padding: 14px 16px;
+    min-height: 64px !important;
+  }
+
+  .questionWrapper {
+    gap: 12px;
+  }
+
+  .questionIcon {
+    font-size: 20px !important;
+  }
+
+  .question {
+    font-size: 0.9rem;
+  }
+
+  .accordionDetails {
+    padding: 0 16px 16px;
+    padding-left: 48px;
+  }
+
+  .answer {
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .contactCta {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .ctaTitle {
+    font-size: 1.1rem;
+  }
+
+  .ctaButton,
+  .ctaButtonOutlined {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}

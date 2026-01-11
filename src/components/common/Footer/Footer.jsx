@@ -1,9 +1,9 @@
 /**
  * Footer Component
- * Site footer with navigation, contact info, and legal links
+ * Site footer with navigation, contact info, legal links, and enhanced features
  */
 
-import { Box, Container, Grid, Typography, IconButton, Link as MuiLink, Divider } from '@mui/material';
+import { Box, Container, Grid, Typography, IconButton, Link as MuiLink, Divider, Chip } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -13,9 +13,14 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { motion } from 'framer-motion';
 import { useUIContext } from '@/context/UIContext';
 import { FOOTER_QUICK_LINKS, FOOTER_LEGAL_LINKS } from '@/lib/constants/navigationItems';
+import { footerContent } from '@/data/content/footer';
+import { siteConfig } from '@/data/content/siteConfig';
 import styles from './Footer.module.css';
 
 /**
@@ -23,6 +28,7 @@ import styles from './Footer.module.css';
  */
 const Footer = () => {
   const { scrollToSection, isMobile, isTablet } = useUIContext();
+  const { awards, workingHours, disclaimer } = footerContent;
 
   // Social media links
   const socialLinks = [
@@ -63,6 +69,29 @@ const Footer = () => {
 
   return (
     <Box component="footer" className={styles.footer}>
+      {/* Awards Banner */}
+      {awards.enabled && (
+        <Box className={styles.awardsBanner}>
+          <Container maxWidth="lg">
+            <Box className={styles.awardsContent}>
+              {awards.items.map((award, index) => (
+                <Box key={index} className={styles.awardItem}>
+                  <EmojiEventsIcon className={styles.awardIcon} />
+                  <Box>
+                    <Typography variant="subtitle2" className={styles.awardTitle}>
+                      {award.title}
+                    </Typography>
+                    <Typography variant="caption" className={styles.awardOrg}>
+                      {award.organization}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Container>
+        </Box>
+      )}
+
       <Container maxWidth="lg">
         <motion.div
           variants={containerVariants}
@@ -104,6 +133,19 @@ const Footer = () => {
                         {social.icon}
                       </IconButton>
                     ))}
+                  </Box>
+
+                  {/* Working Hours */}
+                  <Box className={styles.workingHours}>
+                    <AccessTimeIcon className={styles.workingHoursIcon} />
+                    <Box>
+                      <Typography variant="caption" className={styles.workingHoursText}>
+                        {workingHours.weekdays}
+                      </Typography>
+                      <Typography variant="caption" className={styles.workingHoursText}>
+                        {workingHours.weekends}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
               </motion.div>
@@ -198,9 +240,53 @@ const Footer = () => {
                     </MuiLink>
                   ))}
                 </Box>
+
+                {/* RERA Badge */}
+                <Box className={styles.reraBadge}>
+                  <VerifiedIcon className={styles.reraIcon} />
+                  <Box>
+                    <Typography variant="caption" className={styles.reraLabel}>
+                      RERA Registered
+                    </Typography>
+                    <Typography variant="caption" className={styles.reraNumber}>
+                      {siteConfig.rera.number}
+                    </Typography>
+                  </Box>
+                </Box>
               </motion.div>
             </Grid>
           </Grid>
+
+          {/* Bank Approvals */}
+          <motion.div variants={itemVariants}>
+            <Box className={styles.bankApprovals}>
+              <Typography variant="caption" className={styles.bankTitle}>
+                Approved by Leading Banks
+              </Typography>
+              <Box className={styles.bankLogos}>
+                {siteConfig.bankPartners.map((bank, index) => (
+                  <Chip
+                    key={index}
+                    label={bank.name}
+                    variant="outlined"
+                    size="small"
+                    className={styles.bankChip}
+                  />
+                ))}
+              </Box>
+            </Box>
+          </motion.div>
+
+          {/* Disclaimer */}
+          {disclaimer.enabled && (
+            <motion.div variants={itemVariants}>
+              <Box className={styles.disclaimer}>
+                <Typography variant="caption" className={styles.disclaimerText}>
+                  {disclaimer.text}
+                </Typography>
+              </Box>
+            </motion.div>
+          )}
 
           {/* Divider */}
           <Divider className={styles.divider} />
