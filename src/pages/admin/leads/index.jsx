@@ -3,54 +3,43 @@
  * Leads management with data table, filters, and actions
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import {
   Box,
-  Paper,
   Typography,
+  Alert,
+  Snackbar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
   Button,
-  TextField,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TablePagination,
-  Chip,
-  IconButton,
-  Tooltip,
-  Skeleton,
-  Checkbox,
 } from '@mui/material';
-import {
-  Search as SearchIcon,
-  Download as DownloadIcon,
-  Visibility as VisibilityIcon,
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-  FilterList as FilterListIcon,
-} from '@mui/icons-material';
 import AdminLayout from '@/components/admin/AdminLayout';
+import LeadsTable from '@/components/admin/LeadsTable';
 import { withAuth } from '@/context/AuthContext';
-import { LEAD_STATUS_OPTIONS, LEAD_SOURCE_OPTIONS } from '@/lib/constants';
+import { getLeads, deleteLead, bulkUpdateLeads, bulkDeleteLeads } from '@/lib/api/leads';
 
-// Mock data
+// Enhanced mock data with more realistic entries
 const mockLeads = [
-  { id: 1, name: 'Rahul Kumar', email: 'rahul@email.com', mobile: '9876543210', source: 'hero_form', status: 'new', wantsSiteVisit: true, createdAt: '2025-01-11T10:30:00' },
-  { id: 2, name: 'Priya Sharma', email: 'priya@email.com', mobile: '9876543211', source: 'popup_form', status: 'contacted', wantsSiteVisit: false, createdAt: '2025-01-11T09:15:00' },
-  { id: 3, name: 'Amit Singh', email: 'amit@email.com', mobile: '9876543212', source: 'cta_form', status: 'site_visit_scheduled', wantsSiteVisit: true, createdAt: '2025-01-10T16:45:00' },
-  { id: 4, name: 'Deepika Patel', email: 'deepika@email.com', mobile: '9876543213', source: 'hero_form', status: 'visited', wantsSiteVisit: true, createdAt: '2025-01-10T14:20:00' },
-  { id: 5, name: 'Vikram Reddy', email: 'vikram@email.com', mobile: '9876543214', source: 'popup_form', status: 'negotiation', wantsSiteVisit: false, createdAt: '2025-01-10T11:00:00' },
-  { id: 6, name: 'Sneha Nair', email: 'sneha@email.com', mobile: '9876543215', source: 'hero_form', status: 'converted', wantsSiteVisit: true, createdAt: '2025-01-09T15:30:00' },
-  { id: 7, name: 'Rajesh Gupta', email: 'rajesh@email.com', mobile: '9876543216', source: 'cta_form', status: 'lost', wantsSiteVisit: false, createdAt: '2025-01-09T12:00:00' },
+  { id: 1, name: 'Rahul Kumar', email: 'rahul.kumar@email.com', mobile: '9876543210', source: 'hero_form', status: 'new', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-15', createdAt: '2026-01-11T10:30:00' },
+  { id: 2, name: 'Priya Sharma', email: 'priya.sharma@email.com', mobile: '9876543211', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-11T09:15:00' },
+  { id: 3, name: 'Amit Singh', email: 'amit.singh@email.com', mobile: '9876543212', source: 'cta_form', status: 'site_visit_scheduled', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-14', createdAt: '2026-01-10T16:45:00' },
+  { id: 4, name: 'Deepika Patel', email: 'deepika.patel@email.com', mobile: '9876543213', source: 'hero_form', status: 'visited', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-10T14:20:00' },
+  { id: 5, name: 'Vikram Reddy', email: 'vikram.reddy@email.com', mobile: '9876543214', source: 'popup_form', status: 'negotiation', priority: 'high', wantsSiteVisit: false, createdAt: '2026-01-10T11:00:00' },
+  { id: 6, name: 'Sneha Nair', email: 'sneha.nair@email.com', mobile: '9876543215', source: 'hero_form', status: 'converted', priority: 'medium', wantsSiteVisit: true, createdAt: '2026-01-09T15:30:00' },
+  { id: 7, name: 'Rajesh Gupta', email: 'rajesh.gupta@email.com', mobile: '9876543216', source: 'cta_form', status: 'lost', priority: 'low', wantsSiteVisit: false, createdAt: '2026-01-09T12:00:00' },
+  { id: 8, name: 'Ananya Krishnan', email: 'ananya.k@email.com', mobile: '9876543217', source: 'hero_form', status: 'new', priority: 'medium', wantsSiteVisit: true, siteVisitDate: '2026-01-16', createdAt: '2026-01-09T10:00:00' },
+  { id: 9, name: 'Suresh Menon', email: 'suresh.menon@email.com', mobile: '9876543218', source: 'popup_form', status: 'contacted', priority: 'low', wantsSiteVisit: false, createdAt: '2026-01-08T15:45:00' },
+  { id: 10, name: 'Kavitha Rao', email: 'kavitha.rao@email.com', mobile: '9876543219', source: 'cta_form', status: 'site_visit_scheduled', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-13', createdAt: '2026-01-08T11:30:00' },
+  { id: 11, name: 'Arun Prakash', email: 'arun.prakash@email.com', mobile: '9876543220', source: 'hero_form', status: 'visited', priority: 'medium', wantsSiteVisit: true, createdAt: '2026-01-07T16:20:00' },
+  { id: 12, name: 'Meera Iyer', email: 'meera.iyer@email.com', mobile: '9876543221', source: 'popup_form', status: 'negotiation', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-07T14:00:00' },
+  { id: 13, name: 'Karthik Sundaram', email: 'karthik.s@email.com', mobile: '9876543222', source: 'cta_form', status: 'new', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-06T09:30:00' },
+  { id: 14, name: 'Lakshmi Venkat', email: 'lakshmi.v@email.com', mobile: '9876543223', source: 'hero_form', status: 'converted', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-05T12:15:00' },
+  { id: 15, name: 'Naveen Kumar', email: 'naveen.kumar@email.com', mobile: '9876543224', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-05T10:45:00' },
 ];
 
 /**
@@ -60,65 +49,35 @@ const AdminLeadsPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [leads, setLeads] = useState([]);
-  const [selected, setSelected] = useState([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [sourceFilter, setSourceFilter] = useState('all');
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [deleteDialog, setDeleteDialog] = useState({ open: false, leadId: null, isBulk: false, ids: [] });
 
-  // Load data
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  // Load leads data
+  const loadLeads = useCallback(async () => {
+    setLoading(true);
+    try {
+      // In a real app, fetch from API
+      // const response = await getLeads();
+      // setLeads(response.data);
+
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 600));
       setLeads(mockLeads);
+    } catch (error) {
+      console.error('Failed to load leads:', error);
+      showSnackbar('Failed to load leads', 'error');
+    } finally {
       setLoading(false);
-    }, 800);
-    return () => clearTimeout(timer);
+    }
   }, []);
 
-  // Filter leads
-  const filteredLeads = leads.filter((lead) => {
-    const matchesSearch =
-      lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lead.mobile.includes(searchQuery);
-    const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
-    const matchesSource = sourceFilter === 'all' || lead.source === sourceFilter;
-    return matchesSearch && matchesStatus && matchesSource;
-  });
+  useEffect(() => {
+    loadLeads();
+  }, [loadLeads]);
 
-  // Handle page change
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  // Handle rows per page change
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  // Handle select all
-  const handleSelectAll = (event) => {
-    if (event.target.checked) {
-      setSelected(filteredLeads.map((lead) => lead.id));
-    } else {
-      setSelected([]);
-    }
-  };
-
-  // Handle select one
-  const handleSelectOne = (id) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = [...selected, id];
-    } else {
-      newSelected = selected.filter((selectedId) => selectedId !== id);
-    }
-
-    setSelected(newSelected);
+  // Show snackbar notification
+  const showSnackbar = (message, severity = 'success') => {
+    setSnackbar({ open: true, message, severity });
   };
 
   // Handle view lead
@@ -126,217 +85,158 @@ const AdminLeadsPage = () => {
     router.push(`/admin/leads/${id}`);
   };
 
-  // Get status config
-  const getStatusConfig = (status) => {
-    return LEAD_STATUS_OPTIONS.find((opt) => opt.value === status) || { label: status, color: '#9e9e9e' };
+  // Handle edit lead
+  const handleEditLead = (id) => {
+    router.push(`/admin/leads/${id}?edit=true`);
   };
 
-  // Format source
-  const formatSource = (source) => {
-    return LEAD_SOURCE_OPTIONS.find((opt) => opt.value === source)?.label || source;
+  // Handle delete lead
+  const handleDeleteLead = (id) => {
+    setDeleteDialog({ open: true, leadId: id, isBulk: false, ids: [] });
   };
 
-  // Format date
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
+  // Handle bulk delete
+  const handleBulkDelete = (ids) => {
+    setDeleteDialog({ open: true, leadId: null, isBulk: true, ids });
+  };
+
+  // Confirm delete
+  const confirmDelete = async () => {
+    try {
+      if (deleteDialog.isBulk) {
+        // In real app: await bulkDeleteLeads(deleteDialog.ids);
+        setLeads(leads.filter(lead => !deleteDialog.ids.includes(lead.id)));
+        showSnackbar(`${deleteDialog.ids.length} leads deleted successfully`);
+      } else {
+        // In real app: await deleteLead(deleteDialog.leadId);
+        setLeads(leads.filter(lead => lead.id !== deleteDialog.leadId));
+        showSnackbar('Lead deleted successfully');
+      }
+    } catch (error) {
+      console.error('Failed to delete:', error);
+      showSnackbar('Failed to delete lead(s)', 'error');
+    } finally {
+      setDeleteDialog({ open: false, leadId: null, isBulk: false, ids: [] });
+    }
+  };
+
+  // Handle bulk status change
+  const handleBulkStatusChange = async (ids, status) => {
+    try {
+      // In real app: await bulkUpdateLeads(ids, { status });
+      setLeads(leads.map(lead =>
+        ids.includes(lead.id) ? { ...lead, status } : lead
+      ));
+      showSnackbar(`${ids.length} leads updated to ${status.replace('_', ' ')}`);
+    } catch (error) {
+      console.error('Failed to update status:', error);
+      showSnackbar('Failed to update lead status', 'error');
+    }
+  };
+
+  // Handle export
+  const handleExport = (dataToExport) => {
+    const headers = ['ID', 'Name', 'Email', 'Mobile', 'Source', 'Status', 'Priority', 'Site Visit', 'Created At'];
+    const rows = dataToExport.map(lead => [
+      lead.id,
+      lead.name,
+      lead.email,
+      lead.mobile,
+      lead.source,
+      lead.status,
+      lead.priority,
+      lead.wantsSiteVisit ? 'Yes' : 'No',
+      lead.createdAt,
+    ]);
+
+    const csvContent = [headers, ...rows]
+      .map(row => row.map(cell => `"${cell || ''}"`).join(','))
+      .join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `leads-export-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+
+    showSnackbar(`${dataToExport.length} leads exported successfully`);
   };
 
   return (
     <AdminLayout title="Leads">
       <Head>
-        <title>Leads | Admin - District 25</title>
+        <title>Leads Management | Admin - Nambiar District 25</title>
       </Head>
 
       <Box>
         {/* Header */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-          <Box>
-            <Typography variant="h4" sx={{ fontWeight: 700, color: '#1a1a2e', mb: 0.5 }}>
-              Leads Management
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Manage and track all your leads in one place
-            </Typography>
-          </Box>
-          <Button
-            variant="contained"
-            startIcon={<DownloadIcon />}
-            sx={{
-              backgroundColor: '#8B9A46',
-              '&:hover': { backgroundColor: '#6b7a36' },
-            }}
-          >
-            Export CSV
-          </Button>
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a1a2e', mb: 0.5 }}>
+            Leads Management
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Manage, track, and convert all your leads in one place
+          </Typography>
         </Box>
 
-        {/* Filters */}
-        <Paper sx={{ p: 3, mb: 3, borderRadius: 3 }}>
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-            <TextField
-              placeholder="Search by name, email, or mobile..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              size="small"
-              sx={{ minWidth: 300 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon color="action" />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <FormControl size="small" sx={{ minWidth: 150 }}>
-              <InputLabel>Status</InputLabel>
-              <Select
-                value={statusFilter}
-                label="Status"
-                onChange={(e) => setStatusFilter(e.target.value)}
-              >
-                <MenuItem value="all">All Status</MenuItem>
-                {LEAD_STATUS_OPTIONS.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl size="small" sx={{ minWidth: 150 }}>
-              <InputLabel>Source</InputLabel>
-              <Select
-                value={sourceFilter}
-                label="Source"
-                onChange={(e) => setSourceFilter(e.target.value)}
-              >
-                <MenuItem value="all">All Sources</MenuItem>
-                {LEAD_SOURCE_OPTIONS.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-        </Paper>
-
-        {/* Leads Table */}
-        <Paper sx={{ borderRadius: 3, overflow: 'hidden' }}>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow sx={{ backgroundColor: '#f5f5f7' }}>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      indeterminate={selected.length > 0 && selected.length < filteredLeads.length}
-                      checked={filteredLeads.length > 0 && selected.length === filteredLeads.length}
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Name</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Mobile</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Site Visit</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
-                  <TableCell align="center" sx={{ fontWeight: 600 }}>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {loading ? (
-                  [...Array(5)].map((_, index) => (
-                    <TableRow key={index}>
-                      {[...Array(9)].map((_, cellIndex) => (
-                        <TableCell key={cellIndex}>
-                          <Skeleton variant="text" />
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  filteredLeads
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((lead) => {
-                      const statusConfig = getStatusConfig(lead.status);
-                      const isSelected = selected.includes(lead.id);
-                      return (
-                        <TableRow key={lead.id} hover selected={isSelected}>
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isSelected}
-                              onChange={() => handleSelectOne(lead.id)}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="body2" fontWeight={500}>
-                              {lead.name}
-                            </Typography>
-                          </TableCell>
-                          <TableCell>{lead.mobile}</TableCell>
-                          <TableCell>{lead.email}</TableCell>
-                          <TableCell>
-                            <Chip label={formatSource(lead.source)} size="small" variant="outlined" />
-                          </TableCell>
-                          <TableCell>
-                            <Chip
-                              label={statusConfig.label}
-                              size="small"
-                              sx={{
-                                backgroundColor: `${statusConfig.color}20`,
-                                color: statusConfig.color,
-                                fontWeight: 500,
-                              }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Chip
-                              label={lead.wantsSiteVisit ? 'Yes' : 'No'}
-                              size="small"
-                              color={lead.wantsSiteVisit ? 'success' : 'default'}
-                              variant="outlined"
-                            />
-                          </TableCell>
-                          <TableCell>{formatDate(lead.createdAt)}</TableCell>
-                          <TableCell align="center">
-                            <Tooltip title="View">
-                              <IconButton size="small" onClick={() => handleViewLead(lead.id)}>
-                                <VisibilityIcon fontSize="small" />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Edit">
-                              <IconButton size="small">
-                                <EditIcon fontSize="small" />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Delete">
-                              <IconButton size="small" color="error">
-                                <DeleteIcon fontSize="small" />
-                              </IconButton>
-                            </Tooltip>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            component="div"
-            count={filteredLeads.length}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            rowsPerPageOptions={[10, 25, 50]}
-          />
-        </Paper>
+        {/* Leads Table with all features */}
+        <LeadsTable
+          leads={leads}
+          loading={loading}
+          title="All Leads"
+          onView={handleViewLead}
+          onEdit={handleEditLead}
+          onDelete={handleDeleteLead}
+          onBulkDelete={handleBulkDelete}
+          onBulkStatusChange={handleBulkStatusChange}
+          onExport={handleExport}
+          onRefresh={loadLeads}
+        />
       </Box>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialog.open}
+        onClose={() => setDeleteDialog({ open: false, leadId: null, isBulk: false, ids: [] })}
+      >
+        <DialogTitle>
+          {deleteDialog.isBulk ? 'Delete Selected Leads?' : 'Delete Lead?'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {deleteDialog.isBulk
+              ? `Are you sure you want to delete ${deleteDialog.ids.length} selected leads? This action cannot be undone.`
+              : 'Are you sure you want to delete this lead? This action cannot be undone.'
+            }
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialog({ open: false, leadId: null, isBulk: false, ids: [] })}>
+            Cancel
+          </Button>
+          <Button onClick={confirmDelete} color="error" variant="contained">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Snackbar Notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          severity={snackbar.severity}
+          variant="filled"
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </AdminLayout>
   );
 };
