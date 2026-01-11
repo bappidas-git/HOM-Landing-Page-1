@@ -1,0 +1,356 @@
+/* Trust Badges Section Styles */
+
+.trustSection {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.trustSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8B9A46, #c9a227, #8B9A46);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.preTitle {
+  color: #8B9A46;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+/* Badges Grid */
+.badgesGrid {
+  margin-bottom: 48px;
+}
+
+/* Badge Card */
+.badgeCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.badgeCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.badgeCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(139, 154, 70, 0.15);
+}
+
+.badgeCard:hover::before {
+  transform: scaleX(1);
+}
+
+/* Badge Icon */
+.badgeIcon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.badgeIcon svg {
+  font-size: 36px;
+  color: #8B9A46;
+  transition: all 0.3s ease;
+}
+
+.badgeCard:hover .badgeIcon {
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+}
+
+.badgeCard:hover .badgeIcon svg {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Badge Content */
+.badgeTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.badgeDescription {
+  color: #666666;
+  line-height: 1.5;
+  display: block;
+}
+
+/* Check Mark */
+.checkMark {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #8B9A46;
+  opacity: 0.3;
+}
+
+.checkMark svg {
+  font-size: 20px;
+}
+
+.badgeCard:hover .checkMark {
+  opacity: 1;
+}
+
+/* Bank Partners */
+.bankPartners {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 40px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  margin-bottom: 40px;
+}
+
+.bankTitle {
+  color: #666666;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.bankLogos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.bankLogo {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.bankLogo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.bankLogoInner {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.bankName {
+  font-weight: 700;
+  color: #1a1a2e;
+  font-size: 0.85rem;
+}
+
+/* Trust Indicators */
+.trustIndicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.trustIndicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.indicatorIcon {
+  color: #8B9A46;
+  font-size: 22px !important;
+}
+
+.trustIndicator p {
+  color: #444444;
+  font-weight: 500;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #e0e0e0;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .trustSection {
+    padding: 60px 0;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .badgeCard {
+    padding: 24px 20px;
+  }
+
+  .badgeIcon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 16px;
+  }
+
+  .badgeIcon svg {
+    font-size: 30px;
+  }
+
+  .bankPartners {
+    padding: 24px;
+  }
+
+  .bankLogos {
+    gap: 16px;
+  }
+
+  .bankLogo {
+    width: 80px;
+    height: 40px;
+  }
+
+  .trustIndicators {
+    gap: 20px;
+  }
+
+  .divider {
+    display: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .trustSection {
+    padding: 48px 0;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .badgesGrid {
+    margin-bottom: 32px;
+  }
+
+  .badgeCard {
+    padding: 20px 16px;
+  }
+
+  .badgeIcon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .badgeIcon svg {
+    font-size: 26px;
+  }
+
+  .badgeTitle {
+    font-size: 0.9rem;
+  }
+
+  .badgeDescription {
+    font-size: 0.7rem;
+  }
+
+  .checkMark {
+    top: 12px;
+    right: 12px;
+  }
+
+  .checkMark svg {
+    font-size: 16px;
+  }
+
+  .bankPartners {
+    padding: 20px 16px;
+    margin-bottom: 32px;
+  }
+
+  .bankTitle {
+    font-size: 0.7rem;
+    margin-bottom: 16px;
+  }
+
+  .bankLogos {
+    gap: 12px;
+  }
+
+  .bankLogo {
+    width: 70px;
+    height: 36px;
+  }
+
+  .bankLogoInner {
+    padding: 6px 12px;
+  }
+
+  .bankName {
+    font-size: 0.75rem;
+  }
+
+  .trustIndicators {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .trustIndicator p {
+    font-size: 0.85rem;
+  }
+}

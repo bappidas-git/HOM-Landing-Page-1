@@ -231,7 +231,7 @@ const Amenities = () => {
       {/* Results Count */}
       {searchQuery && (
         <Typography variant="body2" className={styles.resultsCount}>
-          Found {filteredAmenities.length} amenities matching "{searchQuery}"
+          Found {filteredAmenities.length} amenities matching &ldquo;{searchQuery}&rdquo;
         </Typography>
       )}
 
