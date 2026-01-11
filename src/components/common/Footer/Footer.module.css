@@ -1,0 +1,198 @@
+/* Footer Component Styles */
+
+.footer {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+  color: #ffffff;
+  padding: 60px 0 30px;
+}
+
+/* Logo */
+.logoWrapper {
+  margin-bottom: 16px;
+}
+
+.logoMain {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.logoSub {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+}
+
+/* About Section */
+.aboutSection {
+  max-width: 280px;
+}
+
+.aboutText {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* Social Links */
+.socialLinks {
+  display: flex;
+  gap: 8px;
+}
+
+.socialButton {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.socialButton:hover {
+  color: #8B9A46;
+  background: rgba(139, 154, 70, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Section Titles */
+.sectionTitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  border-radius: 1px;
+}
+
+/* Link List */
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLink {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  background: none;
+  border: none;
+  display: inline-block;
+}
+
+.footerLink:hover {
+  color: #8B9A46;
+  padding-left: 8px;
+}
+
+/* Contact List */
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.contactIcon {
+  color: #8B9A46;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contactText {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.contactLink {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.contactLink:hover {
+  color: #8B9A46;
+}
+
+/* Divider */
+.divider {
+  margin: 40px 0 24px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Bottom Bar */
+.bottomBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+.reraInfo {
+  color: #8B9A46;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Mobile bottom padding for bottom navigation */
+.mobileBottomPadding {
+  height: 80px;
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .footer {
+    padding: 48px 0 24px;
+  }
+
+  .aboutSection {
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 599px) {
+  .footer {
+    padding: 40px 0 20px;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+  }
+}

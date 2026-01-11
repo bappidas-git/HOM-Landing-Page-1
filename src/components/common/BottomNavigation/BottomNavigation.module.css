@@ -1,0 +1,132 @@
+/* BottomNavigation Component Styles */
+
+.container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.paper {
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+}
+
+.elevated {
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navigation {
+  background: transparent;
+  height: 70px;
+  padding: 8px 0 12px;
+}
+
+.action {
+  min-width: 64px;
+  padding: 8px 0;
+  color: #666666;
+  transition: all 0.3s ease;
+}
+
+.action:hover {
+  color: #1a1a2e;
+}
+
+.activeAction {
+  color: #8B9A46;
+}
+
+.action .MuiBottomNavigationAction-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-top: 4px;
+  transition: all 0.3s ease;
+}
+
+.activeAction .MuiBottomNavigationAction-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Icon styles */
+.icon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.enquireIcon {
+  color: #8B9A46;
+}
+
+/* Enquire button special styling */
+.enquireAction {
+  position: relative;
+}
+
+.enquireAction::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B9A46, #6b7a36);
+  z-index: -1;
+  box-shadow: 0 4px 15px rgba(139, 154, 70, 0.4);
+}
+
+.enquireAction .icon {
+  color: #ffffff;
+}
+
+.enquireAction .MuiBottomNavigationAction-label {
+  color: #8B9A46;
+  font-weight: 600;
+}
+
+/* Active indicator */
+.indicator {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  border-radius: 0 0 2px 2px;
+  transform: translateX(-50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .navigation {
+    height: 64px;
+  }
+
+  .action .MuiBottomNavigationAction-label {
+    font-size: 0.65rem;
+  }
+
+  .icon {
+    font-size: 1.35rem;
+  }
+
+  .enquireAction::before {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Safe area for notched devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .container {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
