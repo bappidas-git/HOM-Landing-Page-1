@@ -598,7 +598,7 @@ const AdminSEOPage = () => {
               startIcon={saving ? <CircularProgress size={16} color="inherit" /> : <SaveIcon />}
               onClick={handleSave}
               disabled={saving}
-              sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+              sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
             >
               {saving ? 'Saving...' : 'Save Changes'}
             </Button>
@@ -624,8 +624,8 @@ const AdminSEOPage = () => {
                   borderColor: 'divider',
                   backgroundColor: '#f8f9fa',
                   '& .MuiTab-root': { minHeight: 56 },
-                  '& .Mui-selected': { color: '#8B9A46' },
-                  '& .MuiTabs-indicator': { backgroundColor: '#8B9A46' },
+                  '& .Mui-selected': { color: '#667eea' },
+                  '& .MuiTabs-indicator': { backgroundColor: '#667eea' },
                 }}
               >
                 <Tab icon={<SearchIcon />} iconPosition="start" label="Meta Tags" />
@@ -691,7 +691,7 @@ const AdminSEOPage = () => {
                               key={index}
                               label={kw.trim()}
                               size="small"
-                              sx={{ backgroundColor: '#8B9A4615', color: '#8B9A46' }}
+                              sx={{ backgroundColor: '#667eea15', color: '#667eea' }}
                             />
                           ))}
                         </Box>
@@ -1085,9 +1085,9 @@ const AdminSEOPage = () => {
                 </Box>
 
                 {/* Quick Tips */}
-                <Card sx={{ mt: 2, borderRadius: 2, backgroundColor: '#8B9A4610', border: '1px solid #8B9A4630' }}>
+                <Card sx={{ mt: 2, borderRadius: 2, backgroundColor: '#667eea10', border: '1px solid #667eea30' }}>
                   <CardContent>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: '#8B9A46' }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: '#667eea' }}>
                       SEO Tips
                     </Typography>
                     <Box component="ul" sx={{ m: 0, pl: 2, '& li': { fontSize: 13, mb: 0.5 } }}>

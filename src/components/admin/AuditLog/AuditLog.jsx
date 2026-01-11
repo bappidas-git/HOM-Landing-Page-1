@@ -99,7 +99,7 @@ const getModuleColor = (module) => {
     PIXEL: '#ff9800',
     SCHEMA: '#00bcd4',
     KEYWORD: '#4caf50',
-    SETTINGS: '#8B9A46',
+    SETTINGS: '#667eea',
     AUTH: '#1a1a2e',
   };
   return colors[module] || '#9e9e9e';
@@ -226,7 +226,7 @@ export const AuditLogTableRow = ({ log, expanded, onToggle, onViewDetails, onCop
               width: 28,
               height: 28,
               fontSize: '0.75rem',
-              backgroundColor: '#8B9A46',
+              backgroundColor: '#667eea',
             }}
           >
             {log.user.charAt(0)}
@@ -280,7 +280,7 @@ export const AuditLogTableRow = ({ log, expanded, onToggle, onViewDetails, onCop
             sx={{
               fontFamily: 'monospace',
               cursor: 'pointer',
-              '&:hover': { color: '#8B9A46' },
+              '&:hover': { color: '#667eea' },
             }}
             onClick={() => onCopyIP(log.ipAddress)}
           >
@@ -310,7 +310,7 @@ export const AuditLogTableRow = ({ log, expanded, onToggle, onViewDetails, onCop
               <Typography
                 variant="subtitle2"
                 gutterBottom
-                sx={{ color: '#8B9A46' }}
+                sx={{ color: '#667eea' }}
               >
                 Metadata
               </Typography>
@@ -349,7 +349,7 @@ export const AuditLogDetailsDialog = ({ open, log, onClose, onCopyIP }) => (
   >
     <DialogTitle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <HistoryIcon sx={{ color: '#8B9A46' }} />
+        <HistoryIcon sx={{ color: '#667eea' }} />
         <Typography variant="h6">Audit Log Details</Typography>
       </Box>
       <IconButton onClick={onClose}>
@@ -441,7 +441,7 @@ export const AuditLogDetailsDialog = ({ open, log, onClose, onCopyIP }) => (
           {log.metadata && (
             <Grid item xs={12}>
               <Divider sx={{ my: 1 }} />
-              <Typography variant="subtitle2" gutterBottom sx={{ color: '#8B9A46' }}>
+              <Typography variant="subtitle2" gutterBottom sx={{ color: '#667eea' }}>
                 Metadata
               </Typography>
               <Paper

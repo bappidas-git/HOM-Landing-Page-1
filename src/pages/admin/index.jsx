@@ -193,7 +193,7 @@ const AdminIndexPage = () => {
                   width: 120,
                   height: 120,
                   borderRadius: '24px',
-                  background: 'linear-gradient(135deg, #8B9A46 0%, #6b7a36 100%)',
+                  background: 'linear-gradient(135deg, #667eea 0%, #6b7a36 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -279,7 +279,7 @@ const AdminIndexPage = () => {
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     '& .MuiLinearProgress-bar': {
                       borderRadius: 3,
-                      background: 'linear-gradient(90deg, #8B9A46 0%, #a3b15e 100%)',
+                      background: 'linear-gradient(90deg, #667eea 0%, #a3b15e 100%)',
                     },
                   }}
                 />
@@ -292,7 +292,7 @@ const AdminIndexPage = () => {
                 <CircularProgress
                   size={16}
                   sx={{
-                    color: '#8B9A46',
+                    color: '#667eea',
                   }}
                 />
                 <Fade in={true} key={loadingText}>

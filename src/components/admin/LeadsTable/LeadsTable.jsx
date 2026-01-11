@@ -124,10 +124,10 @@ const LeadRow = ({
       selected={selected}
       sx={{
         '&.Mui-selected': {
-          backgroundColor: alpha('#8B9A46', 0.08),
+          backgroundColor: alpha('#667eea', 0.08),
         },
         '&.Mui-selected:hover': {
-          backgroundColor: alpha('#8B9A46', 0.12),
+          backgroundColor: alpha('#667eea', 0.12),
         },
       }}
     >
@@ -137,7 +137,7 @@ const LeadRow = ({
           onChange={(e) => onSelect(lead.id, e.target.checked)}
           sx={{
             '&.Mui-checked': {
-              color: '#8B9A46',
+              color: '#667eea',
             },
           }}
         />
@@ -150,8 +150,8 @@ const LeadRow = ({
             sx={{
               width: 40,
               height: 40,
-              backgroundColor: alpha('#8B9A46', 0.15),
-              color: '#8B9A46',
+              backgroundColor: alpha('#667eea', 0.15),
+              color: '#667eea',
               fontSize: '0.875rem',
               fontWeight: 600,
             }}
@@ -488,8 +488,8 @@ const LeadsTable = ({
               startIcon={<FilterIcon />}
               onClick={() => setShowFiltersPanel(!showFiltersPanel)}
               sx={showFiltersPanel ? {
-                backgroundColor: '#8B9A46',
-                '&:hover': { backgroundColor: '#6b7a36' },
+                backgroundColor: '#667eea',
+                '&:hover': { backgroundColor: '#764ba2' },
               } : {}}
             >
               Filters
@@ -624,16 +624,16 @@ const LeadsTable = ({
               sx={{
                 px: 3,
                 py: 1.5,
-                backgroundColor: alpha('#8B9A46', 0.08),
+                backgroundColor: alpha('#667eea', 0.08),
                 borderTop: '1px solid',
                 borderBottom: '1px solid',
-                borderColor: alpha('#8B9A46', 0.2),
+                borderColor: alpha('#667eea', 0.2),
                 display: 'flex',
                 alignItems: 'center',
                 gap: 2,
               }}
             >
-              <Typography variant="body2" sx={{ fontWeight: 600, color: '#8B9A46' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#667eea' }}>
                 {selected.length} selected
               </Typography>
               <Button
@@ -641,7 +641,7 @@ const LeadsTable = ({
                 variant="outlined"
                 onClick={(e) => setBulkMenuAnchor(e.currentTarget)}
                 endIcon={<ArrowDownIcon />}
-                sx={{ borderColor: '#8B9A46', color: '#8B9A46' }}
+                sx={{ borderColor: '#667eea', color: '#667eea' }}
               >
                 Update Status
               </Button>
@@ -690,7 +690,7 @@ const LeadsTable = ({
                   indeterminate={isIndeterminate}
                   checked={isAllSelected}
                   onChange={(e) => handleSelectAll(e.target.checked)}
-                  sx={{ '&.Mui-checked, &.MuiCheckbox-indeterminate': { color: '#8B9A46' } }}
+                  sx={{ '&.Mui-checked, &.MuiCheckbox-indeterminate': { color: '#667eea' } }}
                 />
               </TableCell>
               <TableCell sx={{ fontWeight: 600, minWidth: 200 }}>

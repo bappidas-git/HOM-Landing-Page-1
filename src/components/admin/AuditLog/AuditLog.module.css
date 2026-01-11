@@ -15,7 +15,7 @@
 }
 
 .tableRow:hover {
-  background-color: rgba(139, 154, 70, 0.04);
+  background-color: rgba(102, 126, 234, 0.04);
 }
 
 /* Timeline Item */
@@ -126,8 +126,8 @@
 }
 
 .moduleSettings {
-  background-color: rgba(139, 154, 70, 0.1);
-  color: #8B9A46;
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
 }
 
 .moduleAuth {
@@ -138,11 +138,11 @@
 /* Metadata Panel */
 .metadataPanel {
   padding: 16px 32px;
-  background-color: rgba(139, 154, 70, 0.03);
+  background-color: rgba(102, 126, 234, 0.03);
 }
 
 .metadataTitle {
-  color: #8B9A46;
+  color: #667eea;
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -155,7 +155,7 @@
 }
 
 .ipAddress:hover {
-  color: #8B9A46;
+  color: #667eea;
 }
 
 /* Responsive */

@@ -135,13 +135,13 @@ const InfoCard = ({ icon: Icon, label, value, action, copyable }) => {
         sx={{
           p: 1,
           borderRadius: 2,
-          backgroundColor: alpha('#8B9A46', 0.1),
+          backgroundColor: alpha('#667eea', 0.1),
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        <Icon sx={{ color: '#8B9A46', fontSize: 20 }} />
+        <Icon sx={{ color: '#667eea', fontSize: 20 }} />
       </Box>
       <Box sx={{ flex: 1, minWidth: 0 }}>
         <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500 }}>
@@ -261,7 +261,7 @@ const LeadDetail = ({
           p: 3,
           mb: 3,
           borderRadius: 3,
-          background: 'linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%)',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           color: '#fff',
         }}
       >
@@ -276,7 +276,7 @@ const LeadDetail = ({
               height: 72,
               fontSize: '1.5rem',
               fontWeight: 700,
-              backgroundColor: alpha('#8B9A46', 0.9),
+              backgroundColor: alpha('#667eea', 0.9),
             }}
           >
             {lead.name?.charAt(0)?.toUpperCase() || '?'}
@@ -371,7 +371,7 @@ const LeadDetail = ({
               </Grid>
               
               {lead.message && (
-                <Box sx={{ mt: 2, p: 2, backgroundColor: alpha('#8B9A46', 0.05), borderRadius: 2 }}>
+                <Box sx={{ mt: 2, p: 2, backgroundColor: alpha('#667eea', 0.05), borderRadius: 2 }}>
                   <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 500 }}>
                     Message
                   </Typography>
@@ -441,7 +441,7 @@ const LeadDetail = ({
                   startIcon={<AddIcon />}
                   onClick={handleAddNote}
                   disabled={!newNote.trim()}
-                  sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+                  sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
                 >
                   Add Note
                 </Button>
@@ -548,7 +548,7 @@ const LeadDetail = ({
                 variant="contained"
                 startIcon={<SaveIcon />}
                 onClick={() => onSave?.(lead.id, { status, priority })}
-                sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+                sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
               >
                 Save Changes
               </Button>
@@ -629,7 +629,7 @@ const LeadDetail = ({
           <Button 
             onClick={handleScheduleFollowUp} 
             variant="contained"
-            sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+            sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
           >
             Schedule
           </Button>

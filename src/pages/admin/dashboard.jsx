@@ -159,7 +159,7 @@ const RecentLeadsTable = ({ leads, loading, onViewLead, onViewAll }) => (
         size="small"
         endIcon={<OpenInNewIcon fontSize="small" />}
         onClick={onViewAll}
-        sx={{ color: '#8B9A46' }}
+        sx={{ color: '#667eea' }}
       >
         View All
       </Button>
@@ -207,8 +207,8 @@ const RecentLeadsTable = ({ leads, loading, onViewLead, onViewAll }) => (
                           width: 36,
                           height: 36,
                           fontSize: '0.875rem',
-                          backgroundColor: alpha('#8B9A46', 0.15),
-                          color: '#8B9A46',
+                          backgroundColor: alpha('#667eea', 0.15),
+                          color: '#667eea',
                         }}
                       >
                         {lead.name?.charAt(0)?.toUpperCase()}
@@ -257,7 +257,7 @@ const RecentLeadsTable = ({ leads, loading, onViewLead, onViewAll }) => (
                           e.stopPropagation();
                           onViewLead(lead.id);
                         }}
-                        sx={{ color: '#8B9A46' }}
+                        sx={{ color: '#667eea' }}
                       >
                         <VisibilityIcon fontSize="small" />
                       </IconButton>
@@ -318,8 +318,8 @@ const TopLocationsCard = ({ locations, loading }) => (
                   sx={{
                     width: 36,
                     height: 36,
-                    backgroundColor: alpha('#8B9A46', 0.1),
-                    color: '#8B9A46',
+                    backgroundColor: alpha('#667eea', 0.1),
+                    color: '#667eea',
                   }}
                 >
                   <LocationIcon fontSize="small" />
@@ -464,8 +464,8 @@ const AdminDashboardPage = () => {
               startIcon={<DownloadIcon />}
               onClick={handleExportLeads}
               sx={{
-                backgroundColor: '#8B9A46',
-                '&:hover': { backgroundColor: '#6b7a36' },
+                backgroundColor: '#667eea',
+                '&:hover': { backgroundColor: '#764ba2' },
               }}
             >
               Export Leads
@@ -526,7 +526,7 @@ const AdminDashboardPage = () => {
               sx={{
                 height: '100%',
                 borderRadius: 3,
-                background: 'linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%)',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 color: '#fff',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
               }}

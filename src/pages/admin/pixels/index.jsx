@@ -265,7 +265,7 @@ const EventCheckboxList = ({ events, onChange, disabled }) => {
               onChange={() => onChange(event, !isEnabled)}
               disabled={disabled}
               size="small"
-              sx={{ '&.Mui-checked': { color: '#8B9A46' } }}
+              sx={{ '&.Mui-checked': { color: '#667eea' } }}
             />
           </ListItemIcon>
           <ListItemText
@@ -515,7 +515,7 @@ fbq('track', 'PageView');
               startIcon={saving ? <CircularProgress size={16} color="inherit" /> : <SaveIcon />}
               onClick={handleSave}
               disabled={saving}
-              sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+              sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
             >
               {saving ? 'Saving...' : 'Save Changes'}
             </Button>
@@ -526,7 +526,7 @@ fbq('track', 'PageView');
         <Paper sx={{ p: 2, mb: 3, borderRadius: 2, backgroundColor: '#f8f9fa' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, flexWrap: 'wrap' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <SpeedIcon sx={{ color: '#8B9A46' }} />
+              <SpeedIcon sx={{ color: '#667eea' }} />
               <Typography variant="body2">
                 <strong>{activeCount}</strong> of 7 integrations active
               </Typography>
@@ -565,8 +565,8 @@ fbq('track', 'PageView');
               borderColor: 'divider',
               backgroundColor: '#f8f9fa',
               '& .MuiTab-root': { minHeight: 56 },
-              '& .Mui-selected': { color: '#8B9A46' },
-              '& .MuiTabs-indicator': { backgroundColor: '#8B9A46' },
+              '& .Mui-selected': { color: '#667eea' },
+              '& .MuiTabs-indicator': { backgroundColor: '#667eea' },
             }}
           >
             <Tab icon={<AnalyticsIcon />} iconPosition="start" label="Analytics" />
@@ -890,7 +890,7 @@ fbq('track', 'PageView');
                 <Grid item xs={12}>
                   <Paper sx={{ p: 3, borderRadius: 2, backgroundColor: '#f8f9fa' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                      <SecurityIcon sx={{ color: '#8B9A46' }} />
+                      <SecurityIcon sx={{ color: '#667eea' }} />
                       <Typography variant="h6" sx={{ fontWeight: 600 }}>
                         Privacy & Compliance
                       </Typography>

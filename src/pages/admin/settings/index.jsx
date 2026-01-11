@@ -122,7 +122,7 @@ const SettingsCard = ({ title, description, icon: Icon, children, badge, expande
         borderBottom: expanded !== undefined ? '1px solid' : 'none',
         borderColor: 'divider',
         cursor: onToggle ? 'pointer' : 'default',
-        backgroundColor: 'rgba(139, 154, 70, 0.03)',
+        backgroundColor: 'rgba(102, 126, 234, 0.03)',
       }}
       onClick={onToggle}
     >
@@ -131,8 +131,8 @@ const SettingsCard = ({ title, description, icon: Icon, children, badge, expande
           sx={{
             width: 48,
             height: 48,
-            backgroundColor: 'rgba(139, 154, 70, 0.1)',
-            color: '#8B9A46',
+            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+            color: '#667eea',
           }}
         >
           <Icon />
@@ -210,12 +210,12 @@ const FormField = ({ icon: Icon, label, value, onChange, multiline, rows, helper
           borderRadius: 2,
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#8B9A46',
+              borderColor: '#667eea',
             },
           },
           '&.Mui-focused': {
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#8B9A46',
+              borderColor: '#667eea',
             },
           },
         },
@@ -232,11 +232,11 @@ const TimeSlotChip = ({ time, onDelete, disabled }) => (
     size="small"
     sx={{
       m: 0.5,
-      backgroundColor: 'rgba(139, 154, 70, 0.1)',
-      color: '#8B9A46',
+      backgroundColor: 'rgba(102, 126, 234, 0.1)',
+      color: '#667eea',
       fontWeight: 500,
       '&:hover': {
-        backgroundColor: 'rgba(139, 154, 70, 0.2)',
+        backgroundColor: 'rgba(102, 126, 234, 0.2)',
       },
     }}
   />
@@ -441,7 +441,7 @@ const AdminSettingsPage = () => {
             p: 3,
             mb: 3,
             borderRadius: 3,
-            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             color: 'white',
             position: 'relative',
             overflow: 'hidden',
@@ -455,7 +455,7 @@ const AdminSettingsPage = () => {
               right: 0,
               width: '40%',
               height: '100%',
-              background: 'radial-gradient(circle at 70% 50%, rgba(139, 154, 70, 0.2) 0%, transparent 70%)',
+              background: 'radial-gradient(circle at 70% 50%, rgba(102, 126, 234, 0.2) 0%, transparent 70%)',
             }}
           />
 
@@ -466,8 +466,8 @@ const AdminSettingsPage = () => {
                   sx={{
                     width: 56,
                     height: 56,
-                    backgroundColor: 'rgba(139, 154, 70, 0.2)',
-                    border: '2px solid rgba(139, 154, 70, 0.5)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                    border: '2px solid rgba(102, 126, 234, 0.5)',
                   }}
                 >
                   <SettingsIcon sx={{ fontSize: 28, color: '#a3b15e' }} />
@@ -504,8 +504,8 @@ const AdminSettingsPage = () => {
                 onClick={handleSave}
                 disabled={saving}
                 sx={{
-                  backgroundColor: '#8B9A46',
-                  '&:hover': { backgroundColor: '#6b7a36' },
+                  backgroundColor: '#667eea',
+                  '&:hover': { backgroundColor: '#764ba2' },
                   minWidth: 140,
                 }}
               >
@@ -522,7 +522,7 @@ const AdminSettingsPage = () => {
                 left: 0,
                 right: 0,
                 '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#8B9A46',
+                  backgroundColor: '#667eea',
                 },
               }}
             />
@@ -546,10 +546,10 @@ const AdminSettingsPage = () => {
                 fontWeight: 500,
               },
               '& .Mui-selected': {
-                color: '#8B9A46',
+                color: '#667eea',
               },
               '& .MuiTabs-indicator': {
-                backgroundColor: '#8B9A46',
+                backgroundColor: '#667eea',
                 height: 3,
               },
             }}
@@ -739,9 +739,9 @@ const AdminSettingsPage = () => {
                   </Grid>
                 </Grid>
 
-                <Box sx={{ mt: 3, p: 2, backgroundColor: 'rgba(139, 154, 70, 0.05)', borderRadius: 2 }}>
+                <Box sx={{ mt: 3, p: 2, backgroundColor: 'rgba(102, 126, 234, 0.05)', borderRadius: 2 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                    <InfoIcon sx={{ color: '#8B9A46', fontSize: 20 }} />
+                    <InfoIcon sx={{ color: '#667eea', fontSize: 20 }} />
                     <Typography variant="body2" fontWeight={500}>
                       Pro Tip
                     </Typography>
@@ -780,9 +780,9 @@ const AdminSettingsPage = () => {
                             variant={leadSettings.leadNotificationInterval === 'immediate' ? 'filled' : 'outlined'}
                             onClick={() => setLeadSettings({ ...leadSettings, leadNotificationInterval: 'immediate' })}
                             sx={{
-                              backgroundColor: leadSettings.leadNotificationInterval === 'immediate' ? '#8B9A46' : 'transparent',
-                              color: leadSettings.leadNotificationInterval === 'immediate' ? 'white' : '#8B9A46',
-                              borderColor: '#8B9A46',
+                              backgroundColor: leadSettings.leadNotificationInterval === 'immediate' ? '#667eea' : 'transparent',
+                              color: leadSettings.leadNotificationInterval === 'immediate' ? 'white' : '#667eea',
+                              borderColor: '#667eea',
                             }}
                           />
                           <Chip
@@ -790,9 +790,9 @@ const AdminSettingsPage = () => {
                             variant={leadSettings.leadNotificationInterval === 'hourly' ? 'filled' : 'outlined'}
                             onClick={() => setLeadSettings({ ...leadSettings, leadNotificationInterval: 'hourly' })}
                             sx={{
-                              backgroundColor: leadSettings.leadNotificationInterval === 'hourly' ? '#8B9A46' : 'transparent',
-                              color: leadSettings.leadNotificationInterval === 'hourly' ? 'white' : '#8B9A46',
-                              borderColor: '#8B9A46',
+                              backgroundColor: leadSettings.leadNotificationInterval === 'hourly' ? '#667eea' : 'transparent',
+                              color: leadSettings.leadNotificationInterval === 'hourly' ? 'white' : '#667eea',
+                              borderColor: '#667eea',
                             }}
                           />
                           <Chip
@@ -800,9 +800,9 @@ const AdminSettingsPage = () => {
                             variant={leadSettings.leadNotificationInterval === 'daily' ? 'filled' : 'outlined'}
                             onClick={() => setLeadSettings({ ...leadSettings, leadNotificationInterval: 'daily' })}
                             sx={{
-                              backgroundColor: leadSettings.leadNotificationInterval === 'daily' ? '#8B9A46' : 'transparent',
-                              color: leadSettings.leadNotificationInterval === 'daily' ? 'white' : '#8B9A46',
-                              borderColor: '#8B9A46',
+                              backgroundColor: leadSettings.leadNotificationInterval === 'daily' ? '#667eea' : 'transparent',
+                              color: leadSettings.leadNotificationInterval === 'daily' ? 'white' : '#667eea',
+                              borderColor: '#667eea',
                             }}
                           />
                         </Box>
@@ -820,7 +820,7 @@ const AdminSettingsPage = () => {
                     <List>
                       <ListItem sx={{ px: 0 }}>
                         <ListItemIcon>
-                          <EventAvailableIcon sx={{ color: leadSettings.enableSiteVisit ? '#8B9A46' : 'text.disabled' }} />
+                          <EventAvailableIcon sx={{ color: leadSettings.enableSiteVisit ? '#667eea' : 'text.disabled' }} />
                         </ListItemIcon>
                         <ListItemText
                           primary="Site Visit Booking"
@@ -832,10 +832,10 @@ const AdminSettingsPage = () => {
                             onChange={() => setLeadSettings({ ...leadSettings, enableSiteVisit: !leadSettings.enableSiteVisit })}
                             sx={{
                               '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#8B9A46',
+                                color: '#667eea',
                               },
                               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#8B9A46',
+                                backgroundColor: '#667eea',
                               },
                             }}
                           />
@@ -844,7 +844,7 @@ const AdminSettingsPage = () => {
                       <Divider />
                       <ListItem sx={{ px: 0 }}>
                         <ListItemIcon>
-                          <LocalShippingIcon sx={{ color: leadSettings.enablePickupDrop ? '#8B9A46' : 'text.disabled' }} />
+                          <LocalShippingIcon sx={{ color: leadSettings.enablePickupDrop ? '#667eea' : 'text.disabled' }} />
                         </ListItemIcon>
                         <ListItemText
                           primary="Pickup & Drop Service"
@@ -856,10 +856,10 @@ const AdminSettingsPage = () => {
                             onChange={() => setLeadSettings({ ...leadSettings, enablePickupDrop: !leadSettings.enablePickupDrop })}
                             sx={{
                               '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#8B9A46',
+                                color: '#667eea',
                               },
                               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#8B9A46',
+                                backgroundColor: '#667eea',
                               },
                             }}
                           />
@@ -868,7 +868,7 @@ const AdminSettingsPage = () => {
                       <Divider />
                       <ListItem sx={{ px: 0 }}>
                         <ListItemIcon>
-                          <RestaurantIcon sx={{ color: leadSettings.enableMealBooking ? '#8B9A46' : 'text.disabled' }} />
+                          <RestaurantIcon sx={{ color: leadSettings.enableMealBooking ? '#667eea' : 'text.disabled' }} />
                         </ListItemIcon>
                         <ListItemText
                           primary="Meal Booking"
@@ -880,10 +880,10 @@ const AdminSettingsPage = () => {
                             onChange={() => setLeadSettings({ ...leadSettings, enableMealBooking: !leadSettings.enableMealBooking })}
                             sx={{
                               '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#8B9A46',
+                                color: '#667eea',
                               },
                               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#8B9A46',
+                                backgroundColor: '#667eea',
                               },
                             }}
                           />
@@ -892,7 +892,7 @@ const AdminSettingsPage = () => {
                       <Divider />
                       <ListItem sx={{ px: 0 }}>
                         <ListItemIcon>
-                          <SecurityIcon sx={{ color: leadSettings.enableDuplicateCheck ? '#8B9A46' : 'text.disabled' }} />
+                          <SecurityIcon sx={{ color: leadSettings.enableDuplicateCheck ? '#667eea' : 'text.disabled' }} />
                         </ListItemIcon>
                         <ListItemText
                           primary="Duplicate Prevention"
@@ -904,10 +904,10 @@ const AdminSettingsPage = () => {
                             onChange={() => setLeadSettings({ ...leadSettings, enableDuplicateCheck: !leadSettings.enableDuplicateCheck })}
                             sx={{
                               '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#8B9A46',
+                                color: '#667eea',
                               },
                               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#8B9A46',
+                                backgroundColor: '#667eea',
                               },
                             }}
                           />
@@ -947,7 +947,7 @@ const AdminSettingsPage = () => {
                         variant="outlined"
                         startIcon={<AddIcon />}
                         onClick={handleAddTimeSlot}
-                        sx={{ borderColor: '#8B9A46', color: '#8B9A46' }}
+                        sx={{ borderColor: '#667eea', color: '#667eea' }}
                       >
                         Add
                       </Button>
@@ -973,10 +973,10 @@ const AdminSettingsPage = () => {
                               onChange={() => handleToggleMealOption(option.value)}
                               sx={{
                                 '& .MuiSwitch-switchBase.Mui-checked': {
-                                  color: '#8B9A46',
+                                  color: '#667eea',
                                 },
                                 '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                  backgroundColor: '#8B9A46',
+                                  backgroundColor: '#667eea',
                                 },
                               }}
                             />
@@ -1062,7 +1062,7 @@ const AdminSettingsPage = () => {
                     <List>
                       <ListItem sx={{ px: 0 }}>
                         <ListItemIcon>
-                          <StorageIcon sx={{ color: system.cacheEnabled ? '#8B9A46' : 'text.disabled' }} />
+                          <StorageIcon sx={{ color: system.cacheEnabled ? '#667eea' : 'text.disabled' }} />
                         </ListItemIcon>
                         <ListItemText
                           primary="Enable Cache"
@@ -1074,10 +1074,10 @@ const AdminSettingsPage = () => {
                             onChange={() => setSystem({ ...system, cacheEnabled: !system.cacheEnabled })}
                             sx={{
                               '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#8B9A46',
+                                color: '#667eea',
                               },
                               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#8B9A46',
+                                backgroundColor: '#667eea',
                               },
                             }}
                           />
@@ -1086,7 +1086,7 @@ const AdminSettingsPage = () => {
                       <Divider />
                       <ListItem sx={{ px: 0 }}>
                         <ListItemIcon>
-                          <CloudUploadIcon sx={{ color: system.autoBackup ? '#8B9A46' : 'text.disabled' }} />
+                          <CloudUploadIcon sx={{ color: system.autoBackup ? '#667eea' : 'text.disabled' }} />
                         </ListItemIcon>
                         <ListItemText
                           primary="Auto Backup"
@@ -1098,10 +1098,10 @@ const AdminSettingsPage = () => {
                             onChange={() => setSystem({ ...system, autoBackup: !system.autoBackup })}
                             sx={{
                               '& .MuiSwitch-switchBase.Mui-checked': {
-                                color: '#8B9A46',
+                                color: '#667eea',
                               },
                               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                backgroundColor: '#8B9A46',
+                                backgroundColor: '#667eea',
                               },
                             }}
                           />
@@ -1155,12 +1155,12 @@ const AdminSettingsPage = () => {
                             message: 'Create a backup of all data. This may take a few minutes.',
                           })}
                           sx={{
-                            borderColor: '#8B9A46',
-                            color: '#8B9A46',
+                            borderColor: '#667eea',
+                            color: '#667eea',
                             py: 1.5,
                             '&:hover': {
-                              backgroundColor: 'rgba(139, 154, 70, 0.08)',
-                              borderColor: '#8B9A46',
+                              backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                              borderColor: '#667eea',
                             },
                           }}
                         >
@@ -1247,8 +1247,8 @@ const AdminSettingsPage = () => {
             color={confirmDialog.type === 'clearLeads' ? 'error' : 'primary'}
             onClick={handleConfirmAction}
             sx={confirmDialog.type !== 'clearLeads' ? {
-              backgroundColor: '#8B9A46',
-              '&:hover': { backgroundColor: '#6b7a36' }
+              backgroundColor: '#667eea',
+              '&:hover': { backgroundColor: '#764ba2' }
             } : {}}
           >
             Confirm

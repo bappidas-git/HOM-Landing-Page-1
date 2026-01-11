@@ -75,7 +75,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 // Keyword type configurations
 const keywordTypes = [
-  { value: 'primary', label: 'Primary', color: '#8B9A46' },
+  { value: 'primary', label: 'Primary', color: '#667eea' },
   { value: 'secondary', label: 'Secondary', color: '#2196f3' },
   { value: 'long-tail', label: 'Long-tail', color: '#9c27b0' },
   { value: 'branded', label: 'Branded', color: '#ff9800' },
@@ -178,11 +178,11 @@ const StatsCard = ({ title, value, subtitle, icon: Icon, color }) => (
         <Box
           sx={{
             p: 1,
-            backgroundColor: `${color || '#8B9A46'}15`,
+            backgroundColor: `${color || '#667eea'}15`,
             borderRadius: 2,
           }}
         >
-          <Icon sx={{ color: color || '#8B9A46' }} />
+          <Icon sx={{ color: color || '#667eea' }} />
         </Box>
       </Box>
     </CardContent>
@@ -375,7 +375,7 @@ const KeywordDialog = ({ open, onClose, keyword, onSave }) => {
           onClick={handleSubmit}
           disabled={!formData.keyword || saving}
           startIcon={saving ? <CircularProgress size={16} color="inherit" /> : <SaveIcon />}
-          sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+          sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
         >
           {saving ? 'Saving...' : isEditing ? 'Update' : 'Add Keyword'}
         </Button>
@@ -456,7 +456,7 @@ const ImportDialog = ({ open, onClose, onImport }) => {
           onClick={handleImport}
           disabled={!csvData.trim() || importing}
           startIcon={importing ? <CircularProgress size={16} /> : <UploadIcon />}
-          sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+          sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
         >
           {importing ? 'Importing...' : 'Import Keywords'}
         </Button>
@@ -745,7 +745,7 @@ const AdminKeywordsPage = () => {
                 setEditingKeyword(null);
                 setKeywordDialogOpen(true);
               }}
-              sx={{ backgroundColor: '#8B9A46', '&:hover': { backgroundColor: '#6b7a36' } }}
+              sx={{ backgroundColor: '#667eea', '&:hover': { backgroundColor: '#764ba2' } }}
             >
               Add Keyword
             </Button>
@@ -759,7 +759,7 @@ const AdminKeywordsPage = () => {
               title="Total Keywords"
               value={stats.total}
               icon={TagIcon}
-              color="#8B9A46"
+              color="#667eea"
             />
           </Grid>
           <Grid item xs={6} md={2.4}>

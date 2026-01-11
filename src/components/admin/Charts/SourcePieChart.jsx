@@ -34,7 +34,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Color palette for sources
 const SOURCE_COLORS = {
-  hero_form: '#8B9A46',
+  hero_form: '#667eea',
   popup_form: '#1a1a2e',
   cta_form: '#c9a227',
 };
