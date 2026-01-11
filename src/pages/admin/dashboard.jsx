@@ -496,7 +496,7 @@ const AdminDashboardPage = () => {
               </Box>
 
               <Box>
-                <Typography variant="body2" sx={{ opacity: 0.7, mb: 0.5 }}>
+                <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5 }}>
                   Conversion Rate
                 </Typography>
                 <Typography variant="h3" sx={{ fontWeight: 800, mb: 3 }}>
@@ -507,7 +507,7 @@ const AdminDashboardPage = () => {
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                   <Box>
-                    <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                    <Typography variant="caption" sx={{ opacity: 0.9 }}>
                       Total Leads
                     </Typography>
                     <Typography variant="h6" sx={{ fontWeight: 700 }}>
@@ -515,18 +515,18 @@ const AdminDashboardPage = () => {
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                    <Typography variant="caption" sx={{ opacity: 0.9 }}>
                       Converted
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#4caf50' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#69f0ae' }}>
                       {stats.convertedLeads}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                    <Typography variant="caption" sx={{ opacity: 0.9 }}>
                       Site Visits
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#ff9800' }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#ffcc80' }}>
                       {stats.siteVisits}
                     </Typography>
                   </Box>
