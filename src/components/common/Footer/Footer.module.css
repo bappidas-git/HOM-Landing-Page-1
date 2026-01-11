@@ -1,16 +1,17 @@
-/* Footer Component Styles */
+/* Footer Component Styles - Modern Minimalistic Professional */
 
 .footer {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
-  color: #ffffff;
-  padding: 0 0 30px;
+  background: #FAFAFA;
+  color: #2A2A33;
+  padding: 0;
+  border-top: 1px solid #E8E8E8;
 }
 
 /* Awards Banner */
 .awardsBanner {
-  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  background: #000000;
   padding: 16px 0;
-  margin-bottom: 48px;
+  margin-bottom: 0;
 }
 
 .awardsContent {
@@ -28,19 +29,25 @@
 }
 
 .awardIcon {
-  color: #1a1a2e;
-  font-size: 28px !important;
+  color: #ffffff;
+  font-size: 24px !important;
 }
 
 .awardTitle {
-  color: #1a1a2e;
+  color: #ffffff;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .awardOrg {
-  color: rgba(26, 26, 46, 0.8);
+  color: rgba(255, 255, 255, 0.7);
   display: block;
+  font-size: 0.75rem;
+}
+
+/* Main Footer Content */
+.footerMain {
+  padding: 64px 0 40px;
 }
 
 /* Logo */
@@ -49,18 +56,19 @@
 }
 
 .logoMain {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.1em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  color: #2A2A33;
+  letter-spacing: -0.02em;
   line-height: 1;
+  font-size: 1.5rem;
 }
 
 .logoSub {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.3em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: #6B6B76;
+  letter-spacing: 0.1em;
   font-size: 0.7rem;
 }
 
@@ -70,9 +78,10 @@
 }
 
 .aboutText {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6B6B76;
   line-height: 1.7;
   margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
 /* Social Links */
@@ -82,15 +91,19 @@
 }
 
 .socialButton {
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  color: #6B6B76;
+  background: #ffffff;
+  border: 1px solid #E8E8E8;
+  transition: all 0.25s ease;
+  width: 40px;
+  height: 40px;
 }
 
 .socialButton:hover {
-  color: #8B9A46;
-  background: rgba(139, 154, 70, 0.2);
-  transform: translateY(-3px);
+  color: #006AFF;
+  background: rgba(0, 106, 255, 0.05);
+  border-color: #006AFF;
+  transform: translateY(-2px);
 }
 
 /* Working Hours */
@@ -99,20 +112,20 @@
   align-items: flex-start;
   gap: 10px;
   margin-top: 20px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border-left: 3px solid #8B9A46;
+  padding: 14px 16px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #E8E8E8;
 }
 
 .workingHoursIcon {
-  color: #8B9A46;
+  color: #006AFF;
   font-size: 20px !important;
   margin-top: 2px;
 }
 
 .workingHoursText {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6B6B76;
   display: block;
   font-size: 0.8rem;
   line-height: 1.5;
@@ -120,24 +133,12 @@
 
 /* Section Titles */
 .sectionTitle {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: #2A2A33;
   margin-bottom: 20px;
-  font-size: 1.1rem;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.sectionTitle::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #8B9A46, #c9a227);
-  border-radius: 1px;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
 }
 
 /* Link List */
@@ -148,10 +149,10 @@
 }
 
 .footerLink {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6B6B76;
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
   text-align: left;
   padding: 0;
@@ -161,8 +162,7 @@
 }
 
 .footerLink:hover {
-  color: #8B9A46;
-  padding-left: 8px;
+  color: #006AFF;
 }
 
 /* Contact List */
@@ -179,26 +179,27 @@
 }
 
 .contactIcon {
-  color: #8B9A46;
-  font-size: 1.25rem;
+  color: #006AFF;
+  font-size: 1.2rem;
   flex-shrink: 0;
   margin-top: 2px;
 }
 
 .contactText {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6B6B76;
   line-height: 1.6;
+  font-size: 0.9rem;
 }
 
 .contactLink {
-  color: rgba(255, 255, 255, 0.7);
+  color: #6B6B76;
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
 .contactLink:hover {
-  color: #8B9A46;
+  color: #006AFF;
 }
 
 /* RERA Badge */
@@ -207,26 +208,26 @@
   align-items: flex-start;
   gap: 10px;
   margin-top: 24px;
-  padding: 12px;
-  background: rgba(139, 154, 70, 0.1);
-  border-radius: 8px;
-  border: 1px solid rgba(139, 154, 70, 0.2);
+  padding: 14px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #E8E8E8;
 }
 
 .reraIcon {
-  color: #8B9A46;
+  color: #00C853;
   font-size: 22px !important;
 }
 
 .reraLabel {
-  color: #8B9A46;
+  color: #00C853;
   font-weight: 600;
   display: block;
   font-size: 0.75rem;
 }
 
 .reraNumber {
-  color: rgba(255, 255, 255, 0.6);
+  color: #6B6B76;
   display: block;
   font-size: 0.65rem;
   word-break: break-all;
@@ -236,53 +237,56 @@
 
 /* Bank Approvals */
 .bankApprovals {
-  margin-top: 40px;
-  padding: 20px 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
+  margin-top: 48px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #E8E8E8;
   text-align: center;
 }
 
 .bankTitle {
-  color: rgba(255, 255, 255, 0.5);
+  color: #9999A4;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   font-weight: 600;
   display: block;
   margin-bottom: 16px;
+  font-size: 0.7rem;
 }
 
 .bankLogos {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .bankChip {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.7);
+  border-color: #E8E8E8;
+  color: #6B6B76;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  background: #FAFAFA;
 }
 
 .bankChip:hover {
-  border-color: #8B9A46;
-  background: rgba(139, 154, 70, 0.1);
-  color: #8B9A46;
+  border-color: #006AFF;
+  background: rgba(0, 106, 255, 0.05);
+  color: #006AFF;
 }
 
 /* Disclaimer */
 .disclaimer {
   margin-top: 32px;
   padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  border-left: 3px solid rgba(201, 162, 39, 0.5);
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #E8E8E8;
 }
 
 .disclaimerText {
-  color: rgba(255, 255, 255, 0.5);
+  color: #9999A4;
   font-size: 0.7rem;
   line-height: 1.7;
   display: block;
@@ -291,7 +295,7 @@
 /* Divider */
 .divider {
   margin: 40px 0 24px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #E8E8E8;
 }
 
 /* Bottom Bar */
@@ -301,17 +305,18 @@
   align-items: center;
   gap: 8px;
   text-align: center;
+  padding-bottom: 24px;
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.6);
+  color: #6B6B76;
   font-size: 0.875rem;
 }
 
 .reraInfo {
-  color: #8B9A46;
+  color: #006AFF;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
@@ -322,37 +327,40 @@
 
 /* Responsive */
 @media (max-width: 899px) {
-  .footer {
-    padding: 48px 0 24px;
+  .footerMain {
+    padding: 48px 0 32px;
   }
 
   .aboutSection {
     max-width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
   .sectionTitle {
     margin-bottom: 16px;
   }
+
+  .bankApprovals {
+    margin-top: 32px;
+  }
 }
 
 @media (max-width: 599px) {
-  .footer {
-    padding: 0 0 20px;
+  .footerMain {
+    padding: 40px 0 24px;
   }
 
   .awardsBanner {
     padding: 12px 0;
-    margin-bottom: 32px;
   }
 
   .awardsContent {
-    gap: 20px;
+    gap: 16px;
     flex-direction: column;
   }
 
   .awardIcon {
-    font-size: 24px !important;
+    font-size: 22px !important;
   }
 
   .awardTitle {
@@ -360,12 +368,11 @@
   }
 
   .workingHours {
-    padding: 10px 12px;
+    padding: 12px 14px;
   }
 
   .bankApprovals {
-    margin-top: 32px;
-    padding: 16px;
+    padding: 20px 16px;
   }
 
   .bankLogos {
@@ -378,7 +385,7 @@
 
   .disclaimer {
     margin-top: 24px;
-    padding: 12px 16px;
+    padding: 14px 16px;
   }
 
   .disclaimerText {
@@ -386,6 +393,6 @@
   }
 
   .bottomBar {
-    flex-direction: column;
+    padding-bottom: 20px;
   }
 }

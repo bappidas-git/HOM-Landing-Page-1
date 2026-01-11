@@ -1,4 +1,4 @@
-/* Header Component Styles */
+/* Header Component Styles - Modern Minimalistic */
 
 .appBar {
   transition: all 0.3s ease;
@@ -11,16 +11,16 @@
 }
 
 .scrolled {
-  background: rgba(26, 26, 46, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
 }
 
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 80px;
+  min-height: 72px;
   padding: 0 16px;
 }
 
@@ -28,7 +28,7 @@
 .logoSection {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .logoWrapper {
@@ -38,25 +38,40 @@
 }
 
 .logoMain {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
   font-size: 1.25rem;
-  color: #ffffff;
-  letter-spacing: 0.1em;
+  color: #2A2A33;
+  letter-spacing: -0.02em;
   line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.transparent .logoMain {
+  color: #ffffff;
 }
 
 .logoSub {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 0.3em;
+  color: #6B6B76;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.transparent .logoSub {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .divider {
   width: 1px;
-  height: 40px;
+  height: 32px;
+  background: #E8E8E8;
+  transition: background 0.3s ease;
+}
+
+.transparent .divider {
   background: rgba(255, 255, 255, 0.3);
 }
 
@@ -67,26 +82,31 @@
 }
 
 .projectTitle {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #8B9A46;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #2A2A33;
   line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.transparent .projectTitle {
+  color: #ffffff;
 }
 
 .projectPhase {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   font-size: 0.6rem;
-  color: #c9a227;
-  letter-spacing: 0.2em;
+  color: #006AFF;
+  letter-spacing: 0.15em;
 }
 
 /* Navigation */
 .navigation {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .navItemWrapper {
@@ -97,40 +117,60 @@
 .navItem {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.85);
-  font-family: 'Poppins', sans-serif;
+  color: #6B6B76;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
-  padding: 8px 16px;
+  padding: 10px 16px;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.25s ease;
   text-decoration: none;
+  border-radius: 8px;
+}
+
+.transparent .navItem {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .navItem:hover {
+  color: #2A2A33;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.transparent .navItem:hover {
   color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .navItem.active {
-  color: #8B9A46;
+  color: #006AFF;
+  font-weight: 600;
+}
+
+.transparent .navItem.active {
+  color: #ffffff;
 }
 
 .navIndicator {
   position: absolute;
-  bottom: 0;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 30px;
+  width: 24px;
   height: 3px;
-  background: linear-gradient(90deg, #8B9A46, #c9a227);
+  background: #006AFF;
   border-radius: 2px;
+}
+
+.transparent .navIndicator {
+  background: #ffffff;
 }
 
 /* CTA Section */
 .ctaSection {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .phoneWrapper {
@@ -140,36 +180,61 @@
 }
 
 .phoneIcon {
-  color: #8B9A46;
-  font-size: 1.1rem;
-}
-
-.phoneNumber {
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 0.95rem;
-  text-decoration: none;
+  color: #6B6B76;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
+.transparent .phoneIcon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.phoneNumber {
+  color: #2A2A33;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.transparent .phoneNumber {
+  color: #ffffff;
+}
+
 .phoneNumber:hover {
-  color: #8B9A46;
+  color: #006AFF;
+}
+
+.transparent .phoneNumber:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .ctaButton {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   padding: 10px 24px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-transform: none;
   white-space: nowrap;
+  font-size: 0.9rem;
+  background: #006AFF;
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
+  transition: all 0.25s ease;
+}
+
+.ctaButton:hover {
+  background: #0052CC;
+  box-shadow: 0 4px 12px rgba(0, 106, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 /* Responsive - Hide on smaller screens (handled by component logic) */
 @media (max-width: 1199px) {
   .navigation {
-    gap: 4px;
+    gap: 2px;
   }
 
   .navItem {
@@ -179,5 +244,10 @@
 
   .phoneWrapper {
     display: none;
+  }
+
+  .ctaButton {
+    padding: 8px 18px;
+    font-size: 0.85rem;
   }
 }

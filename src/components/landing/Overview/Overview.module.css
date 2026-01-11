@@ -1,4 +1,4 @@
-/* Overview Section Styles */
+/* Overview Section Styles - Modern Minimalistic */
 
 /* Image Side */
 .imageWrapper {
@@ -7,14 +7,14 @@
 
 .imageContainer {
   position: relative;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 .image {
   width: 100%;
-  height: 500px;
+  height: 480px;
   object-fit: cover;
   display: block;
 }
@@ -25,24 +25,24 @@
   left: 0;
   right: 0;
   padding: 16px 24px;
-  background: linear-gradient(to top, rgba(26, 26, 46, 0.9), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   color: #ffffff;
 }
 
 .decorativeBox {
   position: absolute;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
-  border-radius: 16px;
-  bottom: -30px;
-  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: #006AFF;
+  border-radius: 14px;
+  bottom: -24px;
+  right: -24px;
   z-index: -1;
 }
 
 /* Content Side */
 .content {
-  padding-left: 20px;
+  padding-left: 24px;
 }
 
 .description {
@@ -50,9 +50,10 @@
 }
 
 .paragraph {
-  color: #666666;
+  color: #6B6B76;
   margin-bottom: 16px;
   line-height: 1.8;
+  font-size: 1.05rem;
 }
 
 .paragraph:last-child {
@@ -63,13 +64,25 @@
   margin-top: 16px;
   padding: 14px 32px;
   font-size: 1rem;
+  background: #006AFF;
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.ctaButton:hover {
+  background: #0052CC;
+  box-shadow: 0 4px 12px rgba(0, 106, 255, 0.25);
+  transform: translateY(-2px);
 }
 
 /* Stats Section */
 .statsSection {
-  margin-top: 80px;
-  padding-top: 60px;
-  border-top: 1px solid #e0e0e0;
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 1px solid #E8E8E8;
 }
 
 .statsGrid {
@@ -77,48 +90,51 @@
 }
 
 .statCard {
-  padding: 24px 16px;
+  padding: 28px 20px;
   text-align: center;
-  border-radius: 16px;
+  border-radius: 14px;
   background: #ffffff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #E8E8E8;
   transition: all 0.3s ease;
   height: 100%;
 }
 
 .statCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: transparent;
 }
 
 .statIcon {
-  font-size: 36px !important;
-  color: #8B9A46;
+  font-size: 32px !important;
+  color: #006AFF;
   margin-bottom: 12px;
 }
 
 .statValue {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a2e;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #2A2A33;
   line-height: 1;
   margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
 .statLabel {
   font-weight: 600;
-  color: #1a1a2e;
+  color: #2A2A33;
   margin-bottom: 4px;
+  font-size: 0.95rem;
 }
 
 .statDesc {
-  color: #666666;
-  font-size: 0.75rem;
+  color: #9999A4;
+  font-size: 0.8rem;
 }
 
 /* Key Features */
 .keyFeatures {
-  margin-top: 60px;
+  margin-top: 56px;
 }
 
 .featureCard {
@@ -128,32 +144,35 @@
   text-align: center;
   padding: 32px 24px;
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  border: 1px solid #E8E8E8;
   transition: all 0.3s ease;
   height: 100%;
 }
 
 .featureCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: transparent;
 }
 
 .featureIcon {
-  font-size: 48px !important;
-  color: #8B9A46;
+  font-size: 44px !important;
+  color: #006AFF;
   margin-bottom: 16px;
 }
 
 .featureTitle {
   font-weight: 600;
-  color: #1a1a2e;
+  color: #2A2A33;
   margin-bottom: 8px;
+  font-size: 1.05rem;
 }
 
 .featureDesc {
-  color: #666666;
+  color: #6B6B76;
   line-height: 1.6;
+  font-size: 0.9rem;
 }
 
 /* Responsive Styles */
@@ -163,14 +182,14 @@
   }
 
   .image {
-    height: 400px;
+    height: 380px;
   }
 
   .decorativeBox {
-    width: 80px;
-    height: 80px;
-    bottom: -20px;
-    right: -20px;
+    width: 72px;
+    height: 72px;
+    bottom: -16px;
+    right: -16px;
   }
 
   .content {
@@ -178,12 +197,12 @@
   }
 
   .statsSection {
-    margin-top: 60px;
+    margin-top: 56px;
     padding-top: 40px;
   }
 
   .statValue {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
   .keyFeatures {
@@ -193,15 +212,19 @@
 
 @media (max-width: 599px) {
   .image {
-    height: 300px;
+    height: 280px;
   }
 
   .decorativeBox {
     display: none;
   }
 
+  .paragraph {
+    font-size: 1rem;
+  }
+
   .statCard {
-    padding: 16px 12px;
+    padding: 20px 16px;
   }
 
   .statIcon {
@@ -221,6 +244,6 @@
   }
 
   .featureIcon {
-    font-size: 40px !important;
+    font-size: 36px !important;
   }
 }

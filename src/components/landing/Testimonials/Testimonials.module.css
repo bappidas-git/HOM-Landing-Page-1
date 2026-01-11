@@ -1,4 +1,4 @@
-/* Testimonials Section Styles */
+/* Testimonials Section Styles - Modern Minimalistic */
 
 /* Stats Bar */
 .statsBar {
@@ -7,10 +7,11 @@
   align-items: center;
   gap: 48px;
   padding: 32px 48px;
-  background: linear-gradient(135deg, rgba(139, 154, 70, 0.08) 0%, rgba(201, 162, 39, 0.08) 100%);
-  border-radius: 20px;
+  background: #FAFAFA;
+  border-radius: 16px;
   margin-bottom: 48px;
   flex-wrap: wrap;
+  border: 1px solid #E8E8E8;
 }
 
 .statItem {
@@ -20,8 +21,8 @@
 }
 
 .statIcon {
-  font-size: 36px !important;
-  color: #8B9A46;
+  font-size: 32px !important;
+  color: #006AFF;
 }
 
 .statContent {
@@ -30,21 +31,22 @@
 }
 
 .statValue {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  color: #1a1a2e;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  color: #2A2A33;
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .statLabel {
-  color: #666666;
+  color: #6B6B76;
   font-weight: 500;
 }
 
 .statDivider {
   width: 1px;
-  height: 50px;
-  background: linear-gradient(180deg, transparent, rgba(139, 154, 70, 0.3), transparent);
+  height: 48px;
+  background: #E8E8E8;
 }
 
 /* Carousel Wrapper */
@@ -67,13 +69,15 @@
   width: 48px;
   height: 48px;
   background: #ffffff !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E8E8E8 !important;
+  transition: all 0.25s ease;
 }
 
 .navButton:hover {
-  background: #8B9A46 !important;
+  background: #006AFF !important;
   color: #ffffff;
+  border-color: #006AFF !important;
   transform: translateY(-50%) scale(1.05);
 }
 
@@ -92,53 +96,42 @@
 /* Testimonial Card */
 .testimonialCard {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 32px;
   height: 100%;
-  min-height: 320px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid #f0f0f0;
-  transition: all 0.4s ease;
+  box-shadow: none;
+  border: 1px solid #E8E8E8;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.testimonialCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #8B9A46, #c9a227);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
-  transform-origin: left;
-}
-
-.testimonialCard:hover::before {
-  transform: scaleX(1);
+.testimonialCard:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: transparent;
+  transform: translateY(-2px);
 }
 
 /* Quote Icon */
 .quoteIconWrapper {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 48px;
-  height: 48px;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(139, 154, 70, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+  background: #FAFAFA;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .quoteIcon {
-  font-size: 28px !important;
-  color: #8B9A46;
+  font-size: 24px !important;
+  color: #006AFF;
   transform: rotate(180deg);
 }
 
@@ -148,33 +141,32 @@
 }
 
 .starFilled {
-  color: #c9a227;
+  color: #FFB300;
 }
 
 .starEmpty {
-  color: #e0e0e0;
+  color: #E8E8E8;
 }
 
 /* Quote */
 .quote {
-  color: #444444;
+  color: #6B6B76;
   line-height: 1.8;
-  font-style: italic;
+  font-style: normal;
   flex-grow: 1;
   margin-bottom: 24px;
   font-size: 0.95rem;
 }
 
 .readMore {
-  color: #8B9A46;
+  color: #006AFF;
   font-weight: 600;
   cursor: pointer;
-  font-style: normal;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
 .readMore:hover {
-  color: #6b7a36;
+  color: #0052CC;
   text-decoration: underline;
 }
 
@@ -185,15 +177,15 @@
   gap: 16px;
   margin-top: auto;
   padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid #E8E8E8;
 }
 
 .avatar {
-  width: 56px;
-  height: 56px;
-  border: 3px solid #8B9A46;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #E8E8E8;
   font-weight: 600;
-  background: linear-gradient(135deg, #8B9A46, #c9a227);
+  background: #2A2A33;
   color: #ffffff;
 }
 
@@ -209,23 +201,23 @@
 
 .name {
   font-weight: 600;
-  color: #1a1a2e;
+  color: #2A2A33;
   font-size: 1rem;
 }
 
 .verifiedIcon {
   font-size: 18px !important;
-  color: #2196f3;
+  color: #006AFF;
 }
 
 .designation {
-  color: #8B9A46;
+  color: #006AFF;
   font-weight: 500;
   font-size: 0.85rem;
 }
 
 .location {
-  color: #999999;
+  color: #9999A4;
   font-size: 0.75rem;
 }
 
@@ -236,23 +228,24 @@
 
 .verifiedBadge {
   padding: 8px 20px;
-  border-color: #8B9A46;
-  color: #1a1a2e;
+  border-color: #E8E8E8;
+  color: #2A2A33;
   font-weight: 500;
-  background: rgba(139, 154, 70, 0.05);
+  background: #FAFAFA;
 }
 
 .verifiedBadge svg {
-  color: #2196f3;
+  color: #006AFF;
 }
 
 /* Swiper Pagination */
 .swiper :global(.swiper-pagination-bullet) {
-  background: #8B9A46;
-  opacity: 0.3;
+  background: #2A2A33;
+  opacity: 0.2;
 }
 
 .swiper :global(.swiper-pagination-bullet-active) {
+  background: #006AFF;
   opacity: 1;
 }
 
@@ -289,14 +282,14 @@
 
   .testimonialCard {
     padding: 24px;
-    min-height: 280px;
+    min-height: 260px;
   }
 }
 
 @media (max-width: 599px) {
   .statsBar {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     padding: 20px;
   }
 
@@ -320,18 +313,18 @@
 
   .testimonialCard {
     padding: 24px 20px;
-    min-height: 260px;
+    min-height: 240px;
   }
 
   .quoteIconWrapper {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     top: 16px;
     right: 16px;
   }
 
   .quoteIcon {
-    font-size: 22px !important;
+    font-size: 20px !important;
   }
 
   .quote {
@@ -340,8 +333,8 @@
   }
 
   .avatar {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
   }
 
   .statIcon {

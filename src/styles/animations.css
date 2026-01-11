@@ -298,7 +298,7 @@
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(139, 154, 70, 0.4);
+  box-shadow: 0 0 20px rgba(0, 106, 255, 0.3);
 }
 
 .hover-shine {
@@ -494,10 +494,10 @@
 
 @keyframes focusRing {
   0% {
-    box-shadow: 0 0 0 0 rgba(139, 154, 70, 0.5);
+    box-shadow: 0 0 0 0 rgba(0, 106, 255, 0.5);
   }
   100% {
-    box-shadow: 0 0 0 4px rgba(139, 154, 70, 0);
+    box-shadow: 0 0 0 4px rgba(0, 106, 255, 0);
   }
 }
 
