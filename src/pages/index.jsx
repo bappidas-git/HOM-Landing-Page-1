@@ -21,6 +21,7 @@ import Amenities from '@/components/landing/Amenities';
 import FloorPlans from '@/components/landing/FloorPlans';
 import UnitPlans from '@/components/landing/UnitPlans';
 import Gallery from '@/components/landing/Gallery';
+import VirtualTour from '@/components/landing/VirtualTour';
 import Location from '@/components/landing/Location';
 import Pricing from '@/components/landing/Pricing';
 import PaymentPlan from '@/components/landing/PaymentPlan';
@@ -85,6 +86,9 @@ export default function Home() {
 
         {/* Gallery Section */}
         <Gallery />
+
+        {/* Virtual Tour Section */}
+        <VirtualTour />
 
         {/* Location Section */}
         <Location />

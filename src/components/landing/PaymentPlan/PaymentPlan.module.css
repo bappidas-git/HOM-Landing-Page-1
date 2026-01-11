@@ -1,0 +1,315 @@
+/* PaymentPlan Section Styles */
+
+/* Plan Selector */
+.planSelector {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.planButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+}
+
+.recommendedChip {
+  background: linear-gradient(135deg, #c9a227 0%, #8B9A46 100%) !important;
+  color: #ffffff !important;
+  font-size: 0.65rem !important;
+  height: 20px !important;
+  margin-left: 8px;
+}
+
+/* Milestones Card */
+.milestonesCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleIcon {
+  color: #8B9A46;
+}
+
+.cardDescription {
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.stepper {
+  padding: 0;
+}
+
+.stepIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.stepIcon span {
+  font-size: 24px;
+}
+
+.stepHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.stepTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.stepPercentage {
+  color: #8B9A46;
+  font-weight: 700;
+}
+
+.stepDescription {
+  color: #666666;
+  margin-bottom: 12px;
+}
+
+.progressBar {
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.cumulativeText {
+  color: #666666;
+}
+
+/* Loan Card */
+.loanCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.checkIcon {
+  color: #8B9A46;
+  font-size: 18px !important;
+  margin-top: 2px;
+}
+
+.bankPartners {
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.bankTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+.bankGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bankItem {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.bankItem p {
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.bankRate {
+  color: #8B9A46;
+}
+
+/* Tax Benefits */
+.taxBenefits {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.taxBenefits .cardTitle {
+  color: #ffffff;
+}
+
+.taxBenefits .titleIcon {
+  color: #c9a227;
+}
+
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.benefitItem {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.benefitSection {
+  color: #c9a227;
+  font-weight: 600;
+}
+
+.benefitAmount {
+  color: #ffffff;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.benefitDescription {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+}
+
+/* Notes Section */
+.notesSection {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 32px;
+}
+
+.notesTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+}
+
+.notesIcon {
+  color: #8B9A46;
+}
+
+.notesList {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notesList li {
+  color: #666666;
+}
+
+/* CTA */
+.ctaWrapper {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.ctaButton {
+  padding: 14px 40px;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .milestonesCard {
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .stepIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stepIcon span {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 599px) {
+  .planSelector {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .planButton {
+    justify-content: center;
+  }
+
+  .milestonesCard {
+    padding: 16px;
+  }
+
+  .stepTitle {
+    font-size: 0.9rem;
+  }
+
+  .stepPercentage {
+    font-size: 1.25rem;
+  }
+
+  .loanCard,
+  .taxBenefits {
+    padding: 20px;
+  }
+
+  .notesSection {
+    padding: 16px;
+  }
+
+  .ctaWrapper {
+    margin-top: 32px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}

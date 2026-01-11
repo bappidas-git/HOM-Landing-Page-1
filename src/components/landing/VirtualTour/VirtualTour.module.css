@@ -1,0 +1,373 @@
+/* Virtual Tour Section Styles */
+
+/* Virtual Tour Section */
+.virtualTourSection {
+  margin-bottom: 48px;
+}
+
+.tourCard {
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tourCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.tourImage {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #1a1a2e;
+}
+
+.tourOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.85) 0%,
+    rgba(26, 26, 46, 0.6) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.playButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 40px rgba(139, 154, 70, 0.3);
+}
+
+.tourCard:hover .playButton {
+  transform: scale(1.1);
+}
+
+.playIcon {
+  font-size: 48px !important;
+  color: #ffffff;
+}
+
+.tourTitle {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.tourDescription {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.tourButton {
+  padding: 12px 32px;
+}
+
+/* Video Section */
+.videoSection {
+  margin-bottom: 48px;
+}
+
+.videoSectionTitle {
+  text-align: center;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 32px;
+}
+
+.videoCard {
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.videoCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.videoThumbnail {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f5f5f5;
+}
+
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 46, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.videoCard:hover .videoOverlay {
+  background: rgba(26, 26, 46, 0.6);
+}
+
+.videoPlayButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B9A46 0%, #c9a227 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.videoCard:hover .videoPlayButton {
+  transform: scale(1.15);
+}
+
+.videoPlayIcon {
+  font-size: 32px !important;
+  color: #ffffff;
+}
+
+.videoDuration {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+}
+
+.durationIcon {
+  font-size: 14px !important;
+}
+
+.videoContent {
+  padding: 16px !important;
+}
+
+.videoTitle {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.videoDescription {
+  color: #666666;
+  line-height: 1.5;
+}
+
+/* CTA Wrapper */
+.ctaWrapper {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(139, 154, 70, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+  border-radius: 20px;
+}
+
+.ctaText {
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  padding: 14px 40px;
+  font-size: 1rem;
+}
+
+/* Video Dialog */
+.videoDialog .MuiPaper-root {
+  background: #000000;
+  border-radius: 12px;
+}
+
+.videoDialogContent {
+  padding: 0 !important;
+  position: relative;
+  background: #000000;
+}
+
+.closeButton {
+  position: absolute !important;
+  top: 8px;
+  right: 8px;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.videoPlayerWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 300px;
+}
+
+.videoPlayer {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+
+.videoPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.placeholderIcon {
+  font-size: 64px !important;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 16px;
+}
+
+.placeholderTitle {
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.placeholderText {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+}
+
+/* Responsive Styles */
+@media (max-width: 899px) {
+  .tourImage {
+    height: 320px;
+  }
+
+  .tourOverlay {
+    padding: 30px;
+  }
+
+  .playButton {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+
+  .playIcon {
+    font-size: 40px !important;
+  }
+
+  .tourTitle {
+    font-size: 1.5rem;
+  }
+
+  .videoThumbnail {
+    height: 180px;
+  }
+
+  .ctaWrapper {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 599px) {
+  .tourImage {
+    height: 280px;
+  }
+
+  .tourOverlay {
+    padding: 20px;
+  }
+
+  .playButton {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 16px;
+  }
+
+  .playIcon {
+    font-size: 36px !important;
+  }
+
+  .tourTitle {
+    font-size: 1.25rem;
+  }
+
+  .tourDescription {
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+  }
+
+  .tourButton {
+    padding: 10px 24px;
+    font-size: 0.875rem;
+  }
+
+  .videoSectionTitle {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+  }
+
+  .videoThumbnail {
+    height: 160px;
+  }
+
+  .videoPlayButton {
+    width: 50px;
+    height: 50px;
+  }
+
+  .videoPlayIcon {
+    font-size: 28px !important;
+  }
+
+  .ctaWrapper {
+    padding: 24px 16px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+
+  .videoPlaceholder {
+    min-height: 300px;
+    padding: 24px;
+  }
+}
