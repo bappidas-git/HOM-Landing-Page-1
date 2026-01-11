@@ -8,7 +8,7 @@
       "role": "admin",
       "avatar": "https://placehold.co/100x100/1976d2/ffffff?text=A",
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "lastLogin": "2024-01-15T10:30:00.000Z"
+      "lastLogin": "2026-01-11T08:57:55.098Z"
     }
   ],
   "leads": [
@@ -155,7 +155,11 @@
         "telephone": "+91-7026034444",
         "contactType": "sales",
         "areaServed": "IN",
-        "availableLanguage": ["English", "Hindi", "Kannada"]
+        "availableLanguage": [
+          "English",
+          "Hindi",
+          "Kannada"
+        ]
       },
       "sameAs": [
         "https://www.facebook.com/nambiarbuilders",
@@ -196,10 +200,22 @@
         "unitCode": "SQF"
       },
       "amenityFeature": [
-        { "@type": "LocationFeatureSpecification", "name": "Swimming Pool" },
-        { "@type": "LocationFeatureSpecification", "name": "Gymnasium" },
-        { "@type": "LocationFeatureSpecification", "name": "Clubhouse" },
-        { "@type": "LocationFeatureSpecification", "name": "Jogging Track" }
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Swimming Pool"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Gymnasium"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Clubhouse"
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Jogging Track"
+        }
       ]
     },
     "faqSchema": {
@@ -352,21 +368,54 @@
       "cta_form": 37
     },
     "leadsByDay": [
-      { "date": "2024-01-09", "count": 12 },
-      { "date": "2024-01-10", "count": 18 },
-      { "date": "2024-01-11", "count": 15 },
-      { "date": "2024-01-12", "count": 22 },
-      { "date": "2024-01-13", "count": 8 },
-      { "date": "2024-01-14", "count": 19 },
-      { "date": "2024-01-15", "count": 14 }
+      {
+        "date": "2024-01-09",
+        "count": 12
+      },
+      {
+        "date": "2024-01-10",
+        "count": 18
+      },
+      {
+        "date": "2024-01-11",
+        "count": 15
+      },
+      {
+        "date": "2024-01-12",
+        "count": 22
+      },
+      {
+        "date": "2024-01-13",
+        "count": 8
+      },
+      {
+        "date": "2024-01-14",
+        "count": 19
+      },
+      {
+        "date": "2024-01-15",
+        "count": 14
+      }
     ],
     "conversionRate": 21.79,
     "averageResponseTime": "2.5 hours",
     "topLocations": [
-      { "city": "Bangalore", "count": 89 },
-      { "city": "Mumbai", "count": 34 },
-      { "city": "Chennai", "count": 18 },
-      { "city": "Hyderabad", "count": 15 }
+      {
+        "city": "Bangalore",
+        "count": 89
+      },
+      {
+        "city": "Mumbai",
+        "count": 34
+      },
+      {
+        "city": "Chennai",
+        "count": 18
+      },
+      {
+        "city": "Hyderabad",
+        "count": 15
+      }
     ],
     "updatedAt": "2024-01-15T12:00:00.000Z"
   },
@@ -402,7 +451,11 @@
       "04:00 PM",
       "05:00 PM"
     ],
-    "mealOptions": ["breakfast", "lunch", "coffee"],
+    "mealOptions": [
+      "breakfast",
+      "lunch",
+      "coffee"
+    ],
     "maintenanceMode": false,
     "updatedAt": "2024-01-15T00:00:00.000Z"
   }
