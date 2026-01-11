@@ -1,6 +1,6 @@
 /**
  * Admin Dashboard Page
- * Main dashboard with stats, charts, and recent leads
+ * Main dashboard with stats, charts, and recent leads - Matching reference code design
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -10,7 +10,6 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -18,39 +17,100 @@ import {
   TableHead,
   TableRow,
   Chip,
-  IconButton,
-  Skeleton,
-  Tooltip,
   Avatar,
-  alpha,
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Stack,
+  Skeleton,
+  Button,
+  IconButton,
+  Tooltip,
+  useTheme,
 } from '@mui/material';
-import {
-  Visibility as VisibilityIcon,
-  Download as DownloadIcon,
-  Refresh as RefreshIcon,
-  TrendingUp as TrendingUpIcon,
-  OpenInNew as OpenInNewIcon,
-  Schedule as ScheduleIcon,
-  LocationOn as LocationIcon,
-} from '@mui/icons-material';
-import { useRouter } from 'next/router';
+import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import AdminLayout from '@/components/admin/AdminLayout';
-import DashboardStats from '@/components/admin/DashboardStats';
 import { LeadsChart, SourcePieChart, StatusBarChart } from '@/components/admin/Charts';
 import { withAuth } from '@/context/AuthContext';
 import { ADMIN_ROUTES, LEAD_STATUS_OPTIONS } from '@/lib/constants';
-import { getDashboardStats, getRecentLeads } from '@/lib/api/dashboard';
-import { getLeads } from '@/lib/api/leads';
+
+// StatCard Component - Matching reference code design
+const StatCard = ({ title, value, icon, color, trend, trendValue, loading }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Paper
+        elevation={0}
+        sx={{
+          p: 3,
+          borderRadius: 3,
+          border: '1px solid',
+          borderColor: 'divider',
+          height: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Background Decoration */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -20,
+            right: -20,
+            width: 100,
+            height: 100,
+            borderRadius: '50%',
+            background: `${color}15`,
+          }}
+        />
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <Box>
+            <Typography variant="body2" color="text.secondary" gutterBottom>
+              {title}
+            </Typography>
+            {loading ? (
+              <Skeleton variant="text" width={80} height={40} />
+            ) : (
+              <Typography variant="h4" fontWeight="bold">
+                {value}
+              </Typography>
+            )}
+            {trend && !loading && (
+              <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                <Icon
+                  icon={trend === 'up' ? 'mdi:trending-up' : 'mdi:trending-down'}
+                  style={{
+                    fontSize: 18,
+                    color: trend === 'up' ? '#4caf50' : '#f44336',
+                    marginRight: 4,
+                  }}
+                />
+                <Typography
+                  variant="caption"
+                  sx={{ color: trend === 'up' ? '#4caf50' : '#f44336' }}
+                >
+                  {trendValue}
+                </Typography>
+              </Box>
+            )}
+          </Box>
+          <Avatar
+            sx={{
+              width: 50,
+              height: 50,
+              bgcolor: `${color}20`,
+              color: color,
+            }}
+          >
+            <Icon icon={icon} style={{ fontSize: 28 }} />
+          </Avatar>
+        </Box>
+      </Paper>
+    </motion.div>
+  );
+};
 
 // Mock data for demonstration
 const mockStats = {
@@ -59,7 +119,7 @@ const mockStats = {
   contactedLeads: 89,
   siteVisits: 45,
   convertedLeads: 34,
-  conversionRate: 21.8,
+  conversionRate: 21.0,
 };
 
 const mockLeadsByDay = [
@@ -130,236 +190,11 @@ const getStatusConfig = (status) => {
 };
 
 /**
- * Recent Leads Table Component
- */
-const RecentLeadsTable = ({ leads, loading, onViewLead, onViewAll }) => (
-  <Paper
-    sx={{
-      borderRadius: 3,
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-      overflow: 'hidden',
-      border: '1px solid',
-      borderColor: 'divider',
-    }}
-  >
-    <Box
-      sx={{
-        p: 3,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderBottom: '1px solid',
-        borderColor: 'divider',
-      }}
-    >
-      <Typography variant="h6" sx={{ fontWeight: 700 }}>
-        Recent Leads
-      </Typography>
-      <Button
-        size="small"
-        endIcon={<OpenInNewIcon fontSize="small" />}
-        onClick={onViewAll}
-        sx={{ color: '#667eea' }}
-      >
-        View All
-      </Button>
-    </Box>
-
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow sx={{ backgroundColor: '#f8f9fa' }}>
-            <TableCell sx={{ fontWeight: 600 }}>Lead</TableCell>
-            <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
-            <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-            <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
-            <TableCell align="center" sx={{ fontWeight: 600 }}>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {loading ? (
-            [...Array(5)].map((_, index) => (
-              <TableRow key={index}>
-                {[...Array(5)].map((_, cellIndex) => (
-                  <TableCell key={cellIndex}>
-                    <Skeleton variant="text" animation="wave" />
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            leads.map((lead) => {
-              const statusConfig = getStatusConfig(lead.status);
-              return (
-                <TableRow
-                  key={lead.id}
-                  hover
-                  sx={{
-                    cursor: 'pointer',
-                    '&:last-child td': { border: 0 },
-                  }}
-                  onClick={() => onViewLead(lead.id)}
-                >
-                  <TableCell>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Avatar
-                        sx={{
-                          width: 36,
-                          height: 36,
-                          fontSize: '0.875rem',
-                          backgroundColor: alpha('#667eea', 0.15),
-                          color: '#667eea',
-                        }}
-                      >
-                        {lead.name?.charAt(0)?.toUpperCase()}
-                      </Avatar>
-                      <Box>
-                        <Typography variant="body2" fontWeight={600}>
-                          {lead.name}
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {lead.mobile}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    <Chip
-                      label={formatSource(lead.source)}
-                      size="small"
-                      variant="outlined"
-                      sx={{ borderRadius: 1.5, fontSize: '0.75rem' }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Chip
-                      label={statusConfig.label}
-                      size="small"
-                      sx={{
-                        backgroundColor: alpha(statusConfig.color, 0.15),
-                        color: statusConfig.color,
-                        fontWeight: 600,
-                        borderRadius: 1.5,
-                        fontSize: '0.75rem',
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body2" color="text.secondary">
-                      {formatDate(lead.createdAt)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Tooltip title="View Details">
-                      <IconButton
-                        size="small"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onViewLead(lead.id);
-                        }}
-                        sx={{ color: '#667eea' }}
-                      >
-                        <VisibilityIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              );
-            })
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  </Paper>
-);
-
-/**
- * Top Locations Card Component
- */
-const TopLocationsCard = ({ locations, loading }) => (
-  <Card
-    sx={{
-      height: '100%',
-      borderRadius: 3,
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-      border: '1px solid',
-      borderColor: 'divider',
-    }}
-  >
-    <CardHeader
-      title={<Typography variant="h6" sx={{ fontWeight: 700 }}>Top Locations</Typography>}
-      sx={{ pb: 0 }}
-    />
-    <CardContent>
-      {loading ? (
-        [...Array(4)].map((_, i) => (
-          <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2, py: 1.5 }}>
-            <Skeleton variant="circular" width={36} height={36} />
-            <Box sx={{ flex: 1 }}>
-              <Skeleton variant="text" width="60%" />
-              <Skeleton variant="text" width="30%" />
-            </Box>
-          </Box>
-        ))
-      ) : (
-        <List sx={{ py: 0 }}>
-          {locations.map((location, index) => (
-            <ListItem
-              key={location.city}
-              sx={{
-                px: 0,
-                py: 1.5,
-                borderBottom: index < locations.length - 1 ? '1px solid' : 'none',
-                borderColor: 'divider',
-              }}
-            >
-              <ListItemAvatar>
-                <Avatar
-                  sx={{
-                    width: 36,
-                    height: 36,
-                    backgroundColor: alpha('#667eea', 0.1),
-                    color: '#667eea',
-                  }}
-                >
-                  <LocationIcon fontSize="small" />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                    {location.city}
-                  </Typography>
-                }
-                secondary={
-                  <Typography variant="caption" color="text.secondary">
-                    {location.count} leads
-                  </Typography>
-                }
-              />
-              <Chip
-                label={`#${index + 1}`}
-                size="small"
-                sx={{
-                  backgroundColor: index === 0 ? alpha('#c9a227', 0.15) : alpha('#1a1a2e', 0.08),
-                  color: index === 0 ? '#c9a227' : 'text.secondary',
-                  fontWeight: 600,
-                  fontSize: '0.7rem',
-                }}
-              />
-            </ListItem>
-          ))}
-        </List>
-      )}
-    </CardContent>
-  </Card>
-);
-
-/**
  * Admin Dashboard Page Component
  */
 const AdminDashboardPage = () => {
   const router = useRouter();
+  const theme = useTheme();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState(mockStats);
   const [leadsByDay, setLeadsByDay] = useState(mockLeadsByDay);
@@ -372,10 +207,6 @@ const AdminDashboardPage = () => {
   const loadDashboardData = useCallback(async () => {
     setLoading(true);
     try {
-      // In a real app, fetch from API
-      // const statsResponse = await getDashboardStats();
-      // const leadsResponse = await getRecentLeads(6);
-
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 800));
 
@@ -397,11 +228,6 @@ const AdminDashboardPage = () => {
     loadDashboardData();
   }, [loadDashboardData]);
 
-  // Handle refresh
-  const handleRefresh = () => {
-    loadDashboardData();
-  };
-
   // Handle view lead
   const handleViewLead = (id) => {
     router.push(`/admin/leads/${id}`);
@@ -409,7 +235,6 @@ const AdminDashboardPage = () => {
 
   // Handle export leads
   const handleExportLeads = () => {
-    // Create CSV content
     const headers = ['Name', 'Email', 'Mobile', 'Source', 'Status', 'Created At'];
     const rows = recentLeads.map(lead => [
       lead.name,
@@ -433,6 +258,30 @@ const AdminDashboardPage = () => {
     URL.revokeObjectURL(url);
   };
 
+  if (loading) {
+    return (
+      <AdminLayout title="Dashboard">
+        <Box>
+          <Grid container spacing={3}>
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Grid item xs={12} sm={6} lg={2} key={i}>
+                <Skeleton variant="rounded" height={140} sx={{ borderRadius: 3 }} />
+              </Grid>
+            ))}
+          </Grid>
+          <Grid container spacing={3} sx={{ mt: 1 }}>
+            <Grid item xs={12} lg={8}>
+              <Skeleton variant="rounded" height={400} sx={{ borderRadius: 3 }} />
+            </Grid>
+            <Grid item xs={12} lg={4}>
+              <Skeleton variant="rounded" height={400} sx={{ borderRadius: 3 }} />
+            </Grid>
+          </Grid>
+        </Box>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout title="Dashboard">
       <Head>
@@ -440,46 +289,115 @@ const AdminDashboardPage = () => {
       </Head>
 
       <Box>
-        {/* Header */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        {/* Page Header */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
           <Box>
-            <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a1a2e', mb: 0.5 }}>
+            <Typography variant="h5" fontWeight="bold" gutterBottom>
               Dashboard
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Welcome back! Here&apos;s what&apos;s happening with your leads today.
             </Typography>
           </Box>
-          <Stack direction="row" spacing={2}>
+          <Box sx={{ display: 'flex', gap: 2 }}>
             <Button
               variant="outlined"
-              startIcon={<RefreshIcon />}
-              onClick={handleRefresh}
-              disabled={loading}
+              startIcon={<Icon icon="mdi:refresh" />}
+              onClick={loadDashboardData}
+              sx={{ borderRadius: 2, textTransform: 'none' }}
             >
               Refresh
             </Button>
             <Button
               variant="contained"
-              startIcon={<DownloadIcon />}
+              startIcon={<Icon icon="mdi:download" />}
               onClick={handleExportLeads}
               sx={{
-                backgroundColor: '#667eea',
-                '&:hover': { backgroundColor: '#764ba2' },
+                borderRadius: 2,
+                textTransform: 'none',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                '&:hover': {
+                  background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
+                },
               }}
             >
               Export Leads
             </Button>
-          </Stack>
+          </Box>
         </Box>
 
         {/* Stats Cards */}
-        <Box sx={{ mb: 4 }}>
-          <DashboardStats stats={stats} loading={loading} onRefresh={handleRefresh} />
-        </Box>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} lg={2}>
+            <StatCard
+              title="Total Leads"
+              value={stats.totalLeads}
+              icon="mdi:account-group"
+              color="#667eea"
+              trend="up"
+              trendValue="12.5% vs last week"
+              loading={loading}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={2}>
+            <StatCard
+              title="New Today"
+              value={stats.newLeads}
+              icon="mdi:account-plus"
+              color="#4caf50"
+              trend="up"
+              trendValue="23.1% vs last week"
+              loading={loading}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={2}>
+            <StatCard
+              title="Contacted"
+              value={stats.contactedLeads}
+              icon="mdi:phone-in-talk"
+              color="#ff9800"
+              trend="up"
+              trendValue="8.4% vs last week"
+              loading={loading}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={2}>
+            <StatCard
+              title="Site Visits"
+              value={stats.siteVisits}
+              icon="mdi:calendar-check"
+              color="#e91e63"
+              trend="down"
+              trendValue="5.2% vs last week"
+              loading={loading}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={2}>
+            <StatCard
+              title="Converted"
+              value={stats.convertedLeads}
+              icon="mdi:check-circle"
+              color="#2196f3"
+              trend="up"
+              trendValue="15.7% vs last week"
+              loading={loading}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={2}>
+            <StatCard
+              title="Conversion Rate"
+              value={`${stats.conversionRate}%`}
+              icon="mdi:percent"
+              color="#9c27b0"
+              trend="up"
+              trendValue="2.3% vs last week"
+              loading={loading}
+            />
+          </Grid>
+        </Grid>
 
         {/* Charts Row */}
-        <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid container spacing={3} sx={{ mt: 1 }}>
           {/* Leads Trend Chart */}
           <Grid item xs={12} lg={8}>
             <LeadsChart
@@ -487,7 +405,7 @@ const AdminDashboardPage = () => {
               loading={loading}
               title="Leads Trend"
               subtitle="Last 7 days performance"
-              onRefresh={handleRefresh}
+              onRefresh={loadDashboardData}
             />
           </Grid>
 
@@ -502,7 +420,7 @@ const AdminDashboardPage = () => {
         </Grid>
 
         {/* Second Row */}
-        <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid container spacing={3} sx={{ mt: 1 }}>
           {/* Status Distribution */}
           <Grid item xs={12} md={6} lg={4}>
             <StatusBarChart
@@ -514,90 +432,254 @@ const AdminDashboardPage = () => {
 
           {/* Top Locations */}
           <Grid item xs={12} md={6} lg={4}>
-            <TopLocationsCard
-              locations={topLocations}
-              loading={loading}
-            />
+            <Paper
+              elevation={0}
+              sx={{
+                height: '100%',
+                borderRadius: 3,
+                border: '1px solid',
+                borderColor: 'divider',
+                overflow: 'hidden',
+              }}
+            >
+              <Box sx={{ p: 2.5, borderBottom: '1px solid', borderColor: 'divider' }}>
+                <Typography variant="h6" fontWeight="bold">
+                  Top Locations
+                </Typography>
+              </Box>
+              <Box sx={{ p: 2 }}>
+                {topLocations.map((location, index) => (
+                  <Box
+                    key={location.city}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 2,
+                      py: 1.5,
+                      borderBottom: index < topLocations.length - 1 ? '1px solid' : 'none',
+                      borderColor: 'divider',
+                    }}
+                  >
+                    <Avatar
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        bgcolor: 'rgba(102, 126, 234, 0.1)',
+                        color: '#667eea',
+                      }}
+                    >
+                      <Icon icon="mdi:map-marker" />
+                    </Avatar>
+                    <Box sx={{ flex: 1 }}>
+                      <Typography variant="body2" fontWeight={600}>
+                        {location.city}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {location.count} leads
+                      </Typography>
+                    </Box>
+                    <Chip
+                      label={`#${index + 1}`}
+                      size="small"
+                      sx={{
+                        bgcolor: index === 0 ? 'rgba(201, 162, 39, 0.15)' : 'rgba(26, 26, 46, 0.08)',
+                        color: index === 0 ? '#c9a227' : 'text.secondary',
+                        fontWeight: 600,
+                        fontSize: '0.7rem',
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </Paper>
           </Grid>
 
-          {/* Quick Stats Card */}
+          {/* Performance Summary */}
           <Grid item xs={12} lg={4}>
-            <Card
+            <Paper
+              elevation={0}
               sx={{
                 height: '100%',
                 borderRadius: 3,
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 color: '#fff',
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                p: 3,
               }}
             >
-              <CardContent sx={{ p: 3 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <Box
-                    sx={{
-                      p: 1.5,
-                      borderRadius: 2,
-                      backgroundColor: 'rgba(255,255,255,0.15)',
-                    }}
-                  >
-                    <TrendingUpIcon />
-                  </Box>
-                  <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                    Performance Summary
-                  </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+                <Box
+                  sx={{
+                    p: 1.5,
+                    borderRadius: 2,
+                    backgroundColor: 'rgba(255,255,255,0.15)',
+                  }}
+                >
+                  <Icon icon="mdi:trending-up" style={{ fontSize: 24 }} />
                 </Box>
+                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                  Performance Summary
+                </Typography>
+              </Box>
 
-                <Stack spacing={3}>
+              <Box>
+                <Typography variant="body2" sx={{ opacity: 0.7, mb: 0.5 }}>
+                  Conversion Rate
+                </Typography>
+                <Typography variant="h3" sx={{ fontWeight: 800, mb: 3 }}>
+                  {stats.conversionRate}%
+                </Typography>
+
+                <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.2)', pt: 2 }} />
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                   <Box>
-                    <Typography variant="body2" sx={{ opacity: 0.7, mb: 0.5 }}>
-                      Conversion Rate
+                    <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                      Total Leads
                     </Typography>
-                    <Typography variant="h3" sx={{ fontWeight: 800 }}>
-                      {loading ? <Skeleton width={80} sx={{ bgcolor: 'rgba(255,255,255,0.1)' }} /> : `${stats.conversionRate}%`}
+                    <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                      {stats.totalLeads}
                     </Typography>
                   </Box>
-
-                  <Divider sx={{ borderColor: 'rgba(255,255,255,0.2)' }} />
-
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Box>
-                      <Typography variant="caption" sx={{ opacity: 0.7 }}>
-                        Total Leads
-                      </Typography>
-                      <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                        {loading ? <Skeleton width={40} sx={{ bgcolor: 'rgba(255,255,255,0.1)' }} /> : stats.totalLeads}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="caption" sx={{ opacity: 0.7 }}>
-                        Converted
-                      </Typography>
-                      <Typography variant="h6" sx={{ fontWeight: 700, color: '#4caf50' }}>
-                        {loading ? <Skeleton width={40} sx={{ bgcolor: 'rgba(255,255,255,0.1)' }} /> : stats.convertedLeads}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="caption" sx={{ opacity: 0.7 }}>
-                        Site Visits
-                      </Typography>
-                      <Typography variant="h6" sx={{ fontWeight: 700, color: '#ff9800' }}>
-                        {loading ? <Skeleton width={40} sx={{ bgcolor: 'rgba(255,255,255,0.1)' }} /> : stats.siteVisits}
-                      </Typography>
-                    </Box>
+                  <Box>
+                    <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                      Converted
+                    </Typography>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#4caf50' }}>
+                      {stats.convertedLeads}
+                    </Typography>
                   </Box>
-                </Stack>
-              </CardContent>
-            </Card>
+                  <Box>
+                    <Typography variant="caption" sx={{ opacity: 0.7 }}>
+                      Site Visits
+                    </Typography>
+                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#ff9800' }}>
+                      {stats.siteVisits}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Paper>
           </Grid>
         </Grid>
 
         {/* Recent Leads Table */}
-        <RecentLeadsTable
-          leads={recentLeads}
-          loading={loading}
-          onViewLead={handleViewLead}
-          onViewAll={() => router.push(ADMIN_ROUTES.LEADS)}
-        />
+        <Paper
+          elevation={0}
+          sx={{
+            mt: 3,
+            borderRadius: 3,
+            border: '1px solid',
+            borderColor: 'divider',
+            overflow: 'hidden',
+          }}
+        >
+          <Box
+            sx={{
+              p: 2.5,
+              borderBottom: '1px solid',
+              borderColor: 'divider',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography variant="h6" fontWeight="bold">
+              Recent Leads
+            </Typography>
+            <Button
+              size="small"
+              endIcon={<Icon icon="mdi:open-in-new" style={{ fontSize: 16 }} />}
+              onClick={() => router.push(ADMIN_ROUTES.LEADS)}
+              sx={{ color: '#667eea', textTransform: 'none' }}
+            >
+              View All
+            </Button>
+          </Box>
+
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow sx={{ bgcolor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)' }}>
+                  <TableCell sx={{ fontWeight: 600 }}>Lead</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
+                  <TableCell align="center" sx={{ fontWeight: 600 }}>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {recentLeads.map((lead) => {
+                  const statusConfig = getStatusConfig(lead.status);
+                  return (
+                    <TableRow key={lead.id} hover>
+                      <TableCell>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                          <Avatar
+                            sx={{
+                              width: 36,
+                              height: 36,
+                              fontSize: '0.875rem',
+                              bgcolor: 'rgba(102, 126, 234, 0.15)',
+                              color: '#667eea',
+                            }}
+                          >
+                            {lead.name?.charAt(0)?.toUpperCase()}
+                          </Avatar>
+                          <Box>
+                            <Typography variant="body2" fontWeight={500}>
+                              {lead.name}
+                            </Typography>
+                            <Typography variant="caption" color="text.secondary">
+                              {lead.mobile}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          label={formatSource(lead.source)}
+                          size="small"
+                          variant="outlined"
+                          sx={{ borderRadius: 1.5, fontSize: '0.75rem' }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          label={statusConfig.label}
+                          size="small"
+                          sx={{
+                            bgcolor: `${statusConfig.color}15`,
+                            color: statusConfig.color,
+                            fontWeight: 600,
+                            borderRadius: 1.5,
+                            fontSize: '0.75rem',
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2" color="text.secondary">
+                          {formatDate(lead.createdAt)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Tooltip title="View Details">
+                          <IconButton
+                            size="small"
+                            onClick={() => handleViewLead(lead.id)}
+                            sx={{ color: '#667eea' }}
+                          >
+                            <Icon icon="mdi:eye" />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </Box>
     </AdminLayout>
   );
