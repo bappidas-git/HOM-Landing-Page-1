@@ -438,37 +438,69 @@ const AdminLeadsPage = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box sx={{ display: 'flex', gap: 2, justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
+              <Box sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
                 <Button
                   variant="outlined"
-                  startIcon={<Icon icon="mdi:refresh" />}
+                  size="small"
+                  startIcon={<Icon icon="mdi:refresh" width={16} />}
                   onClick={loadLeads}
-                  sx={{ borderRadius: 2, textTransform: 'none' }}
+                  sx={{
+                    borderRadius: 1.5,
+                    textTransform: 'none',
+                    fontSize: '0.8125rem',
+                    px: 1.5,
+                    py: 0.5,
+                    borderColor: 'grey.300',
+                    color: 'text.secondary',
+                    '&:hover': {
+                      borderColor: 'grey.400',
+                      backgroundColor: 'grey.50',
+                    },
+                  }}
                 >
                   Refresh
                 </Button>
                 <Button
                   variant="outlined"
-                  startIcon={<Icon icon="mdi:filter-remove" />}
+                  size="small"
+                  startIcon={<Icon icon="mdi:filter-remove" width={16} />}
                   onClick={() => {
                     setSourceFilter('all');
                     setStatusFilter('all');
                     setSearchQuery('');
                   }}
-                  sx={{ borderRadius: 2, textTransform: 'none' }}
+                  sx={{
+                    borderRadius: 1.5,
+                    textTransform: 'none',
+                    fontSize: '0.8125rem',
+                    px: 1.5,
+                    py: 0.5,
+                    borderColor: 'grey.300',
+                    color: 'text.secondary',
+                    '&:hover': {
+                      borderColor: 'grey.400',
+                      backgroundColor: 'grey.50',
+                    },
+                  }}
                 >
                   Clear
                 </Button>
                 <Button
                   variant="contained"
-                  startIcon={<Icon icon="mdi:download" />}
+                  size="small"
+                  startIcon={<Icon icon="mdi:download" width={16} />}
                   onClick={handleExport}
                   sx={{
-                    borderRadius: 2,
+                    borderRadius: 1.5,
                     textTransform: 'none',
+                    fontSize: '0.8125rem',
+                    px: 1.5,
+                    py: 0.5,
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    boxShadow: '0 2px 4px rgba(102, 126, 234, 0.25)',
                     '&:hover': {
                       background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
+                      boxShadow: '0 3px 6px rgba(102, 126, 234, 0.35)',
                     },
                   }}
                 >
