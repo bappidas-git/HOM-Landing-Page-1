@@ -431,4 +431,5 @@ export const useUIContext = () => {
   return context;
 };
 
-export default UIContext;
+// Note: UIContext is not exported as default to prevent Fast Refresh issues
+// Use useUIContext hook or UIProvider instead
