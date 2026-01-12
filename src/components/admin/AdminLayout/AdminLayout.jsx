@@ -33,7 +33,6 @@ import {
 import { Icon } from '@iconify/react';
 import { useAuthContext, withAuth } from '@/context/AuthContext';
 import { ADMIN_ROUTES } from '@/lib/constants';
-import { MODULES, canViewModule, canEditModule, ACCESS_LEVELS } from '@/lib/constants/permissions';
 
 const drawerWidth = 260;
 
@@ -42,50 +41,36 @@ const menuItems = [
     title: 'Dashboard',
     icon: 'mdi:view-dashboard',
     path: '/admin/dashboard',
-    module: MODULES.DASHBOARD,
   },
   {
     title: 'Leads',
     icon: 'mdi:account-group',
     path: '/admin/leads',
-    module: MODULES.LEADS,
-  },
-  {
-    title: 'Users',
-    icon: 'mdi:account-cog',
-    path: '/admin/users',
-    module: MODULES.USERS,
-    adminOnly: true,
   },
   {
     title: 'SEO Settings',
     icon: 'mdi:magnify',
     path: '/admin/seo',
-    module: MODULES.SEO,
   },
   {
     title: 'Pixels & Tracking',
     icon: 'mdi:chart-bar',
     path: '/admin/pixels',
-    module: MODULES.PIXELS,
   },
   {
     title: 'Schema Markup',
     icon: 'mdi:code-tags',
     path: '/admin/schema',
-    module: MODULES.SCHEMA,
   },
   {
     title: 'Keywords',
     icon: 'mdi:key-variant',
     path: '/admin/keywords',
-    module: MODULES.KEYWORDS,
   },
   {
     title: 'Settings',
     icon: 'mdi:cog',
     path: '/admin/settings',
-    module: MODULES.SETTINGS,
   },
 ];
 
@@ -96,17 +81,7 @@ const AdminLayout = ({ children, title }) => {
   const router = useRouter();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const { user, logout, isAuthenticated, isLoading, isInitialized, isAdmin, roleLabel, roleColor, canView, canEdit } = useAuthContext();
-
-  // Filter menu items based on user permissions
-  const filteredMenuItems = menuItems.filter((item) => {
-    // If admin only and user is not admin, hide the item
-    if (item.adminOnly && !isAdmin) {
-      return false;
-    }
-    // Check if user can view the module
-    return canView(item.module);
-  });
+  const { user, logout, isAuthenticated, isLoading, isInitialized } = useAuthContext();
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -214,57 +189,44 @@ const AdminLayout = ({ children, title }) => {
 
       {/* Navigation Menu */}
       <List sx={{ flex: 1, px: 1, py: 2 }}>
-        {filteredMenuItems.map((item) => {
+        {menuItems.map((item) => {
           const isActive = router.pathname === item.path ||
             (item.path === '/admin/leads' && router.pathname.startsWith('/admin/leads'));
-          const isReadOnly = item.module && !canEdit(item.module);
           return (
             <ListItem key={item.path} disablePadding sx={{ mb: 0.5 }}>
-              <Tooltip
-                title={isReadOnly ? 'Read-only access' : ''}
-                placement="right"
-                arrow
+              <ListItemButton
+                onClick={() => {
+                  router.push(item.path);
+                  if (isMobile) setMobileOpen(false);
+                }}
+                sx={{
+                  borderRadius: 2,
+                  mx: 0.5,
+                  bgcolor: isActive
+                    ? 'rgba(102, 126, 234, 0.1)'
+                    : 'transparent',
+                  color: isActive ? 'primary.main' : 'text.primary',
+                  '&:hover': {
+                    bgcolor: 'rgba(102, 126, 234, 0.08)',
+                  },
+                }}
               >
-                <ListItemButton
-                  onClick={() => {
-                    router.push(item.path);
-                    if (isMobile) setMobileOpen(false);
-                  }}
+                <ListItemIcon
                   sx={{
-                    borderRadius: 2,
-                    mx: 0.5,
-                    bgcolor: isActive
-                      ? 'rgba(102, 126, 234, 0.1)'
-                      : 'transparent',
-                    color: isActive ? 'primary.main' : 'text.primary',
-                    '&:hover': {
-                      bgcolor: 'rgba(102, 126, 234, 0.08)',
-                    },
+                    minWidth: 40,
+                    color: isActive ? '#667eea' : 'text.secondary',
                   }}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 40,
-                      color: isActive ? '#667eea' : 'text.secondary',
-                    }}
-                  >
-                    <Icon icon={item.icon} style={{ fontSize: 22 }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.title}
-                    primaryTypographyProps={{
-                      fontWeight: isActive ? 600 : 400,
-                      fontSize: '0.95rem',
-                    }}
-                  />
-                  {isReadOnly && (
-                    <Icon
-                      icon="mdi:eye"
-                      style={{ fontSize: 16, color: '#9e9e9e' }}
-                    />
-                  )}
-                </ListItemButton>
-              </Tooltip>
+                  <Icon icon={item.icon} style={{ fontSize: 22 }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.title}
+                  primaryTypographyProps={{
+                    fontWeight: isActive ? 600 : 400,
+                    fontSize: '0.95rem',
+                  }}
+                />
+              </ListItemButton>
             </ListItem>
           );
         })}
@@ -602,21 +564,9 @@ const AdminLayout = ({ children, title }) => {
               <Typography variant="subtitle2" fontWeight="bold">
                 {user?.name || 'Admin User'}
               </Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+              <Typography variant="caption" color="text.secondary">
                 {user?.email || 'admin@realestate.com'}
               </Typography>
-              <Chip
-                label={roleLabel || 'User'}
-                size="small"
-                sx={{
-                  mt: 0.5,
-                  height: 20,
-                  fontSize: '0.65rem',
-                  bgcolor: `${roleColor}20`,
-                  color: roleColor,
-                  fontWeight: 600,
-                }}
-              />
             </Box>
             <Divider />
             <MenuItem onClick={handleLogout}>

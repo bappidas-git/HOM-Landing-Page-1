@@ -16,7 +16,6 @@ export const ADMIN_ROUTES = {
   DASHBOARD: '/admin/dashboard',
   LEADS: '/admin/leads',
   LEAD_DETAIL: '/admin/leads/[id]',
-  USERS: '/admin/users',
   SEO: '/admin/seo',
   PIXELS: '/admin/pixels',
   SCHEMA: '/admin/schema',
@@ -31,11 +30,6 @@ export const API_ENDPOINTS = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   CURRENT_USER: '/users/1',
-
-  // Users
-  USERS: '/users',
-  USER_BY_ID: (id) => `/users/${id}`,
-  ROLES: '/roles',
 
   // Leads
   LEADS: '/leads',

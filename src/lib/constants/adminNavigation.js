@@ -20,13 +20,6 @@ export const ADMIN_NAV_ITEMS = [
     badge: true, // Show count badge
   },
   {
-    id: 'users',
-    label: 'Users',
-    icon: 'AccountCog',
-    href: ADMIN_ROUTES.USERS,
-    adminOnly: true,
-  },
-  {
     id: 'seo',
     label: 'SEO Settings',
     icon: 'Search',
@@ -178,14 +171,6 @@ export const DASHBOARD_STATS_CONFIG = [
   },
 ];
 
-// User role options
-export const USER_ROLE_OPTIONS = [
-  { value: 'admin', label: 'Admin', color: '#1976d2' },
-  { value: 'manager', label: 'Manager', color: '#9c27b0' },
-  { value: 'owner', label: 'Owner', color: '#4caf50' },
-  { value: 'sales_executive', label: 'Sales Executive', color: '#ff9800' },
-];
-
 export default {
   ADMIN_NAV_ITEMS,
   ADMIN_QUICK_ACTIONS,
@@ -195,5 +180,4 @@ export default {
   AUDIT_ACTION_TYPES,
   AUDIT_MODULE_TYPES,
   DASHBOARD_STATS_CONFIG,
-  USER_ROLE_OPTIONS,
 };
