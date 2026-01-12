@@ -23,6 +23,16 @@ import {
   IconButton,
   Tooltip,
   useTheme,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider,
 } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
@@ -268,6 +278,24 @@ const getStatusConfig = (status) => {
   );
 };
 
+const getPriorityColor = (priority) => {
+  const colors = {
+    high: "#f44336",
+    medium: "#ff9800",
+    low: "#9e9e9e",
+  };
+  return colors[priority] || "#9e9e9e";
+};
+
+const getSourceColor = (source) => {
+  const colors = {
+    hero_form: "#667eea",
+    popup_form: "#1a1a2e",
+    cta_form: "#c9a227",
+  };
+  return colors[source] || "#667eea";
+};
+
 /**
  * Admin Dashboard Page Component
  */
@@ -281,6 +309,12 @@ const AdminDashboardPage = () => {
   const [leadsByStatus, setLeadsByStatus] = useState(mockLeadsByStatus);
   const [topLocations, setTopLocations] = useState(mockTopLocations);
   const [recentLeads, setRecentLeads] = useState(mockRecentLeads);
+
+  // Dialog state for lead details popup
+  const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+  const [selectedLead, setSelectedLead] = useState(null);
+  const [editNotes, setEditNotes] = useState("");
+  const [editStatus, setEditStatus] = useState("");
 
   // Load dashboard data
   const loadDashboardData = useCallback(async () => {
@@ -307,9 +341,41 @@ const AdminDashboardPage = () => {
     loadDashboardData();
   }, [loadDashboardData]);
 
-  // Handle view lead
-  const handleViewLead = (id) => {
-    router.push(`/admin/leads/${id}`);
+  // Handle view lead - open dialog popup
+  const handleViewLead = (lead) => {
+    setSelectedLead(lead);
+    setEditNotes(lead.notes || "");
+    setEditStatus(lead.status);
+    setDetailsDialogOpen(true);
+  };
+
+  // Handle update lead
+  const handleUpdateLead = async () => {
+    try {
+      // Update local state
+      setRecentLeads((prev) =>
+        prev.map((lead) =>
+          lead.id === selectedLead.id
+            ? { ...lead, status: editStatus, notes: editNotes, updatedAt: new Date().toISOString() }
+            : lead
+        )
+      );
+      setDetailsDialogOpen(false);
+    } catch (error) {
+      console.error("Error updating lead:", error);
+    }
+  };
+
+  // Handle delete lead
+  const handleDeleteLead = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
+
+    try {
+      setRecentLeads((prev) => prev.filter((lead) => lead.id !== id));
+      setDetailsDialogOpen(false);
+    } catch (error) {
+      console.error("Error deleting lead:", error);
+    }
   };
 
   // Handle export leads
@@ -817,7 +883,7 @@ const AdminDashboardPage = () => {
                         <Tooltip title="View Details">
                           <IconButton
                             size="small"
-                            onClick={() => handleViewLead(lead.id)}
+                            onClick={() => handleViewLead(lead)}
                             sx={{ color: "#667eea" }}
                           >
                             <Icon icon="mdi:eye" />
@@ -831,6 +897,176 @@ const AdminDashboardPage = () => {
             </Table>
           </TableContainer>
         </Paper>
+
+        {/* Lead Details Dialog */}
+        <Dialog
+          open={detailsDialogOpen}
+          onClose={() => setDetailsDialogOpen(false)}
+          maxWidth="md"
+          fullWidth
+          PaperProps={{
+            sx: { borderRadius: 3 },
+          }}
+        >
+          {selectedLead && (
+            <>
+              <DialogTitle>
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Icon icon="mdi:account-details" style={{ fontSize: 24 }} />
+                    Lead Details
+                  </Box>
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <Chip
+                      label={formatSource(selectedLead.source)}
+                      size="small"
+                      sx={{
+                        bgcolor: `${getSourceColor(selectedLead.source)}15`,
+                        color: getSourceColor(selectedLead.source),
+                        textTransform: "capitalize",
+                      }}
+                    />
+                    <Chip
+                      label={getStatusConfig(selectedLead.status).label}
+                      color="primary"
+                      size="small"
+                      sx={{
+                        bgcolor: `${getStatusConfig(selectedLead.status).color}15`,
+                        color: getStatusConfig(selectedLead.status).color,
+                        textTransform: "capitalize",
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </DialogTitle>
+              <DialogContent dividers>
+                <Grid container spacing={3}>
+                  {/* Contact Info */}
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom>
+                      Contact Information
+                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Name:</Typography>
+                        <Typography variant="body2" fontWeight={500}>{selectedLead.name}</Typography>
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Email:</Typography>
+                        <Typography variant="body2">{selectedLead.email}</Typography>
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Mobile:</Typography>
+                        <Typography variant="body2">{selectedLead.mobile}</Typography>
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Date:</Typography>
+                        <Typography variant="body2">{formatDate(selectedLead.createdAt)}</Typography>
+                      </Box>
+                    </Box>
+                  </Grid>
+
+                  {/* Lead Info */}
+                  <Grid item xs={12} md={6}>
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom>
+                      Lead Details
+                    </Typography>
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Source:</Typography>
+                        <Typography variant="body2">{formatSource(selectedLead.source)}</Typography>
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Priority:</Typography>
+                        <Chip
+                          label={selectedLead.priority || "medium"}
+                          size="small"
+                          sx={{
+                            bgcolor: `${getPriorityColor(selectedLead.priority || "medium")}15`,
+                            color: getPriorityColor(selectedLead.priority || "medium"),
+                            textTransform: "capitalize",
+                            height: 22,
+                          }}
+                        />
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="body2" color="text.secondary">Site Visit:</Typography>
+                        <Typography variant="body2">{selectedLead.wantsSiteVisit ? "Yes" : "No"}</Typography>
+                      </Box>
+                      {selectedLead.siteVisitDate && (
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                          <Typography variant="body2" color="text.secondary">Visit Date:</Typography>
+                          <Typography variant="body2">{selectedLead.siteVisitDate}</Typography>
+                        </Box>
+                      )}
+                    </Box>
+                  </Grid>
+
+                  {/* Update Status */}
+                  <Grid item xs={12}>
+                    <Divider sx={{ my: 1 }} />
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom sx={{ mt: 2 }}>
+                      Update Lead
+                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={4}>
+                        <FormControl fullWidth>
+                          <InputLabel>Status</InputLabel>
+                          <Select
+                            value={editStatus}
+                            label="Status"
+                            onChange={(e) => setEditStatus(e.target.value)}
+                          >
+                            {LEAD_STATUS_OPTIONS.map((status) => (
+                              <MenuItem key={status.value} value={status.value} sx={{ textTransform: "capitalize" }}>
+                                {status.label}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                      <Grid item xs={12} md={8}>
+                        <TextField
+                          fullWidth
+                          label="Notes"
+                          multiline
+                          rows={2}
+                          value={editNotes}
+                          onChange={(e) => setEditNotes(e.target.value)}
+                          placeholder="Add internal notes about this lead..."
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions sx={{ p: 2, justifyContent: "space-between" }}>
+                <Button
+                  color="error"
+                  startIcon={<Icon icon="mdi:delete-outline" />}
+                  onClick={() => handleDeleteLead(selectedLead.id)}
+                >
+                  Delete
+                </Button>
+                <Box sx={{ display: "flex", gap: 1 }}>
+                  <Button onClick={() => setDetailsDialogOpen(false)}>Cancel</Button>
+                  <Button
+                    variant="contained"
+                    onClick={handleUpdateLead}
+                    sx={{
+                      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      "&:hover": {
+                        background: "linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)",
+                      },
+                    }}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
+              </DialogActions>
+            </>
+          )}
+        </Dialog>
       </Box>
     </AdminLayout>
   );
