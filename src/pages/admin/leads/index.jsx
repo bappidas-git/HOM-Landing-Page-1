@@ -37,6 +37,10 @@ import {
   InputLabel,
   useTheme,
   Checkbox,
+  Menu,
+  ListItemIcon,
+  ListItemText,
+  useMediaQuery,
 } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -44,23 +48,23 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import { withAuth } from '@/context/AuthContext';
 import { LEAD_STATUS_OPTIONS } from '@/lib/constants';
 
-// Enhanced mock data with more realistic entries
+// Enhanced mock data with more realistic entries including tracking data
 const mockLeads = [
-  { id: 1, name: 'Rahul Kumar', email: 'rahul.kumar@email.com', mobile: '9876543210', source: 'hero_form', status: 'new', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-15', createdAt: '2026-01-11T10:30:00' },
-  { id: 2, name: 'Priya Sharma', email: 'priya.sharma@email.com', mobile: '9876543211', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-11T09:15:00' },
-  { id: 3, name: 'Amit Singh', email: 'amit.singh@email.com', mobile: '9876543212', source: 'cta_form', status: 'site_visit_scheduled', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-14', createdAt: '2026-01-10T16:45:00' },
-  { id: 4, name: 'Deepika Patel', email: 'deepika.patel@email.com', mobile: '9876543213', source: 'hero_form', status: 'visited', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-10T14:20:00' },
-  { id: 5, name: 'Vikram Reddy', email: 'vikram.reddy@email.com', mobile: '9876543214', source: 'popup_form', status: 'negotiation', priority: 'high', wantsSiteVisit: false, createdAt: '2026-01-10T11:00:00' },
-  { id: 6, name: 'Sneha Nair', email: 'sneha.nair@email.com', mobile: '9876543215', source: 'hero_form', status: 'converted', priority: 'medium', wantsSiteVisit: true, createdAt: '2026-01-09T15:30:00' },
-  { id: 7, name: 'Rajesh Gupta', email: 'rajesh.gupta@email.com', mobile: '9876543216', source: 'cta_form', status: 'lost', priority: 'low', wantsSiteVisit: false, createdAt: '2026-01-09T12:00:00' },
-  { id: 8, name: 'Ananya Krishnan', email: 'ananya.k@email.com', mobile: '9876543217', source: 'hero_form', status: 'new', priority: 'medium', wantsSiteVisit: true, siteVisitDate: '2026-01-16', createdAt: '2026-01-09T10:00:00' },
-  { id: 9, name: 'Suresh Menon', email: 'suresh.menon@email.com', mobile: '9876543218', source: 'popup_form', status: 'contacted', priority: 'low', wantsSiteVisit: false, createdAt: '2026-01-08T15:45:00' },
-  { id: 10, name: 'Kavitha Rao', email: 'kavitha.rao@email.com', mobile: '9876543219', source: 'cta_form', status: 'site_visit_scheduled', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-13', createdAt: '2026-01-08T11:30:00' },
-  { id: 11, name: 'Arun Prakash', email: 'arun.prakash@email.com', mobile: '9876543220', source: 'hero_form', status: 'visited', priority: 'medium', wantsSiteVisit: true, createdAt: '2026-01-07T16:20:00' },
-  { id: 12, name: 'Meera Iyer', email: 'meera.iyer@email.com', mobile: '9876543221', source: 'popup_form', status: 'negotiation', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-07T14:00:00' },
-  { id: 13, name: 'Karthik Sundaram', email: 'karthik.s@email.com', mobile: '9876543222', source: 'cta_form', status: 'new', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-06T09:30:00' },
-  { id: 14, name: 'Lakshmi Venkat', email: 'lakshmi.v@email.com', mobile: '9876543223', source: 'hero_form', status: 'converted', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-05T12:15:00' },
-  { id: 15, name: 'Naveen Kumar', email: 'naveen.kumar@email.com', mobile: '9876543224', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-05T10:45:00' },
+  { id: 1, name: 'Rahul Kumar', email: 'rahul.kumar@email.com', mobile: '9876543210', source: 'hero_form', status: 'new', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-15', createdAt: '2026-01-11T10:30:00', ipAddress: '103.21.125.45', location: 'Mumbai, Maharashtra', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0', utmSource: 'google', utmMedium: 'cpc', utmCampaign: 'brand_search' },
+  { id: 2, name: 'Priya Sharma', email: 'priya.sharma@email.com', mobile: '9876543211', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-11T09:15:00', ipAddress: '182.74.58.102', location: 'Bangalore, Karnataka', userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15', utmSource: 'facebook', utmMedium: 'social', utmCampaign: 'lead_gen' },
+  { id: 3, name: 'Amit Singh', email: 'amit.singh@email.com', mobile: '9876543212', source: 'cta_form', status: 'site_visit_scheduled', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-14', createdAt: '2026-01-10T16:45:00', ipAddress: '49.36.192.78', location: 'Delhi, NCR', userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0', utmSource: 'direct', utmMedium: '', utmCampaign: '' },
+  { id: 4, name: 'Deepika Patel', email: 'deepika.patel@email.com', mobile: '9876543213', source: 'hero_form', status: 'visited', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-10T14:20:00', ipAddress: '157.48.73.21', location: 'Pune, Maharashtra', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/121.0', utmSource: 'google', utmMedium: 'organic', utmCampaign: '' },
+  { id: 5, name: 'Vikram Reddy', email: 'vikram.reddy@email.com', mobile: '9876543214', source: 'popup_form', status: 'negotiation', priority: 'high', wantsSiteVisit: false, createdAt: '2026-01-10T11:00:00', ipAddress: '122.161.48.95', location: 'Hyderabad, Telangana', userAgent: 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/120.0.0.0', utmSource: 'instagram', utmMedium: 'social', utmCampaign: 'reels_ads' },
+  { id: 6, name: 'Sneha Nair', email: 'sneha.nair@email.com', mobile: '9876543215', source: 'hero_form', status: 'converted', priority: 'medium', wantsSiteVisit: true, createdAt: '2026-01-09T15:30:00', ipAddress: '117.195.62.144', location: 'Chennai, Tamil Nadu', userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_2 like Mac OS X) AppleWebKit/605.1.15', utmSource: 'google', utmMedium: 'cpc', utmCampaign: 'competitor' },
+  { id: 7, name: 'Rajesh Gupta', email: 'rajesh.gupta@email.com', mobile: '9876543216', source: 'cta_form', status: 'lost', priority: 'low', wantsSiteVisit: false, createdAt: '2026-01-09T12:00:00', ipAddress: '59.145.78.203', location: 'Kolkata, West Bengal', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/120.0.0.0', utmSource: 'referral', utmMedium: 'partner', utmCampaign: 'broker_network' },
+  { id: 8, name: 'Ananya Krishnan', email: 'ananya.k@email.com', mobile: '9876543217', source: 'hero_form', status: 'new', priority: 'medium', wantsSiteVisit: true, siteVisitDate: '2026-01-16', createdAt: '2026-01-09T10:00:00', ipAddress: '103.87.141.56', location: 'Kochi, Kerala', userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/605.1.15', utmSource: 'google', utmMedium: 'cpc', utmCampaign: 'brand_search' },
+  { id: 9, name: 'Suresh Menon', email: 'suresh.menon@email.com', mobile: '9876543218', source: 'popup_form', status: 'contacted', priority: 'low', wantsSiteVisit: false, createdAt: '2026-01-08T15:45:00', ipAddress: '223.176.45.89', location: 'Ahmedabad, Gujarat', userAgent: 'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/119.0.0.0', utmSource: 'facebook', utmMedium: 'social', utmCampaign: 'awareness' },
+  { id: 10, name: 'Kavitha Rao', email: 'kavitha.rao@email.com', mobile: '9876543219', source: 'cta_form', status: 'site_visit_scheduled', priority: 'high', wantsSiteVisit: true, siteVisitDate: '2026-01-13', createdAt: '2026-01-08T11:30:00', ipAddress: '14.139.82.167', location: 'Bangalore, Karnataka', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0', utmSource: 'google', utmMedium: 'organic', utmCampaign: '' },
+  { id: 11, name: 'Arun Prakash', email: 'arun.prakash@email.com', mobile: '9876543220', source: 'hero_form', status: 'visited', priority: 'medium', wantsSiteVisit: true, createdAt: '2026-01-07T16:20:00', ipAddress: '106.51.73.198', location: 'Mumbai, Maharashtra', userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15', utmSource: 'linkedin', utmMedium: 'social', utmCampaign: 'professional' },
+  { id: 12, name: 'Meera Iyer', email: 'meera.iyer@email.com', mobile: '9876543221', source: 'popup_form', status: 'negotiation', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-07T14:00:00', ipAddress: '175.101.24.156', location: 'Hyderabad, Telangana', userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0', utmSource: 'google', utmMedium: 'cpc', utmCampaign: 'location_based' },
+  { id: 13, name: 'Karthik Sundaram', email: 'karthik.s@email.com', mobile: '9876543222', source: 'cta_form', status: 'new', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-06T09:30:00', ipAddress: '49.207.58.134', location: 'Chennai, Tamil Nadu', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/121.0', utmSource: 'direct', utmMedium: '', utmCampaign: '' },
+  { id: 14, name: 'Lakshmi Venkat', email: 'lakshmi.v@email.com', mobile: '9876543223', source: 'hero_form', status: 'converted', priority: 'high', wantsSiteVisit: true, createdAt: '2026-01-05T12:15:00', ipAddress: '203.122.45.78', location: 'Pune, Maharashtra', userAgent: 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/120.0.0.0', utmSource: 'google', utmMedium: 'cpc', utmCampaign: 'remarketing' },
+  { id: 15, name: 'Naveen Kumar', email: 'naveen.kumar@email.com', mobile: '9876543224', source: 'popup_form', status: 'contacted', priority: 'medium', wantsSiteVisit: false, createdAt: '2026-01-05T10:45:00', ipAddress: '117.247.91.203', location: 'Delhi, NCR', userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_1 like Mac OS X) AppleWebKit/605.1.15', utmSource: 'email', utmMedium: 'newsletter', utmCampaign: 'jan_promo' },
 ];
 
 // Utility functions
@@ -107,6 +111,20 @@ const getSourceColor = (source) => {
   return colors[source] || '#667eea';
 };
 
+// Column configuration - defines all available columns
+const ALL_COLUMNS = [
+  { id: 'lead', label: 'Lead', alwaysVisible: true },
+  { id: 'email', label: 'Email', alwaysVisible: true },
+  { id: 'source', label: 'Source', defaultHidden: true },
+  { id: 'status', label: 'Status', alwaysVisible: true },
+  { id: 'priority', label: 'Priority', defaultHidden: true },
+  { id: 'siteVisit', label: 'Site Visit', defaultHidden: true },
+  { id: 'date', label: 'Date', alwaysVisible: true },
+];
+
+// Default visible columns (excludes hidden by default)
+const DEFAULT_VISIBLE_COLUMNS = ALL_COLUMNS.filter(col => !col.defaultHidden).map(col => col.id);
+
 /**
  * Admin Leads Page Component
  */
@@ -128,6 +146,26 @@ const AdminLeadsPage = () => {
   const [selectedLead, setSelectedLead] = useState(null);
   const [editNotes, setEditNotes] = useState('');
   const [editStatus, setEditStatus] = useState('');
+
+  // Column visibility state
+  const [visibleColumns, setVisibleColumns] = useState(DEFAULT_VISIBLE_COLUMNS);
+  const [columnMenuAnchor, setColumnMenuAnchor] = useState(null);
+
+  // Responsive breakpoint
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Toggle column visibility
+  const handleToggleColumn = (columnId) => {
+    setVisibleColumns((prev) => {
+      if (prev.includes(columnId)) {
+        return prev.filter((id) => id !== columnId);
+      }
+      return [...prev, columnId];
+    });
+  };
+
+  // Check if column is visible
+  const isColumnVisible = (columnId) => visibleColumns.includes(columnId);
 
   // Load leads data
   const loadLeads = useCallback(async () => {
@@ -215,23 +253,47 @@ const AdminLeadsPage = () => {
     }
   };
 
-  // Handle export
+  // Handle export - includes all data fields
   const handleExport = () => {
-    const headers = ['ID', 'Name', 'Email', 'Mobile', 'Source', 'Status', 'Priority', 'Site Visit', 'Created At'];
+    const headers = [
+      'ID',
+      'Name',
+      'Email',
+      'Mobile',
+      'Source',
+      'Status',
+      'Priority',
+      'Site Visit Requested',
+      'Site Visit Date',
+      'Created At',
+      'IP Address',
+      'Location',
+      'User Agent',
+      'UTM Source',
+      'UTM Medium',
+      'UTM Campaign',
+    ];
     const rows = filteredLeads.map(lead => [
       lead.id,
       lead.name,
       lead.email,
       lead.mobile,
-      lead.source,
-      lead.status,
+      formatSource(lead.source),
+      getStatusConfig(lead.status).label,
       lead.priority,
       lead.wantsSiteVisit ? 'Yes' : 'No',
+      lead.siteVisitDate || '',
       lead.createdAt,
+      lead.ipAddress || '',
+      lead.location || '',
+      lead.userAgent || '',
+      lead.utmSource || '',
+      lead.utmMedium || '',
+      lead.utmCampaign || '',
     ]);
 
     const csvContent = [headers, ...rows]
-      .map(row => row.map(cell => `"${cell || ''}"`).join(','))
+      .map(row => row.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(','))
       .join('\n');
 
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -438,7 +500,7 @@ const AdminLeadsPage = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'flex-start', md: 'flex-end' } }}>
+              <Box sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'flex-start', md: 'flex-end' }, flexWrap: 'wrap' }}>
                 <Button
                   variant="outlined"
                   size="small"
@@ -486,6 +548,27 @@ const AdminLeadsPage = () => {
                   Clear
                 </Button>
                 <Button
+                  variant="outlined"
+                  size="small"
+                  startIcon={<Icon icon="mdi:view-column" width={16} />}
+                  onClick={(e) => setColumnMenuAnchor(e.currentTarget)}
+                  sx={{
+                    borderRadius: 1.5,
+                    textTransform: 'none',
+                    fontSize: '0.8125rem',
+                    px: 1.5,
+                    py: 0.5,
+                    borderColor: 'grey.300',
+                    color: 'text.secondary',
+                    '&:hover': {
+                      borderColor: 'grey.400',
+                      backgroundColor: 'grey.50',
+                    },
+                  }}
+                >
+                  Columns
+                </Button>
+                <Button
                   variant="contained"
                   size="small"
                   startIcon={<Icon icon="mdi:download" width={16} />}
@@ -507,6 +590,42 @@ const AdminLeadsPage = () => {
                   Export
                 </Button>
               </Box>
+              {/* Column Selector Menu */}
+              <Menu
+                anchorEl={columnMenuAnchor}
+                open={Boolean(columnMenuAnchor)}
+                onClose={() => setColumnMenuAnchor(null)}
+                PaperProps={{
+                  sx: { minWidth: 200, mt: 1 },
+                }}
+              >
+                <Box sx={{ px: 2, py: 1 }}>
+                  <Typography variant="subtitle2" fontWeight="bold">
+                    Toggle Columns
+                  </Typography>
+                </Box>
+                <Divider />
+                {ALL_COLUMNS.filter(col => !col.alwaysVisible).map((column) => (
+                  <MenuItem
+                    key={column.id}
+                    onClick={() => handleToggleColumn(column.id)}
+                    sx={{ py: 0.5 }}
+                  >
+                    <ListItemIcon>
+                      <Checkbox
+                        checked={isColumnVisible(column.id)}
+                        size="small"
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#667eea',
+                          },
+                        }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={column.label} />
+                  </MenuItem>
+                ))}
+              </Menu>
             </Grid>
           </Grid>
         </Paper>
@@ -550,7 +669,7 @@ const AdminLeadsPage = () => {
             <Table>
               <TableHead>
                 <TableRow sx={{ bgcolor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)' }}>
-                  <TableCell padding="checkbox">
+                  <TableCell padding="checkbox" sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <Checkbox
                       indeterminate={selectedLeads.length > 0 && selectedLeads.length < filteredLeads.length}
                       checked={filteredLeads.length > 0 && selectedLeads.length === filteredLeads.length}
@@ -563,13 +682,27 @@ const AdminLeadsPage = () => {
                       }}
                     />
                   </TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Lead</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Priority</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Site Visit</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
+                  {isColumnVisible('lead') && (
+                    <TableCell sx={{ fontWeight: 600 }}>Lead</TableCell>
+                  )}
+                  {isColumnVisible('email') && (
+                    <TableCell sx={{ fontWeight: 600, display: { xs: 'none', md: 'table-cell' } }}>Email</TableCell>
+                  )}
+                  {isColumnVisible('source') && (
+                    <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
+                  )}
+                  {isColumnVisible('status') && (
+                    <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
+                  )}
+                  {isColumnVisible('priority') && (
+                    <TableCell sx={{ fontWeight: 600 }}>Priority</TableCell>
+                  )}
+                  {isColumnVisible('siteVisit') && (
+                    <TableCell sx={{ fontWeight: 600 }}>Site Visit</TableCell>
+                  )}
+                  {isColumnVisible('date') && (
+                    <TableCell sx={{ fontWeight: 600, display: { xs: 'none', sm: 'table-cell' } }}>Date</TableCell>
+                  )}
                   <TableCell align="right" sx={{ fontWeight: 600 }}>Actions</TableCell>
                 </TableRow>
               </TableHead>
@@ -596,7 +729,7 @@ const AdminLeadsPage = () => {
                               : 'transparent',
                           }}
                         >
-                          <TableCell padding="checkbox">
+                          <TableCell padding="checkbox" sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                             <Checkbox
                               checked={selectedLeads.includes(lead.id)}
                               onChange={(e) => {
@@ -608,87 +741,115 @@ const AdminLeadsPage = () => {
                               }}
                             />
                           </TableCell>
-                          <TableCell>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                              <Avatar
-                                sx={{
-                                  width: 36,
-                                  height: 36,
-                                  fontSize: '0.875rem',
-                                  bgcolor: getSourceColor(lead.source),
-                                  color: '#fff',
-                                }}
-                              >
-                                {lead.name?.[0]?.toUpperCase() || '?'}
-                              </Avatar>
-                              <Box>
-                                <Typography variant="body2" fontWeight={500}>
-                                  {lead.name}
-                                </Typography>
-                                <Typography variant="caption" color="text.secondary">
-                                  {lead.mobile}
-                                </Typography>
+                          {isColumnVisible('lead') && (
+                            <TableCell>
+                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                                <Avatar
+                                  sx={{
+                                    width: 36,
+                                    height: 36,
+                                    fontSize: '0.875rem',
+                                    bgcolor: getSourceColor(lead.source),
+                                    color: '#fff',
+                                  }}
+                                >
+                                  {lead.name?.[0]?.toUpperCase() || '?'}
+                                </Avatar>
+                                <Box>
+                                  <Typography variant="body2" fontWeight={500}>
+                                    {lead.name}
+                                  </Typography>
+                                  <Typography variant="caption" color="text.secondary">
+                                    {lead.mobile}
+                                  </Typography>
+                                  {/* Show email on mobile when email column is hidden */}
+                                  <Typography
+                                    variant="caption"
+                                    color="text.secondary"
+                                    sx={{
+                                      display: { xs: 'block', md: 'none' },
+                                      fontSize: '0.7rem',
+                                      maxWidth: 150,
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                    }}
+                                  >
+                                    {lead.email}
+                                  </Typography>
+                                </Box>
                               </Box>
-                            </Box>
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="body2" color="text.secondary">
-                              {lead.email}
-                            </Typography>
-                          </TableCell>
-                          <TableCell>
-                            <Chip
-                              label={formatSource(lead.source)}
-                              size="small"
-                              variant="outlined"
-                              sx={{
-                                borderRadius: 1.5,
-                                fontSize: '0.75rem',
-                                borderColor: getSourceColor(lead.source),
-                                color: getSourceColor(lead.source),
-                              }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Chip
-                              label={statusConfig.label}
-                              size="small"
-                              sx={{
-                                bgcolor: `${statusConfig.color}15`,
-                                color: statusConfig.color,
-                                fontWeight: 500,
-                                textTransform: 'capitalize',
-                                borderRadius: 1.5,
-                                fontSize: '0.75rem',
-                              }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <Chip
-                              label={lead.priority}
-                              size="small"
-                              sx={{
-                                bgcolor: `${getPriorityColor(lead.priority)}15`,
-                                color: getPriorityColor(lead.priority),
-                                fontWeight: 500,
-                                textTransform: 'capitalize',
-                                borderRadius: 1.5,
-                                fontSize: '0.75rem',
-                              }}
-                            />
-                          </TableCell>
-                          <TableCell>
-                            {lead.wantsSiteVisit ? (
-                              <Icon icon="mdi:check-circle" style={{ color: '#4caf50', fontSize: 20 }} />
-                            ) : (
-                              <Typography color="text.disabled">-</Typography>
-                            )}
-                          </TableCell>
-                          <TableCell>
-                            <Typography variant="caption" color="text.secondary">
-                              {formatDate(lead.createdAt)}
-                            </Typography>
-                          </TableCell>
+                            </TableCell>
+                          )}
+                          {isColumnVisible('email') && (
+                            <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>
+                              <Typography variant="body2" color="text.secondary">
+                                {lead.email}
+                              </Typography>
+                            </TableCell>
+                          )}
+                          {isColumnVisible('source') && (
+                            <TableCell>
+                              <Chip
+                                label={formatSource(lead.source)}
+                                size="small"
+                                variant="outlined"
+                                sx={{
+                                  borderRadius: 1.5,
+                                  fontSize: '0.75rem',
+                                  borderColor: getSourceColor(lead.source),
+                                  color: getSourceColor(lead.source),
+                                }}
+                              />
+                            </TableCell>
+                          )}
+                          {isColumnVisible('status') && (
+                            <TableCell>
+                              <Chip
+                                label={statusConfig.label}
+                                size="small"
+                                sx={{
+                                  bgcolor: `${statusConfig.color}15`,
+                                  color: statusConfig.color,
+                                  fontWeight: 500,
+                                  textTransform: 'capitalize',
+                                  borderRadius: 1.5,
+                                  fontSize: '0.75rem',
+                                }}
+                              />
+                            </TableCell>
+                          )}
+                          {isColumnVisible('priority') && (
+                            <TableCell>
+                              <Chip
+                                label={lead.priority}
+                                size="small"
+                                sx={{
+                                  bgcolor: `${getPriorityColor(lead.priority)}15`,
+                                  color: getPriorityColor(lead.priority),
+                                  fontWeight: 500,
+                                  textTransform: 'capitalize',
+                                  borderRadius: 1.5,
+                                  fontSize: '0.75rem',
+                                }}
+                              />
+                            </TableCell>
+                          )}
+                          {isColumnVisible('siteVisit') && (
+                            <TableCell>
+                              {lead.wantsSiteVisit ? (
+                                <Icon icon="mdi:check-circle" style={{ color: '#4caf50', fontSize: 20 }} />
+                              ) : (
+                                <Typography color="text.disabled">-</Typography>
+                              )}
+                            </TableCell>
+                          )}
+                          {isColumnVisible('date') && (
+                            <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+                              <Typography variant="caption" color="text.secondary">
+                                {formatDate(lead.createdAt)}
+                              </Typography>
+                            </TableCell>
+                          )}
                           <TableCell align="right">
                             <Tooltip title="View Details">
                               <IconButton
@@ -715,7 +876,7 @@ const AdminLeadsPage = () => {
                 </AnimatePresence>
                 {filteredLeads.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={9} align="center" sx={{ py: 6 }}>
+                    <TableCell colSpan={visibleColumns.length + 2} align="center" sx={{ py: 6 }}>
                       <Icon icon="mdi:email-search-outline" style={{ fontSize: 48, opacity: 0.3 }} />
                       <Typography color="text.secondary" sx={{ mt: 1 }}>
                         No leads found
@@ -843,6 +1004,62 @@ const AdminLeadsPage = () => {
                         </Box>
                       )}
                     </Box>
+                  </Grid>
+
+                  {/* Tracking Information */}
+                  <Grid item xs={12}>
+                    <Divider sx={{ my: 1 }} />
+                    <Typography variant="subtitle2" fontWeight="bold" color="primary" gutterBottom sx={{ mt: 2 }}>
+                      Tracking Information
+                    </Typography>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={6}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography variant="body2" color="text.secondary">IP Address:</Typography>
+                            <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>{selectedLead.ipAddress || '-'}</Typography>
+                          </Box>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography variant="body2" color="text.secondary">Location:</Typography>
+                            <Typography variant="body2">{selectedLead.location || '-'}</Typography>
+                          </Box>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography variant="body2" color="text.secondary">UTM Source:</Typography>
+                            <Typography variant="body2">{selectedLead.utmSource || '-'}</Typography>
+                          </Box>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography variant="body2" color="text.secondary">UTM Medium:</Typography>
+                            <Typography variant="body2">{selectedLead.utmMedium || '-'}</Typography>
+                          </Box>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography variant="body2" color="text.secondary">UTM Campaign:</Typography>
+                            <Typography variant="body2">{selectedLead.utmCampaign || '-'}</Typography>
+                          </Box>
+                        </Box>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Box>
+                          <Typography variant="body2" color="text.secondary" gutterBottom>User Agent:</Typography>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              display: 'block',
+                              fontFamily: 'monospace',
+                              bgcolor: 'grey.100',
+                              p: 1,
+                              borderRadius: 1,
+                              wordBreak: 'break-all',
+                            }}
+                          >
+                            {selectedLead.userAgent || '-'}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
                   </Grid>
 
                   {/* Update Status */}
