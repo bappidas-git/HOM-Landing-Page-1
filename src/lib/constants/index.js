@@ -30,24 +30,7 @@ export {
   AUDIT_ACTION_TYPES,
   AUDIT_MODULE_TYPES,
   DASHBOARD_STATS_CONFIG,
-  USER_ROLE_OPTIONS,
 } from './adminNavigation';
-
-// Permissions
-export {
-  USER_ROLES,
-  ROLE_LABELS,
-  ROLE_COLORS,
-  ACCESS_LEVELS,
-  MODULES,
-  ROLE_PERMISSIONS,
-  getModuleAccess,
-  canViewModule,
-  canEditModule,
-  isAdminRole,
-  getRoleOptions,
-  getAccessibleModules,
-} from './permissions';
 
 // SEO Defaults
 export {
