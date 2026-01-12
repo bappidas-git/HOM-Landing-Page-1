@@ -500,95 +500,83 @@ const AdminLeadsPage = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box sx={{ display: 'flex', gap: 1, justifyContent: { xs: 'flex-start', md: 'flex-end' }, flexWrap: 'wrap' }}>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  startIcon={<Icon icon="mdi:refresh" width={16} />}
-                  onClick={loadLeads}
-                  sx={{
-                    borderRadius: 1.5,
-                    textTransform: 'none',
-                    fontSize: '0.8125rem',
-                    px: 1.5,
-                    py: 0.5,
-                    borderColor: 'grey.300',
-                    color: 'text.secondary',
-                    '&:hover': {
-                      borderColor: 'grey.400',
-                      backgroundColor: 'grey.50',
-                    },
-                  }}
-                >
-                  Refresh
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  startIcon={<Icon icon="mdi:filter-remove" width={16} />}
-                  onClick={() => {
-                    setSourceFilter('all');
-                    setStatusFilter('all');
-                    setSearchQuery('');
-                  }}
-                  sx={{
-                    borderRadius: 1.5,
-                    textTransform: 'none',
-                    fontSize: '0.8125rem',
-                    px: 1.5,
-                    py: 0.5,
-                    borderColor: 'grey.300',
-                    color: 'text.secondary',
-                    '&:hover': {
-                      borderColor: 'grey.400',
-                      backgroundColor: 'grey.50',
-                    },
-                  }}
-                >
-                  Clear
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  startIcon={<Icon icon="mdi:view-column" width={16} />}
-                  onClick={(e) => setColumnMenuAnchor(e.currentTarget)}
-                  sx={{
-                    borderRadius: 1.5,
-                    textTransform: 'none',
-                    fontSize: '0.8125rem',
-                    px: 1.5,
-                    py: 0.5,
-                    borderColor: 'grey.300',
-                    color: 'text.secondary',
-                    '&:hover': {
-                      borderColor: 'grey.400',
-                      backgroundColor: 'grey.50',
-                    },
-                  }}
-                >
-                  Columns
-                </Button>
-                <Button
-                  variant="contained"
-                  size="small"
-                  startIcon={<Icon icon="mdi:download" width={16} />}
-                  onClick={handleExport}
-                  sx={{
-                    borderRadius: 1.5,
-                    textTransform: 'none',
-                    fontSize: '0.8125rem',
-                    px: 1.5,
-                    py: 0.5,
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    boxShadow: '0 2px 4px rgba(102, 126, 234, 0.25)',
-                    '&:hover': {
-                      background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
-                      boxShadow: '0 3px 6px rgba(102, 126, 234, 0.35)',
-                    },
-                  }}
-                >
-                  Export
-                </Button>
+              <Box sx={{ display: 'flex', gap: 0.5, justifyContent: { xs: 'flex-start', md: 'flex-end' }, alignItems: 'center' }}>
+                <Tooltip title="Refresh" arrow>
+                  <IconButton
+                    size="small"
+                    onClick={loadLeads}
+                    sx={{
+                      border: '1px solid',
+                      borderColor: 'grey.300',
+                      borderRadius: 1.5,
+                      color: 'text.secondary',
+                      '&:hover': {
+                        borderColor: 'grey.400',
+                        backgroundColor: 'grey.50',
+                      },
+                    }}
+                  >
+                    <Icon icon="mdi:refresh" width={18} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Clear Filters" arrow>
+                  <IconButton
+                    size="small"
+                    onClick={() => {
+                      setSourceFilter('all');
+                      setStatusFilter('all');
+                      setSearchQuery('');
+                    }}
+                    sx={{
+                      border: '1px solid',
+                      borderColor: 'grey.300',
+                      borderRadius: 1.5,
+                      color: 'text.secondary',
+                      '&:hover': {
+                        borderColor: 'grey.400',
+                        backgroundColor: 'grey.50',
+                      },
+                    }}
+                  >
+                    <Icon icon="mdi:filter-remove" width={18} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Columns" arrow>
+                  <IconButton
+                    size="small"
+                    onClick={(e) => setColumnMenuAnchor(e.currentTarget)}
+                    sx={{
+                      border: '1px solid',
+                      borderColor: 'grey.300',
+                      borderRadius: 1.5,
+                      color: 'text.secondary',
+                      '&:hover': {
+                        borderColor: 'grey.400',
+                        backgroundColor: 'grey.50',
+                      },
+                    }}
+                  >
+                    <Icon icon="mdi:view-column" width={18} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Export" arrow>
+                  <IconButton
+                    size="small"
+                    onClick={handleExport}
+                    sx={{
+                      borderRadius: 1.5,
+                      color: 'white',
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      boxShadow: '0 2px 4px rgba(102, 126, 234, 0.25)',
+                      '&:hover': {
+                        background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
+                        boxShadow: '0 3px 6px rgba(102, 126, 234, 0.35)',
+                      },
+                    }}
+                  >
+                    <Icon icon="mdi:download" width={18} />
+                  </IconButton>
+                </Tooltip>
               </Box>
               {/* Column Selector Menu */}
               <Menu
