@@ -216,8 +216,13 @@ const AdminLeadsPage = () => {
     setPage(0);
   }, [searchQuery, sourceFilter, statusFilter, leads]);
 
-  // Handle view details
+  // Handle view details - navigate to lead details page
   const handleViewDetails = (lead) => {
+    router.push(`/admin/leads/${lead.id}`);
+  };
+
+  // Handle edit lead - open dialog for quick edit
+  const handleEditLead = (lead) => {
     setSelectedLead(lead);
     setEditNotes(lead.notes || '');
     setEditStatus(lead.status);
