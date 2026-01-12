@@ -404,4 +404,5 @@ export const useLeadFormContext = () => {
   return context;
 };
 
-export default LeadFormContext;
+// Note: LeadFormContext is not exported as default to prevent Fast Refresh issues
+// Use useLeadFormContext hook or LeadFormProvider instead

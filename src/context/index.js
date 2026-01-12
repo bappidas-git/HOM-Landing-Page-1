@@ -3,45 +3,42 @@
  * Centralized exports for all context providers and hooks
  */
 
-// Auth Context
+// Auth Context - only export components and hooks, not the context object itself
 export {
-  default as AuthContext,
   AuthProvider,
   useAuthContext,
   withAuth,
 } from './AuthContext';
 
-// UI Context
+// UI Context - only export components and hooks, not the context object itself
 export {
-  default as UIContext,
   UIProvider,
   useUIContext,
 } from './UIContext';
 
-// Lead Form Context
+// Lead Form Context - only export components and hooks, not the context object itself
 export {
-  default as LeadFormContext,
   LeadFormProvider,
   useLeadFormContext,
 } from './LeadFormContext';
+
+// Import providers at module level for Fast Refresh compatibility
+import { AuthProvider as AuthProviderComponent } from './AuthContext';
+import { UIProvider as UIProviderComponent } from './UIContext';
+import { LeadFormProvider as LeadFormProviderComponent } from './LeadFormContext';
 
 /**
  * Combined providers wrapper component
  * Wraps the application with all necessary context providers
  */
 export const AppProviders = ({ children }) => {
-  // Import providers dynamically to avoid circular dependencies
-  const { AuthProvider } = require('./AuthContext');
-  const { UIProvider } = require('./UIContext');
-  const { LeadFormProvider } = require('./LeadFormContext');
-
   return (
-    <AuthProvider>
-      <UIProvider>
-        <LeadFormProvider>
+    <AuthProviderComponent>
+      <UIProviderComponent>
+        <LeadFormProviderComponent>
           {children}
-        </LeadFormProvider>
-      </UIProvider>
-    </AuthProvider>
+        </LeadFormProviderComponent>
+      </UIProviderComponent>
+    </AuthProviderComponent>
   );
 };

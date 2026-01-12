@@ -277,4 +277,5 @@ export const withAuth = (Component, options = {}) => {
   return WrappedComponent;
 };
 
-export default AuthContext;
+// Note: AuthContext is not exported as default to prevent Fast Refresh issues
+// Use useAuthContext hook or AuthProvider instead
