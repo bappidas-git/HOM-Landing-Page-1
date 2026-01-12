@@ -14,6 +14,16 @@ import {
   refreshToken,
 } from '@/lib/api/auth';
 import { ADMIN_ROUTES } from '@/lib/constants';
+import {
+  USER_ROLES,
+  ROLE_LABELS,
+  ROLE_COLORS,
+  canViewModule,
+  canEditModule,
+  isAdminRole,
+  getModuleAccess,
+  ACCESS_LEVELS,
+} from '@/lib/constants/permissions';
 
 /**
  * Authentication Context
@@ -180,8 +190,56 @@ export const AuthProvider = ({ children }) => {
    * @returns {boolean} True if user is admin
    */
   const isAdmin = useMemo(() => {
-    return hasRole('admin');
-  }, [hasRole]);
+    return user ? isAdminRole(user.role) : false;
+  }, [user]);
+
+  /**
+   * Get user role label
+   * @returns {string} Role label
+   */
+  const roleLabel = useMemo(() => {
+    if (!user?.role) return '';
+    return ROLE_LABELS[user.role] || user.role;
+  }, [user]);
+
+  /**
+   * Get user role color
+   * @returns {string} Role color
+   */
+  const roleColor = useMemo(() => {
+    if (!user?.role) return '#9e9e9e';
+    return ROLE_COLORS[user.role] || '#9e9e9e';
+  }, [user]);
+
+  /**
+   * Check if user can view a module
+   * @param {string} module - Module name
+   * @returns {boolean} True if can view
+   */
+  const canView = useCallback((module) => {
+    if (!user?.role) return false;
+    return canViewModule(user.role, module);
+  }, [user]);
+
+  /**
+   * Check if user can edit a module
+   * @param {string} module - Module name
+   * @returns {boolean} True if can edit
+   */
+  const canEdit = useCallback((module) => {
+    if (!user?.role) return false;
+    return canEditModule(user.role, module);
+  }, [user]);
+
+  /**
+   * Get access level for a module
+   * @param {string} module - Module name
+   * @returns {string} Access level (full, read, none)
+   */
+  const getAccess = useCallback((module) => {
+    if (!user?.role) return ACCESS_LEVELS.NONE;
+    return getModuleAccess(user.role, module);
+  }, [user]);
 
   /**
    * Context value
@@ -194,6 +252,8 @@ export const AuthProvider = ({ children }) => {
     error,
     isInitialized,
     isAdmin,
+    roleLabel,
+    roleColor,
 
     // Actions
     login,
@@ -202,6 +262,13 @@ export const AuthProvider = ({ children }) => {
     refreshAuthToken,
     clearError,
     hasRole,
+    canView,
+    canEdit,
+    getAccess,
+
+    // Constants
+    USER_ROLES,
+    ACCESS_LEVELS,
   }), [
     user,
     isAuthenticated,
@@ -209,12 +276,17 @@ export const AuthProvider = ({ children }) => {
     error,
     isInitialized,
     isAdmin,
+    roleLabel,
+    roleColor,
     login,
     logout,
     refreshUser,
     refreshAuthToken,
     clearError,
     hasRole,
+    canView,
+    canEdit,
+    getAccess,
   ]);
 
   return (
@@ -244,13 +316,19 @@ export const useAuthContext = () => {
  * @param {React.Component} Component - Component to wrap
  * @param {Object} options - Options
  * @param {string} options.redirectTo - Redirect path if not authenticated
+ * @param {string} options.requiredModule - Module that user must have access to
+ * @param {boolean} options.requireEdit - Whether edit access is required (default: false)
  * @returns {React.Component} Wrapped component
  */
 export const withAuth = (Component, options = {}) => {
-  const { redirectTo = ADMIN_ROUTES.LOGIN } = options;
+  const {
+    redirectTo = ADMIN_ROUTES.LOGIN,
+    requiredModule = null,
+    requireEdit = false,
+  } = options;
 
   const WrappedComponent = (props) => {
-    const { isAuthenticated, isLoading, isInitialized } = useAuthContext();
+    const { isAuthenticated, isLoading, isInitialized, canView, canEdit } = useAuthContext();
     const router = useRouter();
 
     useEffect(() => {
@@ -258,6 +336,16 @@ export const withAuth = (Component, options = {}) => {
         router.replace(redirectTo);
       }
     }, [isAuthenticated, isLoading, isInitialized, router]);
+
+    // Check module access
+    useEffect(() => {
+      if (isInitialized && !isLoading && isAuthenticated && requiredModule) {
+        const hasAccess = requireEdit ? canEdit(requiredModule) : canView(requiredModule);
+        if (!hasAccess) {
+          router.replace(ADMIN_ROUTES.DASHBOARD);
+        }
+      }
+    }, [isAuthenticated, isLoading, isInitialized, router, canView, canEdit]);
 
     // Show nothing while checking auth
     if (!isInitialized || isLoading) {
@@ -267,6 +355,14 @@ export const withAuth = (Component, options = {}) => {
     // Show nothing if not authenticated (will redirect)
     if (!isAuthenticated) {
       return null;
+    }
+
+    // Check module access
+    if (requiredModule) {
+      const hasAccess = requireEdit ? canEdit(requiredModule) : canView(requiredModule);
+      if (!hasAccess) {
+        return null;
+      }
     }
 
     return <Component {...props} />;
