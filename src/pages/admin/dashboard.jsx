@@ -3,8 +3,8 @@
  * Main dashboard with stats, charts, and recent leads - Matching reference code design
  */
 
-import { useState, useEffect, useCallback } from 'react';
-import Head from 'next/head';
+import { useState, useEffect, useCallback } from "react";
+import Head from "next/head";
 import {
   Box,
   Grid,
@@ -23,17 +23,29 @@ import {
   IconButton,
   Tooltip,
   useTheme,
-} from '@mui/material';
-import { Icon } from '@iconify/react';
-import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
-import AdminLayout from '@/components/admin/AdminLayout';
-import { LeadsChart, SourcePieChart, StatusBarChart } from '@/components/admin/Charts';
-import { withAuth } from '@/context/AuthContext';
-import { ADMIN_ROUTES, LEAD_STATUS_OPTIONS } from '@/lib/constants';
+} from "@mui/material";
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import AdminLayout from "@/components/admin/AdminLayout";
+import {
+  LeadsChart,
+  SourcePieChart,
+  StatusBarChart,
+} from "@/components/admin/Charts";
+import { withAuth } from "@/context/AuthContext";
+import { ADMIN_ROUTES, LEAD_STATUS_OPTIONS } from "@/lib/constants";
 
 // StatCard Component - Matching reference code design
-const StatCard = ({ title, value, icon, color, trend, trendValue, loading }) => {
+const StatCard = ({
+  title,
+  value,
+  icon,
+  color,
+  trend,
+  trendValue,
+  loading,
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,27 +57,33 @@ const StatCard = ({ title, value, icon, color, trend, trendValue, loading }) => 
         sx={{
           p: 3,
           borderRadius: 3,
-          border: '1px solid',
-          borderColor: 'divider',
-          height: '100%',
-          position: 'relative',
-          overflow: 'hidden',
+          border: "1px solid",
+          borderColor: "divider",
+          height: "100%",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
         {/* Background Decoration */}
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
             top: -20,
             right: -20,
             width: 100,
             height: 100,
-            borderRadius: '50%',
+            borderRadius: "50%",
             background: `${color}15`,
           }}
         />
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
           <Box>
             <Typography variant="body2" color="text.secondary" gutterBottom>
               {title}
@@ -78,18 +96,20 @@ const StatCard = ({ title, value, icon, color, trend, trendValue, loading }) => 
               </Typography>
             )}
             {trend && !loading && (
-              <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+              <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
                 <Icon
-                  icon={trend === 'up' ? 'mdi:trending-up' : 'mdi:trending-down'}
+                  icon={
+                    trend === "up" ? "mdi:trending-up" : "mdi:trending-down"
+                  }
                   style={{
                     fontSize: 18,
-                    color: trend === 'up' ? '#4caf50' : '#f44336',
+                    color: trend === "up" ? "#4caf50" : "#f44336",
                     marginRight: 4,
                   }}
                 />
                 <Typography
                   variant="caption"
-                  sx={{ color: trend === 'up' ? '#4caf50' : '#f44336' }}
+                  sx={{ color: trend === "up" ? "#4caf50" : "#f44336" }}
                 >
                   {trendValue}
                 </Typography>
@@ -123,13 +143,13 @@ const mockStats = {
 };
 
 const mockLeadsByDay = [
-  { date: '2026-01-05', count: 12 },
-  { date: '2026-01-06', count: 18 },
-  { date: '2026-01-07', count: 15 },
-  { date: '2026-01-08', count: 22 },
-  { date: '2026-01-09', count: 8 },
-  { date: '2026-01-10', count: 19 },
-  { date: '2026-01-11', count: 14 },
+  { date: "2026-01-05", count: 12 },
+  { date: "2026-01-06", count: 18 },
+  { date: "2026-01-07", count: 15 },
+  { date: "2026-01-08", count: 22 },
+  { date: "2026-01-09", count: 8 },
+  { date: "2026-01-10", count: 19 },
+  { date: "2026-01-11", count: 14 },
 ];
 
 const mockLeadsBySource = {
@@ -149,44 +169,103 @@ const mockLeadsByStatus = {
 };
 
 const mockTopLocations = [
-  { city: 'Bangalore', count: 89 },
-  { city: 'Mumbai', count: 34 },
-  { city: 'Chennai', count: 18 },
-  { city: 'Hyderabad', count: 15 },
+  { city: "Bangalore", count: 89 },
+  { city: "Mumbai", count: 34 },
+  { city: "Chennai", count: 18 },
+  { city: "Hyderabad", count: 15 },
 ];
 
 const mockRecentLeads = [
-  { id: 1, name: 'Rahul Kumar', email: 'rahul@email.com', mobile: '9876543210', source: 'hero_form', status: 'new', wantsSiteVisit: true, createdAt: '2026-01-11T10:30:00' },
-  { id: 2, name: 'Priya Sharma', email: 'priya@email.com', mobile: '9876543211', source: 'popup_form', status: 'contacted', wantsSiteVisit: false, createdAt: '2026-01-11T09:15:00' },
-  { id: 3, name: 'Amit Singh', email: 'amit@email.com', mobile: '9876543212', source: 'cta_form', status: 'site_visit_scheduled', wantsSiteVisit: true, createdAt: '2026-01-10T16:45:00' },
-  { id: 4, name: 'Deepika Patel', email: 'deepika@email.com', mobile: '9876543213', source: 'hero_form', status: 'visited', wantsSiteVisit: true, createdAt: '2026-01-10T14:20:00' },
-  { id: 5, name: 'Vikram Reddy', email: 'vikram@email.com', mobile: '9876543214', source: 'popup_form', status: 'negotiation', wantsSiteVisit: false, createdAt: '2026-01-10T11:00:00' },
-  { id: 6, name: 'Sneha Nair', email: 'sneha@email.com', mobile: '9876543215', source: 'hero_form', status: 'converted', wantsSiteVisit: true, createdAt: '2026-01-09T15:30:00' },
+  {
+    id: 1,
+    name: "Rahul Kumar",
+    email: "rahul@email.com",
+    mobile: "9876543210",
+    source: "hero_form",
+    status: "new",
+    wantsSiteVisit: true,
+    createdAt: "2026-01-11T10:30:00",
+  },
+  {
+    id: 2,
+    name: "Priya Sharma",
+    email: "priya@email.com",
+    mobile: "9876543211",
+    source: "popup_form",
+    status: "contacted",
+    wantsSiteVisit: false,
+    createdAt: "2026-01-11T09:15:00",
+  },
+  {
+    id: 3,
+    name: "Amit Singh",
+    email: "amit@email.com",
+    mobile: "9876543212",
+    source: "cta_form",
+    status: "site_visit_scheduled",
+    wantsSiteVisit: true,
+    createdAt: "2026-01-10T16:45:00",
+  },
+  {
+    id: 4,
+    name: "Deepika Patel",
+    email: "deepika@email.com",
+    mobile: "9876543213",
+    source: "hero_form",
+    status: "visited",
+    wantsSiteVisit: true,
+    createdAt: "2026-01-10T14:20:00",
+  },
+  {
+    id: 5,
+    name: "Vikram Reddy",
+    email: "vikram@email.com",
+    mobile: "9876543214",
+    source: "popup_form",
+    status: "negotiation",
+    wantsSiteVisit: false,
+    createdAt: "2026-01-10T11:00:00",
+  },
+  {
+    id: 6,
+    name: "Sneha Nair",
+    email: "sneha@email.com",
+    mobile: "9876543215",
+    source: "hero_form",
+    status: "converted",
+    wantsSiteVisit: true,
+    createdAt: "2026-01-09T15:30:00",
+  },
 ];
 
 // Utility functions
 const formatDate = (dateString) => {
-  if (!dateString) return '-';
+  if (!dateString) return "-";
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-IN', {
-    day: 'numeric',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 };
 
 const formatSource = (source) => {
   const sources = {
-    hero_form: 'Hero Form',
-    popup_form: 'Popup Form',
-    cta_form: 'CTA Form',
+    hero_form: "Hero Form",
+    popup_form: "Popup Form",
+    cta_form: "CTA Form",
   };
   return sources[source] || source;
 };
 
 const getStatusConfig = (status) => {
-  return LEAD_STATUS_OPTIONS.find((opt) => opt.value === status) || { label: status, color: '#9e9e9e' };
+  return (
+    LEAD_STATUS_OPTIONS.find((opt) => opt.value === status) || {
+      label: status,
+      color: "#9e9e9e",
+    }
+  );
 };
 
 /**
@@ -208,7 +287,7 @@ const AdminDashboardPage = () => {
     setLoading(true);
     try {
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
       // Set mock data
       setStats(mockStats);
@@ -218,7 +297,7 @@ const AdminDashboardPage = () => {
       setTopLocations(mockTopLocations);
       setRecentLeads(mockRecentLeads);
     } catch (error) {
-      console.error('Failed to load dashboard data:', error);
+      console.error("Failed to load dashboard data:", error);
     } finally {
       setLoading(false);
     }
@@ -235,8 +314,15 @@ const AdminDashboardPage = () => {
 
   // Handle export leads
   const handleExportLeads = () => {
-    const headers = ['Name', 'Email', 'Mobile', 'Source', 'Status', 'Created At'];
-    const rows = recentLeads.map(lead => [
+    const headers = [
+      "Name",
+      "Email",
+      "Mobile",
+      "Source",
+      "Status",
+      "Created At",
+    ];
+    const rows = recentLeads.map((lead) => [
       lead.name,
       lead.email,
       lead.mobile,
@@ -246,14 +332,16 @@ const AdminDashboardPage = () => {
     ]);
 
     const csvContent = [headers, ...rows]
-      .map(row => row.join(','))
-      .join('\n');
+      .map((row) => row.join(","))
+      .join("\n");
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `leads-export-${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `leads-export-${
+      new Date().toISOString().split("T")[0]
+    }.csv`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -265,16 +353,28 @@ const AdminDashboardPage = () => {
           <Grid container spacing={3}>
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <Grid item xs={4} md={6} lg={4} key={i}>
-                <Skeleton variant="rounded" height={140} sx={{ borderRadius: 3 }} />
+                <Skeleton
+                  variant="rounded"
+                  height={140}
+                  sx={{ borderRadius: 3 }}
+                />
               </Grid>
             ))}
           </Grid>
           <Grid container spacing={3} sx={{ mt: 1 }}>
             <Grid item xs={12} lg={8}>
-              <Skeleton variant="rounded" height={400} sx={{ borderRadius: 3 }} />
+              <Skeleton
+                variant="rounded"
+                height={400}
+                sx={{ borderRadius: 3 }}
+              />
             </Grid>
             <Grid item xs={12} lg={4}>
-              <Skeleton variant="rounded" height={400} sx={{ borderRadius: 3 }} />
+              <Skeleton
+                variant="rounded"
+                height={400}
+                sx={{ borderRadius: 3 }}
+              />
             </Grid>
           </Grid>
         </Box>
@@ -295,7 +395,8 @@ const AdminDashboardPage = () => {
             Dashboard
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Welcome back! Here&apos;s what&apos;s happening with your leads today.
+            Welcome back! Here&apos;s what&apos;s happening with your leads
+            today.
           </Typography>
         </Box>
 
@@ -408,14 +509,20 @@ const AdminDashboardPage = () => {
             <Paper
               elevation={0}
               sx={{
-                height: '100%',
+                height: "100%",
                 borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'divider',
-                overflow: 'hidden',
+                border: "1px solid",
+                borderColor: "divider",
+                overflow: "hidden",
               }}
             >
-              <Box sx={{ p: 2.5, borderBottom: '1px solid', borderColor: 'divider' }}>
+              <Box
+                sx={{
+                  p: 2.5,
+                  borderBottom: "1px solid",
+                  borderColor: "divider",
+                }}
+              >
                 <Typography variant="h6" fontWeight="bold">
                   Top Locations
                 </Typography>
@@ -425,20 +532,21 @@ const AdminDashboardPage = () => {
                   <Box
                     key={location.city}
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
+                      display: "flex",
+                      alignItems: "center",
                       gap: 2,
                       py: 1.5,
-                      borderBottom: index < topLocations.length - 1 ? '1px solid' : 'none',
-                      borderColor: 'divider',
+                      borderBottom:
+                        index < topLocations.length - 1 ? "1px solid" : "none",
+                      borderColor: "divider",
                     }}
                   >
                     <Avatar
                       sx={{
                         width: 36,
                         height: 36,
-                        bgcolor: 'rgba(102, 126, 234, 0.1)',
-                        color: '#667eea',
+                        bgcolor: "rgba(102, 126, 234, 0.1)",
+                        color: "#667eea",
                       }}
                     >
                       <Icon icon="mdi:map-marker" />
@@ -455,10 +563,13 @@ const AdminDashboardPage = () => {
                       label={`#${index + 1}`}
                       size="small"
                       sx={{
-                        bgcolor: index === 0 ? 'rgba(201, 162, 39, 0.15)' : 'rgba(26, 26, 46, 0.08)',
-                        color: index === 0 ? '#c9a227' : 'text.secondary',
+                        bgcolor:
+                          index === 0
+                            ? "rgba(201, 162, 39, 0.15)"
+                            : "rgba(26, 26, 46, 0.08)",
+                        color: index === 0 ? "#c9a227" : "text.secondary",
                         fontWeight: 600,
-                        fontSize: '0.7rem',
+                        fontSize: "0.7rem",
                       }}
                     />
                   </Box>
@@ -472,61 +583,110 @@ const AdminDashboardPage = () => {
             <Paper
               elevation={0}
               sx={{
-                height: '100%',
+                height: "100%",
                 borderRadius: 3,
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: '#fff',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                color: "#fff",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
                 p: 3,
               }}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}
+              >
                 <Box
                   sx={{
                     p: 1.5,
                     borderRadius: 2,
-                    backgroundColor: 'rgba(255,255,255,0.15)',
+                    backgroundColor: "rgba(255,255,255,0.15)",
                   }}
                 >
                   <Icon icon="mdi:trending-up" style={{ fontSize: 24 }} />
                 </Box>
-                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 700, color: "#ffffff !important" }}
+                >
                   Performance Summary
                 </Typography>
               </Box>
 
               <Box>
-                <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ opacity: 0.9, mb: 0.5, color: "#ffffff !important" }}
+                >
                   Conversion Rate
                 </Typography>
-                <Typography variant="h3" sx={{ fontWeight: 800, mb: 3 }}>
+                <Typography
+                  variant="h3"
+                  sx={{ fontWeight: 800, mb: 3, color: "#69da00 !important" }}
+                >
                   {stats.conversionRate}%
                 </Typography>
 
-                <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.2)', pt: 2 }} />
+                <Box
+                  sx={{ borderTop: "1px solid rgba(255,255,255,0.2)", pt: 2 }}
+                />
 
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    mt: 2,
+                  }}
+                >
                   <Box>
-                    <Typography variant="caption" sx={{ opacity: 0.9 }}>
+                    <Typography
+                      variant="caption"
+                      sx={{ opacity: 0.9, color: "#e4e4e4 !important" }}
+                    >
                       Total Leads
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        color: "#fff !important",
+                        paddingLeft: "20px",
+                      }}
+                    >
                       {stats.totalLeads}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" sx={{ opacity: 0.9 }}>
+                    <Typography
+                      variant="caption"
+                      sx={{ opacity: 0.9, color: "#e4e4e4 !important" }}
+                    >
                       Converted
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#69f0ae' }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        color: "#69f0ae",
+                        paddingLeft: "20px",
+                      }}
+                    >
                       {stats.convertedLeads}
                     </Typography>
                   </Box>
                   <Box>
-                    <Typography variant="caption" sx={{ opacity: 0.9 }}>
+                    <Typography
+                      variant="caption"
+                      sx={{ opacity: 0.9, color: "#e4e4e4 !important" }}
+                    >
                       Site Visits
                     </Typography>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#ffcc80' }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 700,
+                        color: "#ffcc80",
+                        paddingLeft: "20px",
+                      }}
+                    >
                       {stats.siteVisits}
                     </Typography>
                   </Box>
@@ -542,19 +702,19 @@ const AdminDashboardPage = () => {
           sx={{
             mt: 3,
             borderRadius: 3,
-            border: '1px solid',
-            borderColor: 'divider',
-            overflow: 'hidden',
+            border: "1px solid",
+            borderColor: "divider",
+            overflow: "hidden",
           }}
         >
           <Box
             sx={{
               p: 2.5,
-              borderBottom: '1px solid',
-              borderColor: 'divider',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              borderBottom: "1px solid",
+              borderColor: "divider",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
             <Typography variant="h6" fontWeight="bold">
@@ -564,7 +724,7 @@ const AdminDashboardPage = () => {
               size="small"
               endIcon={<Icon icon="mdi:open-in-new" style={{ fontSize: 16 }} />}
               onClick={() => router.push(ADMIN_ROUTES.LEADS)}
-              sx={{ color: '#667eea', textTransform: 'none' }}
+              sx={{ color: "#667eea", textTransform: "none" }}
             >
               View All
             </Button>
@@ -573,12 +733,21 @@ const AdminDashboardPage = () => {
           <TableContainer>
             <Table>
               <TableHead>
-                <TableRow sx={{ bgcolor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)' }}>
+                <TableRow
+                  sx={{
+                    bgcolor:
+                      theme.palette.mode === "dark"
+                        ? "rgba(255,255,255,0.03)"
+                        : "rgba(0,0,0,0.02)",
+                  }}
+                >
                   <TableCell sx={{ fontWeight: 600 }}>Lead</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>Source</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
-                  <TableCell align="center" sx={{ fontWeight: 600 }}>Actions</TableCell>
+                  <TableCell align="center" sx={{ fontWeight: 600 }}>
+                    Actions
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -587,14 +756,20 @@ const AdminDashboardPage = () => {
                   return (
                     <TableRow key={lead.id} hover>
                       <TableCell>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1.5,
+                          }}
+                        >
                           <Avatar
                             sx={{
                               width: 36,
                               height: 36,
-                              fontSize: '0.875rem',
-                              bgcolor: 'rgba(102, 126, 234, 0.15)',
-                              color: '#667eea',
+                              fontSize: "0.875rem",
+                              bgcolor: "rgba(102, 126, 234, 0.15)",
+                              color: "#667eea",
                             }}
                           >
                             {lead.name?.charAt(0)?.toUpperCase()}
@@ -603,7 +778,10 @@ const AdminDashboardPage = () => {
                             <Typography variant="body2" fontWeight={500}>
                               {lead.name}
                             </Typography>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography
+                              variant="caption"
+                              color="text.secondary"
+                            >
                               {lead.mobile}
                             </Typography>
                           </Box>
@@ -614,7 +792,7 @@ const AdminDashboardPage = () => {
                           label={formatSource(lead.source)}
                           size="small"
                           variant="outlined"
-                          sx={{ borderRadius: 1.5, fontSize: '0.75rem' }}
+                          sx={{ borderRadius: 1.5, fontSize: "0.75rem" }}
                         />
                       </TableCell>
                       <TableCell>
@@ -626,7 +804,7 @@ const AdminDashboardPage = () => {
                             color: statusConfig.color,
                             fontWeight: 600,
                             borderRadius: 1.5,
-                            fontSize: '0.75rem',
+                            fontSize: "0.75rem",
                           }}
                         />
                       </TableCell>
@@ -640,7 +818,7 @@ const AdminDashboardPage = () => {
                           <IconButton
                             size="small"
                             onClick={() => handleViewLead(lead.id)}
-                            sx={{ color: '#667eea' }}
+                            sx={{ color: "#667eea" }}
                           >
                             <Icon icon="mdi:eye" />
                           </IconButton>
