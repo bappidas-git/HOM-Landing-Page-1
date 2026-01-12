@@ -3,9 +3,9 @@
  * Authentication page for admin panel access - Matching reference code design
  */
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
 import {
   Box,
   Paper,
@@ -16,28 +16,35 @@ import {
   IconButton,
   Alert,
   CircularProgress,
-} from '@mui/material';
-import { Icon } from '@iconify/react';
-import { motion } from 'framer-motion';
-import toast from 'react-hot-toast';
-import { useAuthContext } from '@/context/AuthContext';
-import { ADMIN_ROUTES } from '@/lib/constants';
+} from "@mui/material";
+import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { useAuthContext } from "@/context/AuthContext";
+import { ADMIN_ROUTES } from "@/lib/constants";
 
 /**
  * Admin Login Page Component
  */
 const AdminLoginPage = () => {
   const router = useRouter();
-  const { login, isAuthenticated, isLoading, isInitialized, error, clearError } = useAuthContext();
+  const {
+    login,
+    isAuthenticated,
+    isLoading,
+    isInitialized,
+    error,
+    clearError,
+  } = useAuthContext();
 
   // State
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [loginError, setLoginError] = useState('');
+  const [loginError, setLoginError] = useState("");
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -49,7 +56,7 @@ const AdminLoginPage = () => {
   // Clear errors on mount
   useEffect(() => {
     clearError();
-    setLoginError('');
+    setLoginError("");
   }, [clearError]);
 
   // Handle input change
@@ -58,24 +65,24 @@ const AdminLoginPage = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    setLoginError('');
+    setLoginError("");
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setLoginError('');
+    setLoginError("");
     clearError();
 
     const result = await login(formData.email, formData.password, true);
 
     if (result.success) {
-      toast.success('Login successful! Redirecting...');
+      toast.success("Login successful! Redirecting...");
       router.push(ADMIN_ROUTES.DASHBOARD);
     } else {
-      setLoginError(result.error || 'Invalid credentials');
-      toast.error(result.error || 'Login failed');
+      setLoginError(result.error || "Invalid credentials");
+      toast.error(result.error || "Login failed");
     }
 
     setIsSubmitting(false);
@@ -86,17 +93,17 @@ const AdminLoginPage = () => {
     return (
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '100vh',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
           background: (theme) =>
-            theme.palette.mode === 'dark'
-              ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)'
-              : 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B8DD6 100%)',
+            theme.palette.mode === "dark"
+              ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)"
+              : "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B8DD6 100%)",
         }}
       >
-        <CircularProgress size={48} sx={{ color: '#fff' }} />
+        <CircularProgress size={48} sx={{ color: "#fff" }} />
       </Box>
     );
   }
@@ -110,20 +117,23 @@ const AdminLoginPage = () => {
     <>
       <Head>
         <title>Admin Login | District 25</title>
-        <meta name="description" content="Admin login for Nambiar District 25" />
+        <meta
+          name="description"
+          content="Admin login for Nambiar District 25"
+        />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
       <Box
         sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           background: (theme) =>
-            theme.palette.mode === 'dark'
-              ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)'
-              : 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B8DD6 100%)',
+            theme.palette.mode === "dark"
+              ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)"
+              : "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6B8DD6 100%)",
           p: 2,
         }}
       >
@@ -136,24 +146,24 @@ const AdminLoginPage = () => {
             elevation={24}
             sx={{
               p: 4,
-              width: '100%',
+              width: "100%",
               maxWidth: 420,
               borderRadius: 3,
               background: (theme) =>
-                theme.palette.mode === 'dark'
-                  ? 'rgba(30, 30, 50, 0.95)'
-                  : 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(10px)',
+                theme.palette.mode === "dark"
+                  ? "rgba(30, 30, 50, 0.95)"
+                  : "rgba(255, 255, 255, 0.95)",
+              backdropFilter: "blur(10px)",
             }}
           >
             {/* Logo/Header */}
-            <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <Box sx={{ textAlign: "center", mb: 4 }}>
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mx: "auto",
                   mb: 2,
                 }}
               >
@@ -161,10 +171,11 @@ const AdminLoginPage = () => {
                   variant="h4"
                   sx={{
                     fontWeight: 800,
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    filter: 'drop-shadow(0 4px 16px rgba(102, 126, 234, 0.3))',
+                    background:
+                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    filter: "drop-shadow(0 4px 16px rgba(102, 126, 234, 0.3))",
                   }}
                 >
                   District 25
@@ -196,7 +207,10 @@ const AdminLoginPage = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon icon="mdi:email-outline" style={{ fontSize: 20, color: '#667eea' }} />
+                      <Icon
+                        icon="mdi:email-outline"
+                        style={{ fontSize: 20, color: "#667eea" }}
+                      />
                     </InputAdornment>
                   ),
                 }}
@@ -206,7 +220,7 @@ const AdminLoginPage = () => {
                 fullWidth
                 label="Password"
                 name="password"
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 value={formData.password}
                 onChange={handleChange}
                 required
@@ -214,7 +228,10 @@ const AdminLoginPage = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon icon="mdi:lock-outline" style={{ fontSize: 20, color: '#667eea' }} />
+                      <Icon
+                        icon="mdi:lock-outline"
+                        style={{ fontSize: 20, color: "#667eea" }}
+                      />
                     </InputAdornment>
                   ),
                   endAdornment: (
@@ -225,7 +242,9 @@ const AdminLoginPage = () => {
                       >
                         <Icon
                           icon={
-                            showPassword ? 'mdi:eye-off-outline' : 'mdi:eye-outline'
+                            showPassword
+                              ? "mdi:eye-off-outline"
+                              : "mdi:eye-outline"
                           }
                           style={{ fontSize: 20 }}
                         />
@@ -243,15 +262,17 @@ const AdminLoginPage = () => {
                 disabled={isSubmitting}
                 sx={{
                   py: 1.5,
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background:
+                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                   borderRadius: 2,
-                  textTransform: 'none',
-                  fontSize: '1rem',
+                  textTransform: "none",
+                  fontSize: "1rem",
                   fontWeight: 600,
-                  boxShadow: '0 8px 24px rgba(102, 126, 234, 0.3)',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)',
-                    boxShadow: '0 12px 32px rgba(102, 126, 234, 0.4)',
+                  boxShadow: "0 8px 24px rgba(102, 126, 234, 0.3)",
+                  "&:hover": {
+                    background:
+                      "linear-gradient(135deg, #5a72d4 0%, #6a4190 100%)",
+                    boxShadow: "0 12px 32px rgba(102, 126, 234, 0.4)",
                   },
                 }}
               >
@@ -259,7 +280,10 @@ const AdminLoginPage = () => {
                   <CircularProgress size={24} color="inherit" />
                 ) : (
                   <>
-                    <Icon icon="mdi:login" style={{ marginRight: 8, fontSize: 20 }} />
+                    <Icon
+                      icon="mdi:login"
+                      style={{ marginRight: 8, fontSize: 20 }}
+                    />
                     Sign In
                   </>
                 )}
@@ -267,11 +291,11 @@ const AdminLoginPage = () => {
             </form>
 
             {/* Back to Site */}
-            <Box sx={{ textAlign: 'center', mt: 3 }}>
+            <Box sx={{ textAlign: "center", mt: 3 }}>
               <Button
-                onClick={() => router.push('/')}
+                onClick={() => router.push("/")}
                 startIcon={<Icon icon="mdi:arrow-left" />}
-                sx={{ textTransform: 'none', color: 'text.secondary' }}
+                sx={{ textTransform: "none", color: "text.secondary" }}
               >
                 Back to Website
               </Button>
