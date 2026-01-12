@@ -194,7 +194,7 @@ const AdminLeadDetailPage = () => {
   return (
     <AdminLayout title="Lead Details">
       <Head>
-        <title>{lead?.name ? `${lead.name} | Lead Details` : 'Lead Details'} | Admin - Nambiar District 25</title>
+        <title>{`${lead?.name ? `${lead.name} | Lead Details` : 'Lead Details'} | Admin - Nambiar District 25`}</title>
       </Head>
 
       <Box>

@@ -83,7 +83,7 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>Page Not Found | {siteConfig.siteName}</title>
+        <title>{`Page Not Found | ${siteConfig.siteName}`}</title>
         <meta
           name="description"
           content="The page you're looking for doesn't exist. Return to Nambiar District 25 Phase 2 to explore premium apartments in Bengaluru."

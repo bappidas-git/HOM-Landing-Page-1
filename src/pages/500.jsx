@@ -109,7 +109,7 @@ export default function Custom500() {
   return (
     <>
       <Head>
-        <title>Server Error | {siteConfig.siteName}</title>
+        <title>{`Server Error | ${siteConfig.siteName}`}</title>
         <meta
           name="description"
           content="Something went wrong on our end. Please try again or contact us for assistance."
